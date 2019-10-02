@@ -6,7 +6,7 @@ class NewsPost(models.Model):
     date = models.DateTimeField()
     image = models.ImageField(upload_to="uploads")
 
-    SHORT_CONTENT_LENGTH = 365
+    SHORT_CONTENT_LENGTH = 70
 
     def __str__(self):
         return self.title
