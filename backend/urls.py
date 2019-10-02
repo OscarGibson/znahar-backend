@@ -28,7 +28,7 @@ urlpatterns = [
     path('api/news/', include('news.urls'), name='news'),
     path('api/promotions/', include('promotions.urls'), name='promotions'),
     path('znahar/', include('znahar.urls'), name='znahar'),
-    # path('', include('base.urls'), name='index')
+    path('', include('base.urls'), name='index')
 ]
 
 if settings.DEBUG:

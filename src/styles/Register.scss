@@ -1,0 +1,32 @@
+.Register {
+    .header {
+        padding-top: 20px;
+        padding-bottom: 23px;
+        margin-bottom: 40px;
+        background-color: #f1f6f9;
+    }
+    .content {
+        font-family: Montserrat;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.25;
+        letter-spacing: 0.71px;
+        color: #353535;
+        text-align: left;
+        .title {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .breadCrumpb {
+
+        }
+    }
+
+    .body {
+        .form {
+            width: 326px;
+            margin: auto;
+            text-align: left;
+        }
+    }
+}

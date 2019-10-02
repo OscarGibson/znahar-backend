@@ -1,0 +1,12 @@
+.ActionButton {
+    height: $block-height;
+    padding: 0 6px;
+    cursor: pointer;
+
+    .custom-icon {
+        line-height: 1;
+        width: 24px;
+        margin: 5px;
+        height: 24px;
+    }
+}

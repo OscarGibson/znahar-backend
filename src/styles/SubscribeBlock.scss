@@ -1,0 +1,49 @@
+.SubscribeBlock {
+    background-image: url("/static/images/BG.jpg");
+    background-position-y: 64%;
+    padding-top: 106px;
+    .title {
+        font-family: Montserrat;
+        font-size: 28px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.62px;
+        text-align: center;
+        color: #ffffff;
+    }
+    .description {
+        margin-top: 8px;
+        font-family: Montserrat;
+        font-size: 14px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.43;
+        letter-spacing: 0.31px;
+        text-align: center;
+        color: #ffffff;
+    }
+    .SubscribeForm {
+        padding-bottom: 106px;
+        .input-group {
+            width: 671px;
+            margin: 40px auto;
+            .input {
+                height: 46px;
+                margin-right: 20px;
+            }
+            .button {
+                width: 172px;
+                height: 46px;
+
+                span {
+                    margin: 10px 27px;
+                    font-family: Montserrat;
+                    font-size: 16px;    
+                }
+            }    
+        }
+    }
+}

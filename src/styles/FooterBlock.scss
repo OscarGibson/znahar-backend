@@ -1,0 +1,86 @@
+.FooterBlock {
+    padding: 60px 0;
+
+    .footerHeader {
+        margin-bottom: 20px;
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 3;
+        letter-spacing: 0.36px;
+        text-align: left;
+        color: #353535;
+    }
+
+    .FooterMenu {
+        .Logo {
+            margin-bottom: 20px;
+            img {
+                width: 220px;
+                height: 44px; 
+            }
+        }
+        .menu {
+            .menuItem {
+                font-family: Montserrat;
+                font-size: 14px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.71;
+                letter-spacing: 0.25px;
+                text-align: left;
+                .menuLink {
+                    color: #1c350c;
+                    padding: .2rem 1rem;
+                    &:hover {
+                        color: #346316;
+                    }
+                }
+            }
+        }
+    }
+    .FooterContacts {
+        .footerHeader {
+            // margin-bottom: 40px;
+        }
+        .contacts {
+            list-style: none;
+            text-align: left;
+            padding-left: 0;
+            li {
+                margin-bottom: 8px;
+            }
+        }
+    }
+    .FooterSocial {
+        .social {
+            text-align: left;
+
+            a {
+                margin-right: 6px;
+            }
+        }
+    }
+    .FooterBackForm {
+        .form {
+            text-align: right;
+            input {
+                width: 278px;
+                height: 37px;
+                margin-bottom: 12px;
+            }
+            textarea {
+                width: 278px;
+                margin-bottom: 12px;
+            }
+
+            button {
+                height: 34px;
+                width: 131px;
+            }
+        }
+    }
+}

@@ -1,0 +1,58 @@
+.BigSearchBlock {
+    height:420px;
+    padding-top: 117px;
+    background-image: url("/static/images/BG.jpg");
+    background-position-y: 64%;
+
+    h1, h3 {
+        text-align: left;
+        font-family: Montserrat;
+        font-style: normal;
+        font-stretch: normal;
+        color: #fff;
+    }
+
+    h1 {
+        height: 30px;
+        font-size: 24px;
+        font-weight: bold;
+        line-height: 1.25;
+    }
+
+    h3 {
+        height: 19px;
+        margin-bottom: 39px;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .SearchFormHome {
+        .form-control {
+            width: 550px;
+            border: 2px solid #f5a623;
+        }
+        .custom-select {
+            border: 2px solid #f5a623;
+        }
+        .default-button {
+            width: 136px;
+            height: 46px;
+            border: 2px solid #f5a623;
+
+            span {
+                font-family: Montserrat;
+                font-size: 16px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.29px;
+                text-align: center;
+                color: #ffffff;
+
+                margin: 13px 30px;
+            }
+        }
+    }
+}

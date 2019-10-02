@@ -1,0 +1,85 @@
+.PromotionsSmallBox {
+    margin-top: -40px;
+    background-color: #fff;
+
+    .PromotionsSmallList {
+
+        text-align: left;
+        padding: 8px;
+
+        .PromotionItem {
+            height:284px;
+            width:226px;
+            display: inline-block;
+            margin: 12px;
+
+            h1, h3, p {
+                font-family: Montserrat;
+                color: #353535;
+                text-align: left;
+            }
+
+            .imageBlock {
+                position: relative;
+                .image {
+                    height: 200px;
+                    width: 226px;
+                    margin-bottom: 12px;
+                }
+                .discount {
+                    position: absolute;
+                    bottom: -3px;
+                    right: 1px;
+                    width: 65px;
+                    height: 28px;
+                    padding-left: 15px;
+                    padding-top: 4px;
+                    font-size: 14px;
+                    font-weight: bold;
+                    border-radius: 4px;
+                    background-color: #eee42a;
+                    color: #353535;
+                }
+            }
+
+            
+
+            .name {
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 12px;
+            }
+
+            .priceBlock {
+                p {
+                    display: inline-block;
+                }
+               .price {
+                    font-size: 18px;
+                    font-weight: bold;
+                    margin-right: 4px;
+                }
+                .discountPrice {
+                    font-size: 13px;
+                    color: #acacac;
+                    text-decoration: line-through solid #acacac;
+                }
+            }
+
+            
+        }
+
+        .default-button {
+            margin-left: 12px;
+
+            span {
+                margin-top: 7px;
+            }
+        }
+
+    }
+
+    .PromotionBigItem {
+
+    }
+}

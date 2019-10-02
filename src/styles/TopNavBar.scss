@@ -1,0 +1,113 @@
+$block-height: 40px;
+$top-green: #daf58e;
+
+.TopNavBar {
+    display: flex;
+    height: $block-height;
+    background-image: url("/static/images/BG.jpg");
+    background-position-y: bottom;
+
+    &-block {
+        flex: 1 1 auto;
+    }
+
+    & .left-block {
+        margin-left: 24px;
+        text-align: left;
+
+        .phones {
+            line-height: 2.6;
+
+            font-family: Montserrat;
+            font-size: 14px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: 0.25px;
+
+            color: #ffffff;
+
+            .phoneNumber {
+                margin: 0 3px;
+            }
+        }
+    }
+
+    & .right-block {
+        // margin-right: 24px;
+        text-align: right;
+
+        .authBlock {
+            display: inline-flex;
+
+            .login, .register {
+                
+            }
+
+            div {
+                display: inline-flex;
+            }
+
+            .user-status {
+                display: inline-flex;
+                height: 40px;
+
+                font-family: Montserrat;
+                font-size: 14px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.71;
+                letter-spacing: 0.25px;
+                color: #ffffff;
+
+                span {
+                    margin-top: 8px;
+                }
+            }
+        }
+
+        .cart {
+            display: inline-flex;
+            height: $block-height;
+            width: 250px;
+            padding-left: 25px;
+            background-color: $top-green;
+            color: #000;
+        }
+    }
+
+    // .block-with-icon {
+    //     height: $block-height;
+    //     padding: 0 6px;
+    // }
+
+    .custom-icon {
+        line-height: 1;
+        width: 24px;
+        margin: 5px;
+        height: 24px;
+    }
+    .ActionButton {
+        margin-left: 15px;
+
+        font-family: Montserrat;
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.71;
+        letter-spacing: 0.25px;
+        color: #ffffff;
+
+        span {
+            margin-top: 8px;
+            margin-left: 8px;
+        }
+    
+    }
+    .svg-icon {
+
+    }
+    
+}

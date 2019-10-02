@@ -1,0 +1,48 @@
+.PromotionBigItem {
+    position: relative;
+    display: flex;
+    margin-top: 166px;
+    background-color: #f1f6f9;
+
+    .contentBlock {
+        width: 547px;
+        margin-top: 29px;
+        margin-left: 40px;
+        .name {
+            font-family: Montserrat;
+            font-size: 28px;
+            font-weight: 600;
+            text-align: left;
+            color: #353535;
+        }
+        .description {
+            margin-top: 16px;
+            font-family: Montserrat;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.43;
+            text-align: left;
+            color: #353535;
+        }
+        .default-button {
+            width: 218px;
+            margin-top: 16px;
+            margin-bottom: 29px;
+            i {
+                color: #fff;
+                margin: 9px 3px;
+            }
+        }
+    }
+
+    .imageBlock {
+        position: absolute;
+        bottom: 0;
+        right: 50px;
+        margin-left: 93px;
+        img {
+            width: 294px;
+            height: 326px;
+        }
+    }
+}

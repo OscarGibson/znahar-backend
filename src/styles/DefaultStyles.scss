@@ -1,0 +1,50 @@
+.fixed-width {
+    width: 1024px;
+}
+.position-center {
+    margin: auto;
+}
+
+.standart-container {
+    width: 1024px;
+    margin: auto;
+}
+
+.default-button {
+    width: 228px;
+    height: 36px;
+    background-color: #4f7906;
+    display: flex;
+    flex-direction: row;
+
+    * {
+        display: inline-block;
+    }
+
+    span {
+        margin: 5px 15px;
+        font-family: Montserrat;
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.71;
+        letter-spacing: 0.25px;
+        text-align: center;
+        color: #ffffff;
+    }
+
+    i {
+
+    }
+}
+
+.NotFoundPage {
+    .code {
+        font-size: 100px;
+        color: rgb(187, 187, 187);
+    }
+    .text {
+        font-size: 30px;
+    }
+}
