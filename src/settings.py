@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Third-party
     'corsheaders',
+    'rest_framework',
     # Custom
     'base',
     'customUser',
     'news',
     'orders',
-    'pagesConfig'
+    'pagesConfig',
+    'promotions'
 ]
 
 MIDDLEWARE = [
@@ -129,6 +131,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = "customUser.User"
 
