@@ -28,7 +28,16 @@ urlpatterns = [
     path('api/news/', include('news.urls'), name='news'),
     path('api/promotions/', include('promotions.urls'), name='promotions'),
     path('znahar/', include('znahar.urls'), name='znahar'),
-    path('', include('base.urls'), name='index')
+    path('', include('base.urls'), name='index'),
+    path('search', include('base.urls'), name='index'),
+    path('promotions', include('base.urls'), name='index'),
+    path('news', include('base.urls'), name='index'),
+    path('contacts', include('base.urls'), name='index'),
+    path('for-clients', include('base.urls'), name='index'),
+    path('profile', include('base.urls'), name='index'),
+    path('register', include('base.urls'), name='index'),
+    path('login', include('base.urls'), name='index'),
+    path('404', include('base.urls'), name='index'),
 ]
 
 if settings.DEBUG:

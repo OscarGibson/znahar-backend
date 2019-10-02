@@ -1,5 +1,6 @@
 // const PRODUCTS_BACKEND = "http://194.44.237.46:8008/rt/hs/WebStore"
-const MAIN_BACKEND = "http://localhost:8000"
+// const MAIN_BACKEND = "http://localhost:8000"
+const MAIN_BACKEND = ""
 
 export const IMAGES_BACKEND = `${MAIN_BACKEND}`
 
