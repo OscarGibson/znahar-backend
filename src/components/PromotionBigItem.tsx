@@ -8,6 +8,9 @@ interface IPromotionBigItemComponent {
     items:IPromotionBigItem[]
 }
 
+const redirectToSearch = (title:string) => {
+    window.location.href = `/search?searchKey=${title}`
+}
 
 class PromotionBigItem extends React.Component<IPromotionBigItemComponent, IPromotionBigItemComponent> {
     render() {
@@ -26,7 +29,7 @@ class PromotionBigItem extends React.Component<IPromotionBigItemComponent, IProm
                                     iconName="fas fa-cart-plus"
                                     iconSvgSrc=""
                                     classList={["default-button"]}
-                                    action={() => {console.log("sasaj lalka")}}
+                                    action={() => {redirectToSearch(item.title)}}
                                 />
                             </div>
                             <div className="imageBlock">

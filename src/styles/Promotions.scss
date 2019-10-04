@@ -1,0 +1,149 @@
+.header {
+    padding-top: 20px;
+    padding-bottom: 23px;
+    margin-bottom: 40px;
+    background-color: #f1f6f9;
+}
+.content {
+    font-family: Montserrat;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.25;
+    letter-spacing: 0.71px;
+    color: #353535;
+    text-align: left;
+    .title {
+        font-size: 32px;
+        font-weight: bold;
+    }
+    .breadCrumpb {
+
+    }
+}
+
+.promotions {
+
+    text-align: left;
+    padding: 8px;
+
+    .PromotionItem {
+        height:284px;
+        width:226px;
+        display: inline-block;
+        margin: 12px;
+        cursor: pointer;
+
+        h1, h3, p {
+            font-family: Montserrat;
+            color: #353535;
+            text-align: left;
+        }
+
+        .imageBlock {
+            position: relative;
+            .image {
+                height: 200px;
+                width: 226px;
+                margin-bottom: 12px;
+            }
+            .discount {
+                position: absolute;
+                bottom: -3px;
+                right: 1px;
+                width: 65px;
+                height: 28px;
+                padding-left: 15px;
+                padding-top: 4px;
+                font-size: 14px;
+                font-weight: bold;
+                border-radius: 4px;
+                background-color: #eee42a;
+                color: #353535;
+            }
+        }
+
+        
+
+        .name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .priceBlock {
+            p {
+                display: inline-block;
+            }
+           .price {
+                font-size: 18px;
+                font-weight: bold;
+                margin-right: 4px;
+            }
+            .discountPrice {
+                font-size: 13px;
+                color: #acacac;
+                text-decoration: line-through solid #acacac;
+            }
+        }
+
+        
+    }
+
+    .default-button {
+        margin-left: 12px;
+
+        span {
+            margin-top: 7px;
+        }
+    }
+
+}
+
+.PromotionBigItem {
+    position: relative;
+    display: flex;
+    margin-top: 166px;
+    background-color: #f1f6f9;
+
+    .contentBlock {
+        width: 547px;
+        margin-top: 29px;
+        margin-left: 40px;
+        .name {
+            font-family: Montserrat;
+            font-size: 28px;
+            font-weight: 600;
+            text-align: left;
+            color: #353535;
+        }
+        .description {
+            margin-top: 16px;
+            font-family: Montserrat;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 1.43;
+            text-align: left;
+            color: #353535;
+        }
+        .default-button {
+            width: 218px;
+            margin-top: 16px;
+            margin-bottom: 29px;
+            i {
+                color: #fff;
+                margin: 9px 3px;
+            }
+        }
+    }
+
+    .imageBlock {
+        position: absolute;
+        bottom: 0;
+        right: 50px;
+        margin-left: 93px;
+        img {
+            width: 294px;
+            height: 326px;
+        }
+    }
+}

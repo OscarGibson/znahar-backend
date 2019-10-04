@@ -19,9 +19,10 @@ import {
   SET_USER_DATA,
   SET_USER_FULL_DATA,
   SET_PROMOTIONS,
-  SET_NEWS
+  SET_NEWS,
+  SET_NEWS_POST
 } from "./types";
-import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem } from "../types";
+import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost } from "../types";
 
 export function initProductsInSearch(payload:any) {
   return { type: INIT_PRODUCTS_SEARCH, payload };
@@ -105,4 +106,8 @@ export const setPromotions = (payload:{promotions:IPromotionItem[], promotions_b
 
 export const setNews = (payload:INewsItem[]) => {
   return { type:SET_NEWS, payload}
+}
+
+export const setNewsPost = (payload:INewsPost) => {
+  return { type:SET_NEWS_POST, payload}
 }

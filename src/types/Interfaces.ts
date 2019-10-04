@@ -108,7 +108,7 @@ export interface INewsPost {
     image:string,
     title:string,
     content:string,
-    date:Date,
+    date:string
 }
 
 export interface INewsList {
@@ -237,6 +237,28 @@ export interface ILoginForm {
     password:string,
     changeLoginFormField:(payload:{name:string, value:string}) => void,
     cleanLoginForm:() => void
+}
+
+export interface INewsPage {
+    newsList:INewsItem[],
+    promotions:IPromotionItem[],
+    setPromotions:(payload:{promotions:IPromotionItem[], promotions_big:IPromotionBigItem[]}) => void,
+    setNews:(payload:INewsItem[]) => void
+}
+
+export interface INewsPostPage {
+    newsPost:INewsPost,
+    promotions:IPromotionItem[],
+    setPromotions:(payload:{promotions:IPromotionItem[], promotions_big:IPromotionBigItem[]}) => void,
+    setNewsPost:(payload:INewsPost) => void,
+    setNews:(payload:INewsItem[]) => void,
+    otherNews:INewsItem[]
+}
+
+export interface IPromotionsPage {
+    promotions:IPromotionItem[],
+    promotions_big:IPromotionBigItem[],
+    setPromotions:(payload:{promotions:IPromotionItem[], promotions_big:IPromotionBigItem[]}) => void,
 }
 
 /** PAGES |

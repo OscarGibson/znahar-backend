@@ -12,14 +12,6 @@ HEADERS = {'Accept': 'application/json'}
 AUTH = ('R','R')
 
 
-def create_order(self, request):
-    print(request)
-
-    return Response({
-        'lalka': 'pipka'
-    }, 200)
-
-
 def get_params(query_dict):
     offset = query_dict.get('offset', 0)
     limit = query_dict.get('limit', 0)
@@ -47,6 +39,8 @@ class Order(APIView):
             }
             payload = json.dumps(data)
             r = requests.post(url=URL_ORDERS, auth=AUTH, data=payload)
+            print(r.status_code)
+            print(r.text)
             if r.status_code == 200:
                 return Response({
                     "message": "Your order has been created",

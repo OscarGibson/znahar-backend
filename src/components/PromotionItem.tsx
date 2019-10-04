@@ -5,6 +5,15 @@ import { IMAGES_BACKEND } from '../constants';
 
 
 class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
+    constructor(props:IPromotionItem, state:IPromotionItem) {
+        super(props, state)
+
+        this.redirectToSearch = this.redirectToSearch.bind(this)
+    }
+
+    redirectToSearch(title:string) {
+        window.location.href = `/search?searchKey=${title}`
+    }
     render() {
         const {
             image,
@@ -16,7 +25,7 @@ class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
         } = this.props
 
         return (
-            <div className="PromotionItem">
+            <div onClick={() => {this.redirectToSearch(title)}} className="PromotionItem">
                 <div className="imageBlock">
                     <img src={`${IMAGES_BACKEND}${image}`} alt="photoUrl" className="image"/>
                     <p className="discount">-{discount}%</p>

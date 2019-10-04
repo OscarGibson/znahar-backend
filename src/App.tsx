@@ -6,8 +6,7 @@ import {
   searchInitState,
   topNavBarState,
   homePageState,
-  footerBlockState,
-  profilePageState
+  footerBlockState
 } from './redusers/initState'
 import store from './store';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
@@ -21,6 +20,9 @@ import Profile from './pages/Profile';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ForClients from './pages/ForClients';
+import News from './pages/News';
+import NewsPost from './pages/NewsPost';
+import Promotions from './pages/Promotions';
 
 
 const getProductsRequestSended:IAction = () => {
@@ -79,6 +81,9 @@ const App = () => {
               <Route path="/register" component={Register}/>
               <Route path="/login" component={Login}/>
               <Route path="/for-clients" component={ForClients} />
+              <Route path="/news" exact component={News} />
+              <Route path="/news/:postId" component={NewsPost}/>
+              <Route path="/promotions" exact component={Promotions} />
               <Route path="/404" exact component={() => <NotFoundPage {...homePageState}/>} />
               <Redirect path="*" to="/404" />
             </Switch>

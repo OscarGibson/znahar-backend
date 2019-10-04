@@ -29,7 +29,11 @@ import {
     IRegisterForm,
     ILoginForm,
     IPromotionItem,
-    INewsItem
+    INewsItem,
+    INewsPage,
+    INewsPostPage,
+    INewsPost,
+    IPromotionsPage
 } from '../../types'
 
 export const initProducts:IProduct[] = []
@@ -364,6 +368,35 @@ export const loginForm:ILoginForm = {
     password:"",
     changeLoginFormField:(payload:{name:string, value:string}) => {},
     cleanLoginForm:() => {}
+}
+
+
+export const newsPage:INewsPage = {
+    newsList:[],
+    promotions:[],
+    setPromotions:(payload:{promotions:IPromotionItem[], promotions_big:IPromotionBigItem[]}) => {},
+    setNews:(payload:INewsItem[]) => {}
+}
+
+export const newsPostPage:INewsPostPage = {
+    newsPost:{
+        id:-1,
+        title:"",
+        content:"",
+        date: "",
+        image:""
+    },
+    promotions:[],
+    setPromotions:(payload:{promotions:IPromotionItem[], promotions_big:IPromotionBigItem[]}) => {},
+    setNewsPost:(payload:INewsPost) => {},
+    setNews:(payload:INewsItem[]) => {},
+    otherNews:[]
+}
+
+export const promotionsPage:IPromotionsPage = {
+    promotions:[],
+    promotions_big:[],
+    setPromotions:(payload:{promotions:IPromotionItem[], promotions_big:IPromotionBigItem[]}) => {},
 }
 
 /**

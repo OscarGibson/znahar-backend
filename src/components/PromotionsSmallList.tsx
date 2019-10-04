@@ -29,7 +29,7 @@ class PromotionsSmallList extends React.Component<IPromotionsSmallList, IPromoti
                 })}
                 <ActionButton
                     text={"Показати всі Пропозиції"}
-                    action={() => {}}
+                    action={() => {window.location.href = "/promotions"}}
                     iconName=""
                     iconSvgSrc=""
                     classList={["default-button"]}

@@ -20,7 +20,8 @@ import {
   SET_USER_DATA,
   SET_USER_FULL_DATA,
   SET_PROMOTIONS,
-  SET_NEWS
+  SET_NEWS,
+  SET_NEWS_POST
 } from "../actions/types";
 
 import {
@@ -29,10 +30,14 @@ import {
   defaultState,
   profilePageState,
   registerForm,
-  loginForm
+  loginForm,
+  newsPage,
+  newsPostPage,
+  promotionsPage
 } from './initState';
 
 import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage } from "../types";
+
 
 export const DefaultReducer = (state = defaultState, action:any) => {
 
@@ -56,6 +61,67 @@ export const DefaultReducer = (state = defaultState, action:any) => {
         isUserAuth:true,
         userName:action.payload
       }
+    }
+  }
+
+  return state
+}
+
+export const NewsPostReducer = (state = newsPostPage, action:any) => {
+
+  if (action.type === SET_PROMOTIONS) {
+    const { promotions } = action.payload
+    return {
+      ...state,
+      promotions
+      }
+  }
+
+  if (action.type === SET_NEWS_POST) {
+    return {
+      ...state,
+      newsPost:action.payload
+    }
+  }
+
+  if (action.type === SET_NEWS) {
+    return {
+      ...state,
+      otherNews:action.payload
+    }
+  }
+
+  return state
+}
+
+export const PromotionsReducer = (state = promotionsPage, action:any) => {
+
+  if (action.type === SET_PROMOTIONS) {
+    const { promotions, promotions_big } = action.payload
+    return {
+      ...state,
+      promotions,
+      promotions_big
+      }
+  }
+
+  return state
+}
+
+export const NewsReducer = (state = newsPage, action:any) => {
+
+  if (action.type === SET_PROMOTIONS) {
+    const { promotions } = action.payload
+    return {
+      ...state,
+      promotions
+      }
+  }
+
+  if (action.type === SET_NEWS) {
+    return {
+      ...state,
+      newsList:action.payload
     }
   }
 
