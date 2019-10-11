@@ -103,7 +103,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
             let warehouse:IWarehouse
             for (let warehouseId of warehousesError) {
                 warehouse = getWarehouseById(warehouseId)
-                text += `№${warehouseId} ${warehouse.address}`
+                text += `№${warehouseId} ${warehouse.name}`
             }
             showInfoLayer({
                 text,
@@ -270,7 +270,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                                             return (
                                                 <tr key={index}>
                                                     <td>{name}</td>
-                                                    <td>{`№${warehouse_id} ${warehouse.address}`}</td>
+                                                    <td>{`№${warehouse_id} ${warehouse.name}`}</td>
                                                     <td>{price}</td>
                                                     <td>{count}</td>
                                                     <td>

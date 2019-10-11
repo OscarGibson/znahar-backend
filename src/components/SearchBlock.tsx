@@ -54,8 +54,6 @@ class SearchBlock extends React.Component<SearchBlockProps, SearchBlockState> {
             products,
             isRequestSended,
             isResponseRecieved,
-            searchInput,
-            searchFormSubmitted,
             handleSearch
         } = this.props
 
@@ -63,11 +61,7 @@ class SearchBlock extends React.Component<SearchBlockProps, SearchBlockState> {
 
         return (
             <div className="SearchBlock">
-                <SearchForm
-                    searchInput={searchInput}
-                    searchFormSubmitted={searchFormSubmitted}
-                    action={handleSearch}
-                />
+                <SearchForm action={handleSearch}/>
                 <table className="table standart-container">
                     <SearchTableHeader />
                     <SearchList products={products} isProductsLoaded={isProductsLoaded}/>

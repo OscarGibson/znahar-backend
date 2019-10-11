@@ -43,7 +43,7 @@ export interface IGetProductsRequest {
 export interface ISearchForm {
     searchInput:string,
     searchFormSubmitted:boolean,
-    action:IHandleSearch
+    warehouses:IWarehouse[]
 }
 
 export interface ITopNavBarState {
@@ -188,11 +188,21 @@ export interface IMapPoint {
 }
 
 export interface IWarehouse {
-    id:string,
+    uuid:string,
     photoUrl:string,
-    address:string,
+    name:string,
     description:string,
     coordinates:IMapPoint|undefined
+}
+
+export interface ISettings {
+    id:number,
+    contact_cell_top:string[],
+    contact_cell_footer:string[],
+    contact_email:string,
+    facebook_link:string,
+    instagram_link:string,
+    youtube_link:string
 }
 
 export interface IInfoLayer {
@@ -307,4 +317,7 @@ export interface IProfilePage {
 export interface IRootApp {
     infoLayerState:IInfoLayer,
     topNavBarState:ITopNavBarState,
+    settings:ISettings,
+    warehouses:IWarehouse[],
+    footerBlockState:IFooterBlock,
 }

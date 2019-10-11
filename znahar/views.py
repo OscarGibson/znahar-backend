@@ -1,13 +1,20 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.generics import RetrieveAPIView, ListAPIView
+from rest_framework import permissions
 import requests
 import json
 # from django.views.decorators.csrf import csrf_exempt
 # from django.utils.decorators import method_decorator
+from .models import Warehouse, SiteSettings
+from .serializers import WarehouseSerializer, SiteSettingsSerializer
 
 
-URL_PRODUCTS = 'http://194.44.237.46:8008/rt/hs/WebStore/products'
-URL_ORDERS = 'http://194.44.237.46:8008/rt/hs/WebStore/orders'
+# URL = 'http://194.44.237.46:8008'
+URL = 'http://a3.apteka-znahar.com.ua:15890/RT/hs/WebStore'
+
+URL_PRODUCTS = f'{URL}/products'
+URL_ORDERS = f'{URL}/orders'
 HEADERS = {'Accept': 'application/json'}
 AUTH = ('R','R')
 
@@ -79,3 +86,35 @@ class Products(APIView):
                 "message": "Request error",
                 "code": 400
             }, 400)
+
+class WarehousesAPI:
+
+    model = Warehouse
+    queryset = model.objects.all()
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = WarehouseSerializer
+
+class WarehousesRetrieveAPI(WarehousesAPI, RetrieveAPIView):
+    lookup_field = "uuid"
+
+
+class WarehousesListAPI(WarehousesAPI, ListAPIView):pass
+
+
+class Settings(APIView):
+
+    def get(self, request, *args, **kwargs):
+
+        settings = SiteSettings.load()
+        warehouses = Warehouse.objects.all()
+
+        return Response({
+            "message": "Site settings",
+            "code": 200,
+            "data": {
+                "settings": SiteSettingsSerializer(settings).data,
+                "warehouses": WarehouseSerializer(warehouses, many=True).data
+            }
+        }, 200)

@@ -89,7 +89,7 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
         return (
             <tr key={id}>
                 <td>{name}</td>
-                <td>{`#${warehouse.id} ${warehouse.address}`}</td>
+                <td>{`#${warehouse.uuid} ${warehouse.name}`}</td>
                 <td>{price}</td>
                 <td>{remain}</td>
                 <td>

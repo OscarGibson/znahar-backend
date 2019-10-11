@@ -21,7 +21,9 @@ import {
   SET_USER_FULL_DATA,
   SET_PROMOTIONS,
   SET_NEWS,
-  SET_NEWS_POST
+  SET_NEWS_POST,
+  SET_SETTINGS,
+  SET_WAREHOUSES
 } from "../actions/types";
 
 import {
@@ -38,6 +40,12 @@ import {
 
 import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage } from "../types";
 
+
+const extractCell = (listOfCell:{phone:string}[]) => {
+  return listOfCell.map( (item) => {
+    return item.phone
+  })
+}
 
 export const DefaultReducer = (state = defaultState, action:any) => {
 
@@ -62,6 +70,47 @@ export const DefaultReducer = (state = defaultState, action:any) => {
         userName:action.payload
       }
     }
+  }
+
+  if (action.type === SET_SETTINGS) {
+    const { topNavBarState, footerBlockState } = state
+    const { socialList } = footerBlockState
+    const newState = {
+      ...state,
+      topNavBarState:{
+        ...topNavBarState,
+        phonesNumbers:extractCell(action.payload.contact_cell_top)
+      },
+      footerBlockState:{
+        ...footerBlockState,
+        contactsList:{
+          title:"Контактна інформація",
+          items:extractCell(action.payload.contact_cell_footer)
+        },
+        socialList:{
+          ...socialList,
+          items:[{
+            iconName:"facebook",
+            link:action.payload.facebook_link
+          },{
+            iconName:"instagram",
+            link:action.payload.instagram_link
+          },{
+            iconName:"youtube",
+            link:action.payload.youtube_link
+          }]
+        }
+      }
+    }
+    return newState
+  }
+
+  if (action.type === SET_WAREHOUSES) {
+    const newState = {
+      ...state,
+      warehouses:action.payload
+    }
+    return newState
   }
 
   return state

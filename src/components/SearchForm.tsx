@@ -2,21 +2,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ISearchForm, IHandleSearch } from '../types'
 import ActionButton from './ActionButton';
-import { warehouses } from '../redusers/initState';
+// import { warehouses } from '../redusers/initState';
 
 const XOR = (a:boolean,b:boolean) => {
     return !( ( a && !b ) || ( !a && b ) )
 }
 
-const mapStateToProps = (reducer:any, other:any) => {
-    const { searchInput, searchFormSubmitted } = reducer.SearchReducer.searchFormState
+const mapStateToProps = (reducer:any):ISearchForm => {
+    const { searchFormState } = reducer.SearchReducer
+    const { warehouses } = reducer.DefaultReducer
     return {
-        searchInput, searchFormSubmitted
+        ...searchFormState,
+        warehouses,
     }
 }
 
 interface ISearchFormFilter extends ISearchForm {
     selectedFilter:string
+}
+
+interface ISearchFormCustom extends ISearchForm {
+    action:IHandleSearch
 }
 
 // const dispatchToProps = (dispatch:any) => {
@@ -26,9 +32,9 @@ interface ISearchFormFilter extends ISearchForm {
 //     }
 // }
 
-class SearchFormComponent extends React.Component<ISearchForm, ISearchFormFilter> {
+class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchFormFilter> {
 
-    constructor(props:ISearchForm, state:ISearchFormFilter) {
+    constructor(props:ISearchFormCustom, state:ISearchFormFilter) {
         super(props, state)
 
         this.state = {
@@ -40,9 +46,7 @@ class SearchFormComponent extends React.Component<ISearchForm, ISearchFormFilter
         this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this)
         this.handleFilterChange = this.handleFilterChange.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
-    }
 
-    componentDidMount() {
         const search = window.location.search
         const params = new URLSearchParams(search)
         const searchInput = params.get('searchKey')
@@ -54,13 +58,28 @@ class SearchFormComponent extends React.Component<ISearchForm, ISearchFormFilter
             selectedFilter === null ? "У всіх Аптеках" : selectedFilter,
             action
         )
+
     }
+
+    // componentDidMount() {
+    //     const search = window.location.search
+    //     const params = new URLSearchParams(search)
+    //     const searchInput = params.get('searchKey')
+    //     const selectedFilter = params.get('selectedFilter')
+
+    //     const { action } = this.props
+    //     this.handleSearch(
+    //         searchInput === null ? "" : searchInput,
+    //         selectedFilter === null ? "У всіх Аптеках" : selectedFilter,
+    //         action
+    //     )
+    // }
 
     handleSearch(searchInput:string, selectedFilter:string, action:IHandleSearch) {
         action(searchInput, selectedFilter)
-        this.setState({
-            searchInput: ""
-        })
+        // this.setState({
+        //     searchInput: ""
+        // })
     }
 
     handleSearchFormSubmit(event:React.FormEvent<HTMLFormElement>):void {
@@ -84,7 +103,7 @@ class SearchFormComponent extends React.Component<ISearchForm, ISearchFormFilter
     }
 
     render() {
-        const { searchInput } = this.state
+        const { searchInput, warehouses } = this.state
         return (
             <div className="SearchForm">
                 <div className="content standart-container">
@@ -107,8 +126,8 @@ class SearchFormComponent extends React.Component<ISearchForm, ISearchFormFilter
                             <option selected>У всіх Аптеках</option>
                             {warehouses.map((warehouse, index) => {
                                 return (
-                                    <option key={index} value={warehouse.id}>
-                                        {`№${warehouse.id} ${warehouse.address}`}
+                                    <option key={`warehouse-${index}`} value={warehouse.uuid}>
+                                        {`№${warehouse.uuid} ${warehouse.name}`}
                                     </option>
                                 )
                             })}

@@ -1,16 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ISearchForm } from '../types'
+import { ISearchForm, IWarehouse, IHandleSearch } from '../types'
 import ActionButton from './ActionButton';
-import { warehouses } from '../redusers/initState';
 
 interface ISearchFormFilter extends ISearchForm {
     selectedFilter:string|undefined
 }
 
-class SearchFormHome extends React.Component<ISearchForm, ISearchFormFilter> {
+interface ISearchFormCustom extends ISearchForm {
+    action:IHandleSearch
+}
 
-    constructor(props:ISearchForm, state:ISearchFormFilter) {
+const mapStateToProps = (reducer:any):ISearchForm => {
+    const warehouses:IWarehouse[] = reducer.DefaultReducer.warehouses
+    const { searchFormState } = reducer.HomeReducer.bigSearchBlockState
+    const newState = {
+        ...searchFormState,
+        warehouses
+    }
+    return newState
+}
+
+class SearchFormHome extends React.Component<ISearchFormCustom, ISearchFormFilter> {
+
+    constructor(props:ISearchFormCustom, state:ISearchFormFilter) {
         super(props, state)
 
         this.state = {
@@ -49,6 +62,7 @@ class SearchFormHome extends React.Component<ISearchForm, ISearchFormFilter> {
 
     render() {
         const { searchInput } = this.state
+        const { warehouses } = this.props
         return (
             <div className="SearchFormHome">
                 <div className="input-group standart-container">
@@ -67,8 +81,8 @@ class SearchFormHome extends React.Component<ISearchForm, ISearchFormFilter> {
                         <option selected>У всіх Аптеках</option>
                         {warehouses.map((warehouse, index) => {
                             return (
-                                <option key={index} value={warehouse.id}>
-                                    {`№${warehouse.id} ${warehouse.address}`}
+                                <option key={`warehouses-home-${index}`} value={warehouse.uuid}>
+                                    {`№${warehouse.uuid} ${warehouse.name}`}
                                 </option>
                             )
                         })}
@@ -88,4 +102,4 @@ class SearchFormHome extends React.Component<ISearchForm, ISearchFormFilter> {
     }
 }
 
-export default connect()(SearchFormHome)
+export default connect(mapStateToProps)(SearchFormHome)

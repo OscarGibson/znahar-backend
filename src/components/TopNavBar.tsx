@@ -20,10 +20,10 @@ const mapDispatchToProps = (dispatch:any) => {
     }
 }
 
-const mapStateToProps = (reducer:any, props:TopNavBarData) => {
+const mapStateToProps = (reducer:any):TopNavBarData => {
+    console.log("mapStateToProps", reducer)
     const { topNavBarState } = reducer.DefaultReducer
     return {
-        ...props,
         ...topNavBarState
     }
 }

@@ -17,8 +17,10 @@ const mapDispatchToProps = (dispatch:any) => {
     }
 }
 
-const mapStateToProps = (reducer:any) => {
+const mapStateToProps = (reducer:any):IHomePage => {
     const { HomeReducer } = reducer
+    const { BigSearchBlock } = HomeReducer
+    const { warehouses } = reducer.DefaultReducer
     return {
         ...HomeReducer
     }
@@ -30,11 +32,13 @@ class HomePage extends React.Component<IHomePage, IHomePage> {
 
         this.getPromotions = this.getPromotions.bind(this)
         this.getNews = this.getNews.bind(this)
+
+        this.getNews()
+        this.getPromotions()
     }
 
     componentDidMount() {
-        this.getNews()
-        this.getPromotions()
+        
     }
 
     getPromotions() {
@@ -72,17 +76,15 @@ class HomePage extends React.Component<IHomePage, IHomePage> {
     render() {
         const {
             mainMenuOriginState,
-            bigSearchBlockState,
             promotionsSmallBoxState,
             newBlockState,
             subscribeBlockState,
         } = this.props
-        console.log("HOME PROPS: ", this.props)
         return (
             <div className="HomePage">
                 {/* <TopNavBar { ...topNavBarState } /> */}
                 <MainMenuBig {...mainMenuOriginState}/>
-                <BigSearchBlock {...bigSearchBlockState}/>
+                <BigSearchBlock />
                 <PromotionsSmallBox {...promotionsSmallBoxState}/>
                 <NewsBlock {...newBlockState}/>
                 {/* <CarouselBlock {...carouselState}/> */}

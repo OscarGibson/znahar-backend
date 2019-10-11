@@ -1,6 +1,20 @@
-// const PRODUCTS_BACKEND = "http://194.44.237.46:8008/rt/hs/WebStore"
-const MAIN_BACKEND = "http://localhost:8000"
-// const MAIN_BACKEND = ""
+const envPath = ():string => {
+    switch (process.env.NODE_ENV) {
+        case "development":
+            return "http://localhost:8000"
+
+        case "test":
+            return ""
+
+        case "production":
+            return ""
+    
+        default:
+            return ""
+    }
+}
+
+const MAIN_BACKEND = envPath()
 
 export const IMAGES_BACKEND = `${MAIN_BACKEND}`
 
@@ -12,3 +26,5 @@ export const REFRESH_TOKEN_URL = `${MAIN_BACKEND}/api/token/refresh`
 export const GET_USER_URL = `${MAIN_BACKEND}/api/user/retrieve`
 export const GET_PROMOTIONS_URL = `${MAIN_BACKEND}/api/promotions/`
 export const GET_NEWS_URL = `${MAIN_BACKEND}/api/news/`
+export const GET_SETTINGS_URL = `${MAIN_BACKEND}/znahar/settings/`
+export const GET_WAREHOUSES_URL = `${MAIN_BACKEND}/znahar/warehouses/`

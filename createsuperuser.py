@@ -9,4 +9,7 @@ application = get_wsgi_application()
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
-User.objects.create_superuser('admin', 'admin@znahar.com', 'operationCwal0')
+try:
+    User.objects.create_superuser('admin', 'admin@znahar.com', 'operationCwal0')
+except Exception:
+    pass

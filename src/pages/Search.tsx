@@ -97,13 +97,12 @@ class SearchPage extends React.Component<ISearchState, ISearchState> {
     }
 
     render() {
-        const { productsRequestState, searchFormState, infoLayerState, topNavBarState } = this.props
+        const { productsRequestState, searchFormState, infoLayerState } = this.props
         const { products, isRequestSended, isResponseRecieved } = productsRequestState
         const { searchFormSubmitted, searchInput } = searchFormState
 
         return (
             <div className="search-page">
-                {/* <TopNavBar { ...topNavBarState } /> */}
                 <MainMenuSimple { ...mainMenuSimpleState }/>
                 <SearchBlock
                     products={products}

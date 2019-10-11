@@ -1,11 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { IFooterBlock } from '../types';
+import { IFooterBlock, IRootApp } from '../types';
 import FooterMenu from './FooterMenu';
 import FooterContacts from './FooterContacts';
 import FooterSocial from './FooterSocial';
 import FooterBackForm from './FooterBackForm';
 
+const mapStateToProps = (reducer:any):IFooterBlock => {
+    const { footerBlockState } = reducer.DefaultReducer
+    return {
+      ...footerBlockState
+    }
+}
 
 const FooterBlock = ({
     footerMenu, contactsList, socialList, backForm
@@ -43,4 +49,4 @@ const FooterBlock = ({
     )
 }
 
-export default connect()(FooterBlock)
+export default connect(mapStateToProps)(FooterBlock)

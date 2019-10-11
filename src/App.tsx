@@ -1,17 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import './App.css';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import { 
   searchInitState,
-  topNavBarState,
+  // topNavBarState,
   homePageState,
-  footerBlockState
+  infoLayerState,
+  // footerBlockState
 } from './redusers/initState'
 import store from './store';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import { Provider } from "react-redux";
-import { IAction, IActionPayload, ICart, ITopNavBarState, IProfilePage } from './types'
+import { IAction, IActionPayload, IRootApp, ISettings, IWarehouse } from './types'
 import TopNavBar from './components/TopNavBar';
 import BottomFooterBlock from './components/BottomFooterBlock';
 import FooterBlock from './components/FooterBlock';
@@ -23,58 +26,70 @@ import ForClients from './pages/ForClients';
 import News from './pages/News';
 import NewsPost from './pages/NewsPost';
 import Promotions from './pages/Promotions';
+import { GET_SETTINGS_URL } from './constants';
+import { setSettings, setWarehouses } from './actions';
+
+interface IRootAppAction {
+  setSettings:(payload:ISettings) => void,
+  setWarehouses:(payload:IWarehouse[]) => void
+}
 
 
-const getProductsRequestSended:IAction = () => {
+
+const mapStateToProps = (reducer:any):IRootApp => {
+  const { DefaultReducer } = reducer
   return {
-    type:"",action:{}
+    ...DefaultReducer
   }
 }
 
-const setProductsSuccess:IActionPayload = (products) => {
+const mapDispatchToProps = (dispatch:any) => {
   return {
-    type:"",action:products
+    setSettings:(payload:ISettings) => {dispatch(setSettings(payload))},
+    setWarehouses:(payload:IWarehouse[]) => {dispatch(setWarehouses(payload))}
   }
 }
 
-const App = () => {
-  // let newTopNavBarState:ITopNavBarState
-  // let newProfilePageState:IProfilePage
 
-  // const cartStateJsonStr = localStorage.getItem("cart")
-  // if (cartStateJsonStr) {
-  //     const newCartState:ICart = JSON.parse(cartStateJsonStr)
-  //     console.log("cartState", newCartState)
-  //     newTopNavBarState = {
-  //       ...topNavBarState,
-  //       cartOrdersCount:newCartState.products.length
-  //     }
-  //     newProfilePageState = {
-  //       ...profilePageState,
-  //       cartState: newCartState
-  //     }
-  // } else {
-  //   newTopNavBarState = {
-  //     ...topNavBarState
-  //   }
-  //   newProfilePageState = {
-  //     ...profilePageState
-  //   }
-  // }
+class AppTemplate extends React.Component<IRootAppAction, IRootAppAction> {
+  constructor(props:IRootAppAction, state:IRootAppAction) {
+    super(props, state)
+    this.getSettings = this.getSettings.bind(this)
 
-  return (
-    <div>
-      <Provider store={store}>
+    this.getSettings()
+  }
+
+  getSettings() {
+    const { setSettings, setWarehouses } = this.props
+    axios.get(GET_SETTINGS_URL, {})
+    .then((response) => {
+        if (response.data.code === 200) {
+          const {settings, warehouses} = response.data.data
+          setSettings(settings)
+          setWarehouses(warehouses)
+        }
+    })
+    .catch((error) => {
+        console.log("ERROR", error)
+    })
+    .finally(() => {
+  
+    })
+  }
+
+  render() {
+    return (
+      <div>
         <Router>
           <div className="App">
-            <TopNavBar { ...topNavBarState } />
+            <TopNavBar />
             <Switch>
-              <Route path="/" exact component={() => <Home {...homePageState}/>} />
+              <Route path="/" exact component={Home} />
               <Route path="/search" component={() =>
                 <Search
                   {...searchInitState}
-                  getProductsRequestSended={getProductsRequestSended}
-                  setProductsSuccess={setProductsSuccess}
+                  // getProductsRequestSended={getProductsRequestSended}
+                  // setProductsSuccess={setProductsSuccess}
                 />
               }/>
               <Route path="/profile" component={Profile} />
@@ -84,16 +99,24 @@ const App = () => {
               <Route path="/news" exact component={News} />
               <Route path="/news/:postId" component={NewsPost}/>
               <Route path="/promotions" exact component={Promotions} />
-              <Route path="/404" exact component={() => <NotFoundPage {...homePageState}/>} />
+              <Route path="/404" exact component={NotFoundPage} />
               <Redirect path="*" to="/404" />
             </Switch>
-            <FooterBlock {...footerBlockState}/>
+            <FooterBlock />
             <BottomFooterBlock text={"©2019 Аптека Знахар Львів"}/>
           </div>
         </Router>
-      </Provider>
-    </div>
+      </div>
+    )
+  }
+}
+
+const AppConnected = connect(mapStateToProps, mapDispatchToProps)(AppTemplate)
+
+const App = () => {
+  return (
+    <AppConnected />
   )
 }
 
-export default App;
+export default App

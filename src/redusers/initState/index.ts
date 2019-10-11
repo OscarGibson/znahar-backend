@@ -51,9 +51,10 @@ export const productsRequestState:IGetProductsRequest = {
 export const searchFormState:ISearchForm = {
     searchInput: "",
     searchFormSubmitted:false,
-    action:(searchKey:string, selectedFiler:string|undefined) => {
-        window.location.href = `/search?searchKey=${searchKey}&selectedFilter=${selectedFiler}`
-    }
+    // action:(searchKey:string, selectedFiler:string|undefined) => {
+    //     window.location.href = `/search?searchKey=${searchKey}&selectedFilter=${selectedFiler}`
+    // },
+    warehouses:[]
 }
 
 export const mainMenuSimpleState:IMainMenuData = {
@@ -177,14 +178,9 @@ export const footerMenu:IMainMenuData = {
 
 export const contactsList:IContactsList = {
     title:"Контактна інформація",
-    items:[
-        "lubowitz.kara@hotmail.com",
-        "(032) 297-55-89",
-        "(032) 297-55-80",
-        "(032) 264-53-37",
-        "(067) 007-06-70"
-    ]
+    items:[]
 }
+
 
 export const socialList:ISocialList = {
     title:"Ми у соцмережах",
@@ -215,79 +211,81 @@ export const footerBlockState:IFooterBlock = {
     backForm:backForm
 }
 
-export const warehouses:IWarehouse[] = [{
-    id:"1",
-    address:"вул. Хімічна, 22",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"2",
-    address:"вул. Мазепи, 11",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"3",
-    address:"вул. Виговського, 29а",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"4",
-    address:"просп. Червоної Калини, 64",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"5",
-    address:"вул. Городоцька, 82",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"6",
-    address:"вул. Симоненка, 3",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"7",
-    address:"вул. Богдана Хмельницького, 1",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"8",
-    address:"вул. Дорошенка, 6",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"9",
-    address:"вул. Личаківська, 54/2",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"10",
-    address:"вул. Сихівська, 22",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"11",
-    address:"вул. Пасічна, 70",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-},{
-    id:"12",
-    address:"вул. Шевченка, 366в",
-    description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
-    photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
-    coordinates:undefined
-}]
+export const warehouses:IWarehouse[] = []
+
+// export const warehouses:IWarehouse[] = [{
+//     id:"1",
+//     address:"вул. Хімічна, 22",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"2",
+//     address:"вул. Мазепи, 11",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"3",
+//     address:"вул. Виговського, 29а",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"4",
+//     address:"просп. Червоної Калини, 64",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"5",
+//     address:"вул. Городоцька, 82",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"6",
+//     address:"вул. Симоненка, 3",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"7",
+//     address:"вул. Богдана Хмельницького, 1",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"8",
+//     address:"вул. Дорошенка, 6",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"9",
+//     address:"вул. Личаківська, 54/2",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"10",
+//     address:"вул. Сихівська, 22",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"11",
+//     address:"вул. Пасічна, 70",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// },{
+//     id:"12",
+//     address:"вул. Шевченка, 366в",
+//     description:"Години роботи: Пн-Пт: 8:00-21:00, Сб: 8:00 - 20:00, Нд: 9:00 - 19:00",
+//     photoUrl:"http://www.apteka-znahar.com.ua/static/images/khimichna.jpg",
+//     coordinates:undefined
+// }]
 
 const warehousesIdList:{[id:string]:number} = {
     "1":0,
@@ -344,10 +342,7 @@ export const cartState:ICart = {
 }
 
 export const topNavBarState:ITopNavBarState = {
-    phonesNumbers:[
-        "(032) 297-55-89",
-        "(067) 007-06-07"
-    ],
+    phonesNumbers:[],
     isUserAuth:false,
     userName:"",
     cartOrdersCount:initCartState.totalCount,
@@ -445,6 +440,17 @@ export const profilePageState:IProfilePage = {
 export const defaultState:IRootApp = {
     infoLayerState:infoLayerState,
     topNavBarState:topNavBarState,
+    settings:{
+        id:0,
+        contact_cell_footer:[],
+        contact_cell_top:[],
+        facebook_link:"",
+        instagram_link:"",
+        youtube_link:"",
+        contact_email:""
+    },
+    warehouses:[],
+    footerBlockState:footerBlockState,
 }
 
 export const initialState = {

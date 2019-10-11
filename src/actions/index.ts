@@ -20,9 +20,11 @@ import {
   SET_USER_FULL_DATA,
   SET_PROMOTIONS,
   SET_NEWS,
-  SET_NEWS_POST
+  SET_NEWS_POST,
+  SET_SETTINGS,
+  SET_WAREHOUSES
 } from "./types";
-import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost } from "../types";
+import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost, IWarehouse, ISettings } from "../types";
 
 export function initProductsInSearch(payload:any) {
   return { type: INIT_PRODUCTS_SEARCH, payload };
@@ -110,4 +112,13 @@ export const setNews = (payload:INewsItem[]) => {
 
 export const setNewsPost = (payload:INewsPost) => {
   return { type:SET_NEWS_POST, payload}
+}
+
+export const setSettings = (payload:ISettings) => {
+  console.log("setSettings")
+  return { type:SET_SETTINGS, payload }
+}
+
+export const setWarehouses = (payload:IWarehouse[]) => {
+  return {type:SET_WAREHOUSES, payload}
 }

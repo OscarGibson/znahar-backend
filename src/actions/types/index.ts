@@ -34,3 +34,6 @@ export const SET_USER_FULL_DATA = "SET_USER_FULL_DATA"
 export const SET_PROMOTIONS = "SET_PROMOTIONS"
 export const SET_NEWS = "SET_NEWS"
 export const SET_NEWS_POST = "SET_NEWS_POST"
+
+export const SET_SETTINGS = "SET_SETTINGS"
+export const SET_WAREHOUSES = "SET_WAREHOUSES"
