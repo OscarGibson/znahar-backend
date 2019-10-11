@@ -5,8 +5,10 @@ import SearchFormHome from './SearchFormHome';
 
 const mapStateToProps = (reducer:any):IBigSearchBlock => {
     const { bigSearchBlockState } = reducer.HomeReducer
+    const { warehouses } = reducer.DefaultReducer
     return {
-        ...bigSearchBlockState
+        ...bigSearchBlockState,
+        warehouses
     }
 }
 

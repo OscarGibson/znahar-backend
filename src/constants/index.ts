@@ -1,7 +1,7 @@
 const envPath = ():string => {
     switch (process.env.NODE_ENV) {
         case "development":
-            return "http://localhost:8000"
+            return "http://www.apteka-znahar.com.ua"
 
         case "test":
             return ""

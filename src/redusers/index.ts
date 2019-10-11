@@ -295,7 +295,6 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
   }
 
   if (action.type === SET_PRODUCTS_SEARCH_SUCCESS) {
-    console.log("SET_PRODUCTS_SEARCH_SUCCESS", state, action)
     const { searchFormState } = state
     const { message, code, data, total } = action.payload
     return {
@@ -318,7 +317,6 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
   }
 
   if (action.type === SET_PRODUCTS_SEARCH_FAIL) {
-    console.log("SET_PRODUCTS_SEARCH_FAIL", state, action)
     const { searchFormState } = state
     const { message, code, error } = action.payload
     return {

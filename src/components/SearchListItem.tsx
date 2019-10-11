@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getWarehouseById } from '../redusers/initState';
 import ActionButton from './ActionButton';
-import { IProduct, IInfoLayer, IProductItem } from '../types';
+import { IProduct, IInfoLayer, IProductItem, IWarehouse } from '../types';
 import { showInfoLayer, addProductToCart, addItemTopCart } from '../actions';
 
 export interface SearchListItemProps {
@@ -14,6 +14,7 @@ export interface SearchListItemProps {
     price:number,
     discount:number,
     remain:number,
+    warehousesList:IWarehouse[],
     showInfoLayer:(payload:any) => void,
     addProductToCart:(payload:IProductItem) => void,
     addItemTopCart:(payload:number) => void
@@ -32,7 +33,7 @@ export interface SearchListItemState {
 
 const mapStateToProps = (reducer:any, other:any) => {
     return {
-        ...other
+        
     }
 }
 
@@ -83,9 +84,9 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
     render() {
         const {
             id, index, name, warehouse_id, photoUrl, price,
-            discount, remain
+            discount, remain, warehousesList
         } = this.props
-        const warehouse = getWarehouseById(warehouse_id)
+        const warehouse = getWarehouseById(warehouse_id, warehousesList)
         return (
             <tr key={id}>
                 <td>{name}</td>

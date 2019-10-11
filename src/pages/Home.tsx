@@ -62,7 +62,6 @@ class HomePage extends React.Component<IHomePage, IHomePage> {
         axios.get(GET_NEWS_URL, {})
         .then((response) => {
             if (response.status === 200) {
-                // const { news } = response.data
                 setNews(response.data)
             }
         })
@@ -82,12 +81,10 @@ class HomePage extends React.Component<IHomePage, IHomePage> {
         } = this.props
         return (
             <div className="HomePage">
-                {/* <TopNavBar { ...topNavBarState } /> */}
                 <MainMenuBig {...mainMenuOriginState}/>
                 <BigSearchBlock />
                 <PromotionsSmallBox {...promotionsSmallBoxState}/>
                 <NewsBlock {...newBlockState}/>
-                {/* <CarouselBlock {...carouselState}/> */}
                 <SubscribeBlock {...subscribeBlockState}/>
             </div>
         )

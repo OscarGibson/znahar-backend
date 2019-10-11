@@ -1,7 +1,3 @@
-import { string } from "prop-types";
-import SubscribeBlock from "../components/SubscribeBlock";
-import { ReactNode } from "react";
-
 export interface IAction {
     ():{type:string,action:any}
 }
@@ -66,6 +62,7 @@ export interface IMainMenuData {
 
 export interface IBigSearchBlock {
     searchFormState:ISearchForm,
+    warehouses:IWarehouse[]
 }
 
 export interface IActionButton {
@@ -311,7 +308,8 @@ export interface IProfilePage {
     minusProductFromCart:(payload:number) => void,
     showInfoLayer:(payload:any) => void,
     clearCart:() => void,
-    setUserFullData:(payload:IUser) => void
+    setUserFullData:(payload:IUser) => void,
+    warehouses:IWarehouse[],
 }
 
 export interface IRootApp {

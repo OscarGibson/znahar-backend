@@ -40,13 +40,13 @@ const mapDispatchToProps = (dispatch:any) => {
 }
 
 const mapStateToProps = (reducer:any) => {
-    const { ProfileReducer, SearchReducer } = reducer
-    console.log("STATE TO PROPS", ProfileReducer)
+    const { ProfileReducer, SearchReducer, DefaultReducer } = reducer
     return {
         ...ProfileReducer,
         cartState:SearchReducer.cartState,
         topNavBarState:SearchReducer.topNavBarState,
-        infoLayerState:SearchReducer.infoLayerState
+        infoLayerState:SearchReducer.infoLayerState,
+        warehouses:DefaultReducer.warehouses
     }
 }
 
@@ -82,7 +82,6 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
             }
         })
         .catch((error) => {
-            console.log("ERROR", error)
             window.location.href = "/login"
         })
         .finally(() => {
@@ -91,7 +90,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
     }
 
     sendFinishMessage(warehousesError:string[]) {
-        const { showInfoLayer } = this.props
+        const { showInfoLayer, warehouses } = this.props
         let text:string = "Деякі товари з вашого списку не вдалось забронювати: \n"
 
         if (warehousesError.length === 0) {
@@ -102,7 +101,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
         } else {
             let warehouse:IWarehouse
             for (let warehouseId of warehousesError) {
-                warehouse = getWarehouseById(warehouseId)
+                warehouse = getWarehouseById(warehouseId, warehouses)
                 text += `№${warehouseId} ${warehouse.name}`
             }
             showInfoLayer({
@@ -153,7 +152,6 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
         const accessToken = localStorage.getItem("accessToken")
         const { showInfoLayer } = this.props
 
-        console.log("ORDERS: ", finalOrders)
 
         axios.post(ORDERS_URL, {
             orders:finalOrders
@@ -172,10 +170,8 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                     timer:2,
                 })
             }
-            console.log(response)
         })
         .catch((error) => {
-            console.log("ERROR", error)
             showInfoLayer({
                 text:"Помилка системи. Приносимо вибачення за тимчасові незручності",
                 timer:2,
@@ -191,7 +187,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
 
 
     render() {
-        const { mainMenuSimpleState, userState, cartState, infoLayerState } = this.props
+        const { mainMenuSimpleState, userState, cartState, infoLayerState, warehouses } = this.props
         const { products, totalCount, totalPriceDiscount, totalPrice } = cartState
 
         let price:string
@@ -266,7 +262,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                                     <tbody>
                                         {products.map( (product, index) => {
                                             const { name, warehouse_id, price, count, id } = product
-                                            const warehouse = getWarehouseById(warehouse_id)
+                                            const warehouse = getWarehouseById(warehouse_id, warehouses)
                                             return (
                                                 <tr key={index}>
                                                     <td>{name}</td>

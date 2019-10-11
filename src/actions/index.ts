@@ -115,7 +115,6 @@ export const setNewsPost = (payload:INewsPost) => {
 }
 
 export const setSettings = (payload:ISettings) => {
-  console.log("setSettings")
   return { type:SET_SETTINGS, payload }
 }
 

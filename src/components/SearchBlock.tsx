@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import SearchList from './SearchList'
 import SearchForm from './SearchForm'
-import { IHandleSearch } from '../types'
+import { IHandleSearch, IWarehouse } from '../types'
 
 interface SearchBlockProps {
     products:Array<any>,
@@ -10,7 +10,8 @@ interface SearchBlockProps {
     isResponseRecieved:boolean,
     searchInput:string,
     searchFormSubmitted:boolean,
-    handleSearch:IHandleSearch
+    handleSearch:IHandleSearch,
+    warehousesList:IWarehouse[]
 }
 
 interface SearchBlockState {
@@ -18,14 +19,15 @@ interface SearchBlockState {
 }
 
 const mapStateToProps = (reducer:any, other:any) => {
-    console.log("mapStateToProps in SEARCHBLOCK:", reducer, other)
     const { SearchReducer } = reducer
+    const { warehouses } = reducer.DefaultReducer
     const { productsRequestState, searchFormState } = SearchReducer
     const { products, isRequestSended, isResponseRecieved } = productsRequestState
     const { searchFormSubmitted, searchInput } = searchFormState
     return {
         products, isRequestSended, isResponseRecieved,
-        searchInput, searchFormSubmitted
+        searchInput, searchFormSubmitted,
+        warehousesList:warehouses
     }
 }
 
@@ -49,12 +51,12 @@ const XOR = (a:boolean,b:boolean) => {
 
 class SearchBlock extends React.Component<SearchBlockProps, SearchBlockState> {
     render() {
-        console.log("RERENDER SEARCH BLOCK")
         const {
             products,
             isRequestSended,
             isResponseRecieved,
-            handleSearch
+            handleSearch,
+            warehousesList
         } = this.props
 
         const isProductsLoaded = XOR(isRequestSended, isResponseRecieved)
@@ -64,7 +66,11 @@ class SearchBlock extends React.Component<SearchBlockProps, SearchBlockState> {
                 <SearchForm action={handleSearch}/>
                 <table className="table standart-container">
                     <SearchTableHeader />
-                    <SearchList products={products} isProductsLoaded={isProductsLoaded}/>
+                    <SearchList
+                        products={products}
+                        isProductsLoaded={isProductsLoaded}
+                        warehousesList={warehousesList}
+                    />
                 </table>     
             </div>
             

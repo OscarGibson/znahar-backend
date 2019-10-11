@@ -19,9 +19,5 @@ const envPath = ():string => {
     }
 }
 
-console.log("process.env.NODE_ENV", process.env.NODE_ENV, resolve(__dirname, `../.env${envPath()}`), __dirname)
-
 
 config({ path: resolve(__dirname, `../.env${envPath()}`) })
-
-console.log("env", process.env)

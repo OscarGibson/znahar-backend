@@ -21,7 +21,6 @@ interface ComponentProps extends RouteComponentProps<RouteInfo>, INewsPostPage {
 
 const mapStateToProps = (reducer:any) => {
     const { NewsPostReducer } = reducer
-    console.log("NewsReducer", NewsPostReducer)
     return {
         ...NewsPostReducer
     }
@@ -90,7 +89,6 @@ class NewsPost extends React.Component<ComponentProps, ComponentProps> {
         axios.get(GET_NEWS_URL, {})
         .then((response) => {
             if (response.status === 200) {
-                // const { news } = response.data
                 setNews(response.data)
             }
         })

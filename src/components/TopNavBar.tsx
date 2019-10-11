@@ -21,7 +21,6 @@ const mapDispatchToProps = (dispatch:any) => {
 }
 
 const mapStateToProps = (reducer:any):TopNavBarData => {
-    console.log("mapStateToProps", reducer)
     const { topNavBarState } = reducer.DefaultReducer
     return {
         ...topNavBarState
@@ -73,7 +72,6 @@ const handleRefreshToken = (refreshToken:string) => {
     })
     .then((response) => {
         if (response.status === 200) {
-            console.log(response)
             const { access } = response.data
             localStorage.setItem("accessToken", access)
             window.location.reload()
@@ -98,9 +96,7 @@ const getUserInfo = (
     })
     .then((response) => {
         if (response.status === 200) {
-            console.log(response)
             const { fname, lname, email} = response.data
-            // const userName = `${fname} ${lname}`
             const userName = email
             localStorage.setItem("userName", userName)
             setUserDataAction(userName)
@@ -160,7 +156,7 @@ const TopNavBar = ({phonesNumbers, isUserAuth, cartOrdersCount, setUserData, use
                         text={`Ваш кошик: ${cartOrdersCount} товарів`}
                         iconName=""
                         iconSvgSrc="/static/svg/basket.svg"
-                        action={() => {console.log("Cart click")}}
+                        action={() => {}}
                         classList={["cart", "svg-icon"]}
                     />
                 </Link>

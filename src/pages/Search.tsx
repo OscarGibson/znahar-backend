@@ -68,14 +68,11 @@ class SearchPage extends React.Component<ISearchState, ISearchState> {
         else
             params["warehouses"] = [warehouse_id]
 
-        console.log("handleSearch: ", params)
-
         axios.get(GET_PRODUCTS_URL, {
             params
         })
         .then((response) => {
             if (response.data.code === 200) {
-                console.log("SUCCESS", response.data)
                 setProductsSuccess(response.data)    
             }
         })
@@ -86,14 +83,6 @@ class SearchPage extends React.Component<ISearchState, ISearchState> {
         .finally(() => {
 
         })
-    }
-
-    componentWillUpdate() {
-        console.log("componentWillUpdate")
-    }
-
-    componentDidUpdate() {
-        console.log("componentDidUpdate")
     }
 
     render() {

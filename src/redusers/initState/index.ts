@@ -83,12 +83,13 @@ export const mainMenuOriginState:IMainMenuData = {
 }
 
 export const bigSearchBlockState:IBigSearchBlock = {
-    searchFormState: searchFormState,
+    searchFormState:searchFormState,
+    warehouses:[]
 }
 
 export const actionButton:IActionButton = {
     text:"Show all",
-    action: () => {console.log("ACTION BUTTON PUSH")},
+    action: () => {},
     classList:[],
     iconName:"",
     iconSvgSrc:""
@@ -302,7 +303,8 @@ const warehousesIdList:{[id:string]:number} = {
     "12":11
 }
 
-export const getWarehouseById = (id:string):IWarehouse => {
+export const getWarehouseById = (id:string, warehouses:IWarehouse[]):IWarehouse => {
+    console.log("getWarehouseById", id, warehouses)
     return warehouses[warehousesIdList[id]]
 }
 
@@ -404,8 +406,8 @@ export const searchInitState:ISearchState = {
     searchFormState: searchFormState,
     topNavBarState: topNavBarState,
     mainMenuSimpleState: mainMenuSimpleState,
-    setProductsSuccess:(products) => { console.log("setProductsSuccess", products) },
-    getProductsRequestSended:() => { console.log("getProductsRequestSended") },
+    setProductsSuccess:(products) => {  },
+    getProductsRequestSended:() => { },
     infoLayerState:infoLayerState,
     cartState:cartState
 }
@@ -434,7 +436,8 @@ export const profilePageState:IProfilePage = {
     minusProductFromCart:(payload:number) => {},
     showInfoLayer:(payload:any) => {},
     clearCart:() => {},
-    setUserFullData:(payload:IUser) => {}
+    setUserFullData:(payload:IUser) => {},
+    warehouses:[]
 }
 
 export const defaultState:IRootApp = {

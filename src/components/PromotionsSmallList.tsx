@@ -19,7 +19,6 @@ const mapStateToProps = (reducer:any) => {
 class PromotionsSmallList extends React.Component<IPromotionsSmallList, IPromotionsSmallList> {
     render() {
         const { items } = this.props
-        console.log("ITEMS: ", this.props)
         return (
             <div className="PromotionsSmallList">
                 {items.map( (item, index) => {

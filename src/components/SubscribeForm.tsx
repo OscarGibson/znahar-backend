@@ -34,7 +34,7 @@ class SubscribeForm extends React.Component<ISubscribeForm, ISubscribeForm> {
                         <ActionButton
                             text={"Підписатись"}
                             classList={["default-button", "button"]}
-                            action={() => {console.log("Subscribe click")}}
+                            action={() => {}}
                             iconName={""}
                             iconSvgSrc=""
                         />

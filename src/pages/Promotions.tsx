@@ -12,7 +12,6 @@ import ActionButton from '../components/ActionButton';
 
 const mapStateToProps = (reducer:any) => {
     const { PromotionsReducer } = reducer
-    console.log(PromotionsReducer)
     return {
         ...PromotionsReducer
     }

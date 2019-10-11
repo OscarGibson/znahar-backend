@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SearchListItem, { SearchListItemProps } from './SearchListItem';
+import { IWarehouse } from '../types';
 
 interface SearchListProps {
     products:Array<SearchListItemProps>,
-    isProductsLoaded:boolean
+    isProductsLoaded:boolean,
+    warehousesList:IWarehouse[],
 }
 
 interface SearchListState {
@@ -28,25 +30,10 @@ const mapStateToProps = (reducer:any, other:any) => {
 }
 
 class SearchListComponent extends React.Component<SearchListProps, SearchListState> {
-    // constructor(props:SearchListProps, state:SearchListState) {
-    //     super(props, state)
-
-    //     this.state = {
-    //         products:props.products
-    //     }
-    // }
-
-    // componentWillUpdate(props:SearchListProps, state:SearchListState) {
-    //     console.log("SearchListComponentWillUpdate", props, state)
-    //     this.setState({
-    //         products: props.products
-    //     })
-    // }
 
     render() {
-        // console.log("RENDER SEARCH LIST", this.props)
         const {
-            products, isProductsLoaded
+            products, isProductsLoaded, warehousesList
         } = this.props
 
         if (isProductsLoaded)
@@ -64,6 +51,7 @@ class SearchListComponent extends React.Component<SearchListProps, SearchListSta
                                 price={product.price}
                                 discount={product.discount}
                                 remain={product.remain}
+                                warehousesList={warehousesList}
                             />
                         )   
                     })}

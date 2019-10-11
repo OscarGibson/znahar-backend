@@ -15,8 +15,6 @@ class PromotionsSmallBox extends React.Component<IPromotionsSmallBox, IPromotion
     render() {
         const { promotionsSmallList, promotionsBigList } = this.props
 
-        console.log("PromotionsSmallBox PROPS: ", this.props)
-
         return (
             <div className="PromotionsSmallBox standart-container">
                 <PromotionsSmallList items={promotionsSmallList}/>

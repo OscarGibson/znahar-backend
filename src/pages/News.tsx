@@ -13,7 +13,6 @@ import PromotionItem from '../components/PromotionItem';
 
 const mapStateToProps = (reducer:any) => {
     const { NewsReducer } = reducer
-    console.log("NewsReducer", NewsReducer)
     return {
         ...NewsReducer
     }
@@ -61,7 +60,6 @@ class News extends React.Component<INewsPage, INewsPage> {
         axios.get(GET_NEWS_URL, {})
         .then((response) => {
             if (response.status === 200) {
-                // const { news } = response.data
                 setNews(response.data)
             }
         })

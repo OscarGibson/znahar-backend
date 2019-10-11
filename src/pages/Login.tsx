@@ -50,7 +50,6 @@ class Login extends React.Component<ILoginForm, ILoginForm> {
         })
         .then((response) => {
             if (response.status === 200) {
-                console.log(response)
                 const { access, refresh } = response.data
                 localStorage.setItem("accessToken", access)
                 localStorage.setItem("refreshToken", refresh)
