@@ -31,12 +31,12 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
-    photoUrl = models.URLField(
-        _("photo url"),
+    photoUrl = models.ImageField(
+        upload_to="uploads",
         blank=True,
         null=True
     )
-    cell = models.CharField(max_length=10, null=True)
+    cell = models.CharField(max_length=16, null=True)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ["username"]

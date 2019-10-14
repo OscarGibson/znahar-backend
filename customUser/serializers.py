@@ -14,6 +14,10 @@ class UserSerializer(serializers.ModelSerializer):
             email=validated_data['email']
         )
         user.set_password(validated_data['password'])
+        user.fname = validated_data['fname']
+        user.lname = validated_data['lname']
+        user.username = "{} {}".format(validated_data['fname'], validated_data['lname'])
+        user.cell = validated_data['cell']
         user.save()
 
         return user
