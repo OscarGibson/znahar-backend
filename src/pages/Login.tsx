@@ -5,7 +5,7 @@ import Breadcrumbp from '../components/Breadcrumbp'
 import MainMenuSimple from '../components/MainMenuSimple'
 import { mainMenuSimpleState } from '../redusers/initState'
 import { ILoginForm } from '../types';
-import { changeLoginFormField, cleanLoginForm } from '../actions';
+import { changeLoginFormField, cleanLoginForm, setLoginErrors } from '../actions';
 import { LOGIN_URL } from '../constants';
 
 
@@ -19,7 +19,18 @@ const mapStateToProps = (reducer:any) => {
 const mapDispatchToProps = (dispatch:any) => {
     return {
         changeLoginFormField: (payload:{name:string, value:string}) => {dispatch(changeLoginFormField(payload))},
-        cleanLoginForm: () => {dispatch(cleanLoginForm())}
+        cleanLoginForm: () => {dispatch(cleanLoginForm())},
+        setLoginErrors:(errors:string) => {dispatch(setLoginErrors(errors))}
+    }
+}
+
+const renderErrors = (errors:string) => {
+    if (errors !== "") {
+        return (
+            <div className="alert alert-danger custom-alert" role="alert">
+                {errors}
+            </div>
+        )
     }
 }
 
@@ -49,6 +60,7 @@ class Login extends React.Component<ILoginForm, ILoginForm> {
             email, password
         })
         .then((response) => {
+            console.log("RESPONSE", response.status)
             if (response.status === 200) {
                 const { access, refresh } = response.data
                 localStorage.setItem("accessToken", access)
@@ -58,7 +70,15 @@ class Login extends React.Component<ILoginForm, ILoginForm> {
             }
         })
         .catch((error) => {
-            console.log("ERROR", error)
+            const { setLoginErrors } = this.props
+            const { status } = error.response
+            if (status === 400) {
+                setLoginErrors("Invalid request")
+            } else if (status === 401) {
+                setLoginErrors("Невірний логін або пароль")
+            } else {
+                setLoginErrors("Server error")
+            }
         })
         .finally(() => {
 
@@ -71,7 +91,7 @@ class Login extends React.Component<ILoginForm, ILoginForm> {
     }
 
     render() {
-        const { email, password } = this.props
+        const { email, password, errors } = this.props
         return (
             <div className="Register">
                 <MainMenuSimple { ...mainMenuSimpleState }/>
@@ -94,13 +114,13 @@ class Login extends React.Component<ILoginForm, ILoginForm> {
                         <div className="form-group">
                             <label>Електронна Скринька</label>
                             <input onChange={this.handleFieldChange} value={email} name="email" type="email" className="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Email" />
-                            <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div className="form-group">
                             <label>Пароль</label>
                             <input onChange={this.handleFieldChange} value={password} type="password" name="password" className="form-control" id="exampleInputPassword1" placeholder="********" />
                         </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
+                        <button type="submit" className="btn btn-primary default-button">Увійти</button>
+                        {renderErrors(errors)}
                     </form>
                 </div>
             </div>

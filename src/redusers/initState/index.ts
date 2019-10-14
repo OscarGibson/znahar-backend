@@ -352,19 +352,26 @@ export const topNavBarState:ITopNavBarState = {
 }
 
 export const registerForm:IRegisterForm = {
-    name:"",
+    fname:"",
+    lname:"",
     email:"",
     cell:"",
     password:"",
+    validated:false,
     changeRegisterFormField:(payload:{name:string, value:string}) => {},
-    cleanRegisterForm:() => {}
+    cleanRegisterForm:() => {},
+    handleFormSubmit:() => {},
+    validateRegisterForm:() => {},
+    unValidateRegisterForm:() => {}
 }
 
 export const loginForm:ILoginForm = {
     email:"",
     password:"",
+    errors:"",
     changeLoginFormField:(payload:{name:string, value:string}) => {},
-    cleanLoginForm:() => {}
+    cleanLoginForm:() => {},
+    setLoginErrors:(error:string) => {}
 }
 
 

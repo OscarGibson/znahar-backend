@@ -5,8 +5,11 @@ import Breadcrumbp from '../components/Breadcrumbp'
 import MainMenuSimple from '../components/MainMenuSimple'
 import { mainMenuSimpleState } from '../redusers/initState'
 import { IRegisterForm } from '../types';
-import { changeRegisterFormField, cleanRegisterForm } from '../actions';
+import { changeRegisterFormField, cleanRegisterForm, validateRegisterForm, unValidateRegisterForm } from '../actions';
 import { REGISTER_USER } from '../constants';
+import RegisterForm from '../components/RegisterForm';
+import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';
+import { FormControlProps } from 'react-bootstrap';
 
 
 const mapStateToProps = (reducer:any) => {
@@ -19,7 +22,9 @@ const mapStateToProps = (reducer:any) => {
 const mapDispatchToProps = (dispatch:any) => {
     return {
         changeRegisterFormField: (payload:{name:string, value:string}) => {dispatch(changeRegisterFormField(payload))},
-        cleanRegisterForm: () => {dispatch(cleanRegisterForm())}
+        cleanRegisterForm: () => {dispatch(cleanRegisterForm())},
+        validateRegisterForm:() => dispatch(validateRegisterForm()),
+        unValidateRegisterForm:() => dispatch(unValidateRegisterForm())
     }
 }
 
@@ -32,6 +37,7 @@ class Register extends React.Component<IRegisterForm, IRegisterForm> {
         this.handleFieldChange = this.handleFieldChange.bind(this)
         this.handleFormSubmit = this.handleFormSubmit.bind(this)
         this.registerUser = this.registerUser.bind(this)
+        this.changeRegisterFormField = this.changeRegisterFormField.bind(this)
     }
 
     handleFieldChange(event:React.ChangeEvent<HTMLInputElement>) {
@@ -44,9 +50,9 @@ class Register extends React.Component<IRegisterForm, IRegisterForm> {
     }
 
     registerUser() {
-        const { name, email, cell, password, cleanRegisterForm } = this.props
+        const { fname, lname, email, cell, password, cleanRegisterForm } = this.props
         axios.post(REGISTER_USER, {
-            fname:name, email, cell, password
+            fname, lname, email, cell, password
         })
         .then((response) => {
             if (response.status === 201) {
@@ -62,13 +68,41 @@ class Register extends React.Component<IRegisterForm, IRegisterForm> {
         })
     }
 
+    changeRegisterFormField(event: React.FormEvent<ReplaceProps<"input", BsPrefixProps<"input"> & FormControlProps>>) {
+        const { changeRegisterFormField } = this.props
+        const form = event.currentTarget
+        changeRegisterFormField({
+            name:form.name || "",
+            value:form.value || ""
+        })
+    }
+
     handleFormSubmit(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
+        event.stopPropagation()
+        const { validateRegisterForm, unValidateRegisterForm } = this.props
+        validateRegisterForm()
+        setTimeout( () => {
+            unValidateRegisterForm()
+        }, 3000)
+        // const form = event.currentTarget;
+        // if (form.checkValidity() === false) {
+        //     event.preventDefault();
+        //     event.stopPropagation();
+        // }
         this.registerUser()
     }
 
+    /** 
+     * (
+     *  (event: React.FormEvent<ReplaceProps<"input", BsPrefixProps<"input"> & FormControlProps>>) => void
+     * ) | undefined
+     * 
+     * React.FormEvent<HTMLFormElement>
+    */
+
     render() {
-        const { name, email, cell, password } = this.props
+        // const { name, email, cell, password, validated } = this.props
         return (
             <div className="Register">
                 <MainMenuSimple { ...mainMenuSimpleState }/>
@@ -87,7 +121,22 @@ class Register extends React.Component<IRegisterForm, IRegisterForm> {
                     </div>
                 </div>
                 <div className="body standart-container">
-                    <form className="form" onSubmit={this.handleFormSubmit}>
+                    <RegisterForm
+                        {...this.props}
+                        handleFormSubmit={this.handleFormSubmit}
+                        onChange={this.changeRegisterFormField}
+                        />
+                </div>
+            </div>
+        )
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)
+
+
+/* 
+<form className="form" onSubmit={this.handleFormSubmit}>
                         <div className="form-group">
                             <label>Ім’я</label>
                             <input onChange={this.handleFieldChange} value={name} name="name" type="text" className="form-control" id="inputName" placeholder="" />
@@ -107,10 +156,4 @@ class Register extends React.Component<IRegisterForm, IRegisterForm> {
                         </div>
                         <button type="submit" className="btn btn-primary">Submit</button>
                     </form>
-                </div>
-            </div>
-        )
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Register)
+*/

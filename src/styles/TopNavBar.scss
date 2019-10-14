@@ -67,13 +67,17 @@ $top-green: #daf58e;
             }
         }
 
-        .cart {
-            display: inline-flex;
-            height: $block-height;
-            width: 250px;
-            padding-left: 25px;
-            background-color: $top-green;
-            color: #000;
+        a {
+            height: 40px;
+            display: inline-block;
+            .cart {
+                display: inline-flex;
+                height: $block-height;
+                width: 250px;
+                padding-left: 25px;
+                background-color: $top-green;
+                color: #000;
+            }
         }
     }
 
@@ -108,6 +112,10 @@ $top-green: #daf58e;
     }
     .svg-icon {
 
+    }
+
+    .logout {
+        cursor: pointer;
     }
     
 }

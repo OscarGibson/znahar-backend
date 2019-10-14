@@ -230,20 +230,43 @@ export interface IUser {
     cell:string
 }
 
-export interface IRegisterForm {
+
+export interface IRegisterFormState {
     name:string,
     email:string,
     cell:string,
     password:string,
+    // validated:boolean
+}
+
+
+export interface IRegisterFormProps extends IRegisterFormState {
     changeRegisterFormField:(payload:{name:string, value:string}) => void,
-    cleanRegisterForm:() => void
+    cleanRegisterForm:() => void,
+    // handleFormSubmit:(event:React.FormEvent<HTMLFormElement>) => void
+}
+
+export interface IRegisterForm {
+    fname:string,
+    lname:string,
+    email:string,
+    cell:string,
+    password:string,
+    validated:boolean,
+    changeRegisterFormField:(payload:{name:string, value:string}) => void,
+    cleanRegisterForm:() => void,
+    handleFormSubmit:(event:React.FormEvent<HTMLFormElement>) => void,
+    validateRegisterForm:() => void,
+    unValidateRegisterForm:() => void
 }
 
 export interface ILoginForm {
     email:string,
     password:string,
+    errors:string,
     changeLoginFormField:(payload:{name:string, value:string}) => void,
-    cleanLoginForm:() => void
+    cleanLoginForm:() => void,
+    setLoginErrors:(error:string) => void
 }
 
 export interface INewsPage {

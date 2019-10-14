@@ -1,13 +1,13 @@
 const envPath = ():string => {
     switch (process.env.NODE_ENV) {
         case "development":
-            return "http://www.apteka-znahar.com.ua"
+            return "http://localhost:8000"
 
         case "test":
             return ""
 
         case "production":
-            return ""
+            return "http://www.apteka-znahar.com.ua"
     
         default:
             return ""

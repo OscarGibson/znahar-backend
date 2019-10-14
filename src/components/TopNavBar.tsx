@@ -42,18 +42,26 @@ const renderLoginRegister = () => {
                 iconName=""
                 action={() => {window.location.href="/register"}}
                 classList={["svg-icon"]}
-                iconSvgSrc="/static/svg/user.svg"
+                iconSvgSrc="/static/svg/join.svg"
             />
         </div>
     )
 }
 
+
+const logout = () => {
+    localStorage.removeItem("accessToken")
+    localStorage.removeItem("refreshToken")
+    localStorage.removeItem("userName")
+    window.location.href = "/"
+}
+
 const renderUserStatus = (name:string) => {
     return (
         <div className="authBlock">
-            <div></div>
-            <div className="user-status">
-                <span>{name}</span>
+            <span></span>
+            <div onClick={logout} className="user-status">
+                <span className="logout">Вийти</span>
             </div>
         </div>
     )
@@ -134,6 +142,7 @@ const checkUserData = (setUserData:(payload:string) => void) => {
         setUserData(userName)
     }
 }
+
 
 const TopNavBar = ({phonesNumbers, isUserAuth, cartOrdersCount, setUserData, userName}:TopNavBarData) => {
     checkUserData(setUserData)

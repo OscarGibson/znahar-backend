@@ -23,7 +23,10 @@ import {
   SET_NEWS,
   SET_NEWS_POST,
   SET_SETTINGS,
-  SET_WAREHOUSES
+  SET_WAREHOUSES,
+  VALIDATE_REGISTER_FORM,
+  UNVALIDATE_REGISTER_FORM,
+  SET_LOGIN_ERRORS
 } from "../actions/types";
 
 import {
@@ -549,6 +552,20 @@ export const RegisterReducer = (state = registerForm, action:any) => {
     }
   }
 
+  if (action.type === VALIDATE_REGISTER_FORM) {
+    return {
+      ...state,
+      validated:true,
+    }
+  }
+
+  if (action.type === UNVALIDATE_REGISTER_FORM) {
+    return {
+      ...state,
+      validated:false,
+    }
+  }
+
   return state
 }
 
@@ -567,6 +584,13 @@ export const LoginReducer = (state = loginForm, action:any) => {
   if (action.type === CLEAN_LOGIN_FORM) {
     return {
       ...loginForm
+    }
+  }
+
+  if (action.type === SET_LOGIN_ERRORS) {
+    return {
+      ...state,
+      errors:action.payload
     }
   }
 

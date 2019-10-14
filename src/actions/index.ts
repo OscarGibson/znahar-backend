@@ -22,7 +22,10 @@ import {
   SET_NEWS,
   SET_NEWS_POST,
   SET_SETTINGS,
-  SET_WAREHOUSES
+  SET_WAREHOUSES,
+  VALIDATE_REGISTER_FORM,
+  UNVALIDATE_REGISTER_FORM,
+  SET_LOGIN_ERRORS
 } from "./types";
 import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost, IWarehouse, ISettings } from "../types";
 
@@ -86,6 +89,14 @@ export const cleanRegisterForm = () => {
   return { type:CLEAN_REGISTER_FORM, payload:{}}
 }
 
+export const validateRegisterForm = () => {
+  return { type:VALIDATE_REGISTER_FORM, payload:{}}
+}
+
+export const unValidateRegisterForm = () => {
+  return { type:UNVALIDATE_REGISTER_FORM, payload:{}}
+}
+
 export const changeLoginFormField = (payload:{name:string, value:string}) => {
   return { type:CHANGE_LOGIN_FORM_FIELD, payload}
 }
@@ -120,4 +131,8 @@ export const setSettings = (payload:ISettings) => {
 
 export const setWarehouses = (payload:IWarehouse[]) => {
   return {type:SET_WAREHOUSES, payload}
+}
+
+export const setLoginErrors = (errors:string) => {
+  return {type:SET_LOGIN_ERRORS, payload:errors}
 }
