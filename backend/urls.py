@@ -37,6 +37,11 @@ urlpatterns = [
     path('profile', include('base.urls'), name='index'),
     path('register', include('base.urls'), name='index'),
     path('login', include('base.urls'), name='index'),
+    path('orders', include('base.urls'), name='index'),
+    path('map', include('base.urls'), name='index'),
+    path('profile/orders', include('base.urls'), name='index'),
+    path('profile/discounts', include('base.urls'), name='index'),
+    path('profile/settings', include('base.urls'), name='index'),
     path('404', include('base.urls'), name='index'),
 ]
 

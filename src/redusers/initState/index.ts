@@ -165,7 +165,7 @@ export const footerMenu:IMainMenuData = {
         name:"Оптовим кліентам",
         url:"/for-clients"
     },{
-        name:"Найблища Аптека",
+        name:"Найближча Аптека",
         url:"/map"
     },{
         name:"Новини",

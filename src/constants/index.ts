@@ -14,7 +14,8 @@ const envPath = ():string => {
     }
 }
 
-const MAIN_BACKEND = envPath()
+// const MAIN_BACKEND = envPath()
+const MAIN_BACKEND = "http://www.apteka-znahar.com.ua"
 
 export const IMAGES_BACKEND = `${MAIN_BACKEND}`
 

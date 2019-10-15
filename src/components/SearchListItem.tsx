@@ -92,7 +92,7 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
                 <td>{name}</td>
                 <td>{`#${warehouse.uuid} ${warehouse.name}`}</td>
                 <td>{price}</td>
-                <td>{remain}</td>
+                <td></td>
                 <td>
                     <ActionButton
                         text={"Забронювати"}

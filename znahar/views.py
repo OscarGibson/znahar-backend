@@ -45,6 +45,7 @@ class Order(APIView):
                 "phonenumber":request.user.cell,
                 **request.data
             }
+            print("DATA:", data)
             payload = json.dumps(data)
             r = requests.post(url=URL_ORDERS, auth=AUTH, data=payload)
             print(r.status_code)

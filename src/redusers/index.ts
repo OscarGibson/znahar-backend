@@ -411,6 +411,7 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
         cartOrdersCount:newProducts.length
       }
     }
+    console.log("newState", newState)
     return newState
   }
 
