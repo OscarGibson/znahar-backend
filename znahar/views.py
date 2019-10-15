@@ -42,6 +42,7 @@ class Order(APIView):
         try:
             data = {
                 "user_id":request.user.id,
+                "phonenumber":request.user.cell,
                 **request.data
             }
             payload = json.dumps(data)
