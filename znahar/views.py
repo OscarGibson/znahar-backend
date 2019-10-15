@@ -41,13 +41,13 @@ class Order(APIView):
     def post(self, request, *args, **kwargs):
         try:
             data = {
-                "user_id":request.user.id,
                 "phonenumber":request.user.cell,
                 **request.data
             }
             print("DATA:", data)
             payload = json.dumps(data)
-            r = requests.post(url=URL_ORDERS, auth=AUTH, data=payload)
+            URL = URL_ORDERS + f"?user_id={request.user.id}"
+            r = requests.post(url=URL, auth=AUTH, data=payload)
             print(r.status_code)
             print(r.text)
             if r.status_code == 200:
