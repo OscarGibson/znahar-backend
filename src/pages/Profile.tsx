@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import MainMenuSimple from '../components/MainMenuSimple'
 import { IProfilePage, IInfoLayer, IWarehouse, IUser } from '../types'
-import ActionButton from '../components/ActionButton'
 import { getWarehouseById } from '../redusers/initState'
 import axios from 'axios'
 import {
@@ -16,6 +15,8 @@ import {
 import InfoLayer from '../components/InfoLayer'
 import Breadcrumbp from '../components/Breadcrumbp'
 import { ORDERS_URL, GET_USER_URL } from '../constants'
+import { Switch, Route, Router } from 'react-router'
+import ProfileComponents from '../components/ProfileComponents'
 
 interface IProductData {
     id:string,
@@ -119,10 +120,16 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
     }
 
     createOrder() {
-        const { cartState } = this.props
+        const { cartState, userState, showInfoLayer } = this.props
+        if (userState.cell === "") {
+            showInfoLayer({
+                text:"У вас не вказаний номер телефону. Щоб продовжити - перейдіть на сторінку налаштувань",
+                timer:3,
+            })
+        }
 
         let orders:{[key:string]:IOrderRequest} = {}
-        let ordersLength:number = 0
+        // let ordersLength:number = 0
 
         for (let productItem of cartState.products) {
             if (orders[productItem.warehouse_id]) {
@@ -130,7 +137,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                     id:productItem.id,
                     quantity:productItem.count
                 })
-                ordersLength++
+                // ordersLength++
             } else {
                 orders[productItem.warehouse_id] = {
                     warehouse_id:productItem.warehouse_id,
@@ -139,7 +146,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                         quantity:productItem.count
                     }]
                 }
-                ordersLength++
+                // ordersLength++
             }
         }
 
@@ -150,7 +157,6 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
         }
 
         const accessToken = localStorage.getItem("accessToken")
-        const { showInfoLayer } = this.props
 
 
         axios.post(ORDERS_URL, {
@@ -219,16 +225,20 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                         <div className="userPhoto">
                             {renderUserPhoto(userState.photoUrl)}
                         </div>
-                        <div className="menu">
-                            {/* <ul>
-                                <li>Мої Бронювання</li>
-                                <li>Ваучер на знижку</li>
-                                <li>Налаштування</li>
-                                <li>Історія Бронювань</li>
-                                <hr/>
-                                <li>Вихід</li>
-                            </ul> */}
-                        </div>
+                        <Switch>
+                            <Route path="/profile/orders" exact component={() =>
+                                <ProfileComponents.ProfileMenu currentPageName="orders"/>
+                            }/>
+                            <Route path="/profile/discounts" exact component={() =>
+                                <ProfileComponents.ProfileMenu currentPageName="discounts"/>
+                            }/>
+                            <Route path="/profile/history" exact component={() =>
+                                <ProfileComponents.ProfileMenu currentPageName="history"/>
+                            }/>
+                            <Route path="/profile/settings" exact component={() =>
+                                <ProfileComponents.ProfileMenu currentPageName="settings"/>
+                            }/>
+                        </Switch>
                     </div>
                     <div className="rightSidebar">
                         <div className="userBio">
@@ -237,53 +247,27 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                             <p className="userCell">{userState.cell}</p>
                         </div>
                         <div className="cartOrders">
-                            <div className="info">
-                                <span className="text">{`Мої Бронювання (${totalCount}од. / ${price} грн)`}</span>
-                                <ActionButton
-                                    text={"Підтвердити"}
-                                    action={this.createOrder}
-                                    classList={["default-button", "button"]}
-                                    iconName=""
-                                    iconSvgSrc=""
-                                />
-                            </div>
-
-                            <div className="ordersList cart">
-                                <table className="table">
-                                    <thead className="thead-dark">
-                                        <tr>
-                                            <th>Назва Товару</th>
-                                            <th>Аптека</th>
-                                            <th>Ціна</th>
-                                            <th>Кількість</th>
-                                            <th></th>
-                                        </tr> 
-                                    </thead>
-                                    <tbody>
-                                        {products.map( (product, index) => {
-                                            const { name, warehouse_id, price, count, id } = product
-                                            const warehouse = getWarehouseById(warehouse_id, warehouses)
-                                            return (
-                                                <tr key={index}>
-                                                    <td>{name}</td>
-                                                    <td>{`№${warehouse_id} ${warehouse.name}`}</td>
-                                                    <td>{price}</td>
-                                                    <td>{count}</td>
-                                                    <td>
-                                                        <ActionButton
-                                                            text="Delete"
-                                                            iconName=""
-                                                            iconSvgSrc=""
-                                                            classList={[]}
-                                                            action={() => {this.removeItemFromCart(id)}}
-                                                        />
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })}
-                                    </tbody>
-                                </table>
-                            </div>
+                            <Switch>
+                                <Route path="/profile/orders" exact component={() =>
+                                    <ProfileComponents.OrdersList
+                                        products={products}
+                                        warehouses={warehouses}
+                                        totalCount={totalCount}
+                                        price={price}
+                                        removeItemFromCart={this.removeItemFromCart}
+                                        createOrder={this.createOrder}
+                                    />
+                                }/>
+                                <Route path="/profile/discounts" exact component={() =>
+                                    <ProfileComponents.Discounts/>
+                                }/>
+                                <Route path="/profile/history" exact component={() =>
+                                    <ProfileComponents.History />
+                                }/>
+                                <Route path="/profile/settings" exact component={() =>
+                                    <ProfileComponents.Settings />
+                                }/>
+                            </Switch>
 
                             {/* <div className="info">
                                 <span className="text">Мої Бронювання (2457.88 грн)</span>

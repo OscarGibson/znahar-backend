@@ -136,3 +136,15 @@ export const setWarehouses = (payload:IWarehouse[]) => {
 export const setLoginErrors = (errors:string) => {
   return {type:SET_LOGIN_ERRORS, payload:errors}
 }
+
+export const setSettingsEditable = () => {
+
+}
+
+export const setSettingsNonEditable = () => {
+
+}
+
+export const setProfileFormField = (payload:{name:string, value:string}) => {
+
+}
