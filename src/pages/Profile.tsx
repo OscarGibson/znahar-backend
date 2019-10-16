@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import MainMenuSimple from '../components/MainMenuSimple'
-import { IProfilePage, IInfoLayer, IWarehouse, IUser } from '../types'
+import { IProfilePage, IInfoLayer, IWarehouse, IUser, IUserForm } from '../types'
 import { getWarehouseById } from '../redusers/initState'
 import axios from 'axios'
 import {
@@ -10,13 +10,19 @@ import {
     minusProductFromCart,
     showInfoLayer,
     clearCart,
-    setUserFullData
+    setUserFullData,
+    setPrivacyEditable,
+    setGeneralEditable,
+    setProfileFormField,
+    setSettingsForm
 } from '../actions'
 import InfoLayer from '../components/InfoLayer'
 import Breadcrumbp from '../components/Breadcrumbp'
 import { ORDERS_URL, GET_USER_URL } from '../constants'
 import { Switch, Route, Router } from 'react-router'
 import ProfileComponents from '../components/ProfileComponents'
+import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';
+import { FormControlProps } from 'react-bootstrap';
 
 interface IProductData {
     id:string,
@@ -36,18 +42,23 @@ const mapDispatchToProps = (dispatch:any) => {
         minusProductFromCart: (payload:number) => {dispatch(minusProductFromCart(payload))},
         showInfoLayer: (payload:IInfoLayer) => {dispatch(showInfoLayer(payload))},
         clearCart: () => {dispatch(clearCart())},
-        setUserFullData: (payload:IUser) => {dispatch(setUserFullData(payload))}
+        setUserFullData: (payload:IUser) => {dispatch(setUserFullData(payload))},
+        setPrivacyEditable:(isEditable:boolean) => {dispatch(setPrivacyEditable(isEditable))},
+        setGeneralEditable:(isEditable:boolean) => {dispatch(setGeneralEditable(isEditable))},
+        setProfileFormField:(payload:{name:string, value:string}) => {dispatch(setProfileFormField(payload))},
+        setSettingsForm:(payload:IUserForm) => {dispatch(setSettingsForm(payload))}
     }
 }
 
 const mapStateToProps = (reducer:any) => {
-    const { ProfileReducer, SearchReducer, DefaultReducer } = reducer
+    const { ProfileReducer, SearchReducer, DefaultReducer, ProfileSettingsReducer } = reducer
     return {
         ...ProfileReducer,
         cartState:SearchReducer.cartState,
         topNavBarState:SearchReducer.topNavBarState,
         infoLayerState:SearchReducer.infoLayerState,
-        warehouses:DefaultReducer.warehouses
+        warehouses:DefaultReducer.warehouses,
+        settings:ProfileSettingsReducer
     }
 }
 
@@ -69,17 +80,62 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
         this.removeItemFromCart = this.removeItemFromCart.bind(this)
         this.createOrder = this.createOrder.bind(this)
         this.sendFinishMessage = this.sendFinishMessage.bind(this)
+        this.changeUserFormField = this.changeUserFormField.bind(this)
+        this.submitUserForm = this.submitUserForm.bind(this)
+        this.submitPrivacyForm = this.submitPrivacyForm.bind(this)
+        this.changeEditable = this.changeEditable.bind(this)
+    }
+
+    changeEditable(isEditable:boolean, name:string) {
+        console.log("changeEditable", isEditable, name)
+        let changeAction
+        if (name === "privacy")
+            changeAction = this.props.setPrivacyEditable
+        else
+            changeAction = this.props.setGeneralEditable
+
+        changeAction(isEditable)
+    }
+
+    submitUserForm(event:React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        const { setGeneralEditable, setSettingsForm, settings } = this.props
+        const { userForm } = settings
+        // send request
+        setGeneralEditable(false)
+        setSettingsForm({...userForm, password:"******"})
+    }
+
+    submitPrivacyForm(event:React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        const { setPrivacyEditable, setSettingsForm, settings } = this.props
+        const { userForm } = settings
+        // send request
+        setPrivacyEditable(false)
+        setSettingsForm({...userForm, password:"******"})
+    }
+
+    changeUserFormField(event: React.FormEvent<ReplaceProps<"input", BsPrefixProps<"input"> & FormControlProps>>) {
+        const { setProfileFormField } = this.props
+        const form = event.currentTarget
+        console.log("FORM: ", form)
+        setProfileFormField({
+            name:form.name || "",
+            value:form.value || ""
+        })
     }
 
     componentDidMount() {
+
         const accessToken = localStorage.getItem("accessToken")
         axios.get(GET_USER_URL, {
             headers: {Authorization: "Bearer " + accessToken}
         })
         .then((response) => {
             if (response.status === 200) {
-                const { setUserFullData } = this.props
+                const { setUserFullData, setSettingsForm } = this.props
                 setUserFullData(response.data)
+                setSettingsForm({...response.data, password:"******"})
             }
         })
         .catch((error) => {
@@ -193,7 +249,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
 
 
     render() {
-        const { mainMenuSimpleState, userState, cartState, infoLayerState, warehouses } = this.props
+        const { mainMenuSimpleState, userState, cartState, infoLayerState, warehouses, settings } = this.props
         const { products, totalCount, totalPriceDiscount, totalPrice } = cartState
 
         let price:string
@@ -265,7 +321,15 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                                     <ProfileComponents.History />
                                 }/>
                                 <Route path="/profile/settings" exact component={() =>
-                                    <ProfileComponents.Settings />
+                                    <ProfileComponents.Settings
+                                        userForm={settings.userForm}
+                                        generalBlockEditable={settings.generalBlockEditable}
+                                        privacyBlockEditable={settings.privacyBlockEditable}
+                                        changeUserFormField={this.changeUserFormField}
+                                        submitUserForm={this.submitUserForm}
+                                        submitPrivacyForm={this.submitPrivacyForm}
+                                        changeEditable={this.changeEditable}
+                                    />
                                 }/>
                             </Switch>
 

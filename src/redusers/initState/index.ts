@@ -33,7 +33,9 @@ import {
     INewsPage,
     INewsPostPage,
     INewsPost,
-    IPromotionsPage
+    IPromotionsPage,
+    SettingsState,
+    IUserForm
 } from '../../types'
 
 export const initProducts:IProduct[] = []
@@ -432,6 +434,22 @@ export const homePageState:IHomePage = {
     setNews:(payload:INewsItem[]) => {}
 }
 
+export const profileSettingsState:SettingsState = {
+    userForm:{
+        fname:"",
+        lname:"",
+        email:"",
+        cell:"",
+        password:""
+    },
+    generalBlockEditable:false,
+    privacyBlockEditable:false,
+    changeUserFormField:(event:any) => {},
+    submitUserForm:(event:any) => {},
+    submitPrivacyForm:(event:any) => {},
+    changeEditable:(editable:boolean, name:string) => {}
+}
+
 export const profilePageState:IProfilePage = {
     topNavBarState: topNavBarState,
     mainMenuSimpleState: mainMenuSimpleState,
@@ -444,7 +462,12 @@ export const profilePageState:IProfilePage = {
     showInfoLayer:(payload:any) => {},
     clearCart:() => {},
     setUserFullData:(payload:IUser) => {},
-    warehouses:[]
+    warehouses:[],
+    settings:profileSettingsState,
+    setPrivacyEditable:(isEditable:boolean) => {},
+    setGeneralEditable:(isEditable:boolean) => {},
+    setProfileFormField:(payload:{name:string, value:string}) => {},
+    setSettingsForm:(payload:IUserForm) => {}
 }
 
 export const defaultState:IRootApp = {

@@ -25,9 +25,13 @@ import {
   SET_WAREHOUSES,
   VALIDATE_REGISTER_FORM,
   UNVALIDATE_REGISTER_FORM,
-  SET_LOGIN_ERRORS
+  SET_LOGIN_ERRORS,
+  CHANGE_PRIVACYBLOCK_EDITABLE,
+  CHANGE_GENERAL_EDITABLE,
+  CHANGE_USER_FORM_FIELD,
+  SET_SETTINGS_FORM
 } from "./types";
-import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost, IWarehouse, ISettings } from "../types";
+import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost, IWarehouse, ISettings, IUserForm } from "../types";
 
 export function initProductsInSearch(payload:any) {
   return { type: INIT_PRODUCTS_SEARCH, payload };
@@ -137,14 +141,20 @@ export const setLoginErrors = (errors:string) => {
   return {type:SET_LOGIN_ERRORS, payload:errors}
 }
 
-export const setSettingsEditable = () => {
-
+export const setPrivacyEditable = (isEditable:boolean) => {
+  console.log("setPrivacyEditable", isEditable)
+  return {type:CHANGE_PRIVACYBLOCK_EDITABLE, payload:isEditable}
 }
 
-export const setSettingsNonEditable = () => {
-
+export const setGeneralEditable = (isEditable:boolean) => {
+  console.log("setGeneralEditable", isEditable)
+  return {type:CHANGE_GENERAL_EDITABLE, payload:isEditable}
 }
 
 export const setProfileFormField = (payload:{name:string, value:string}) => {
+  return {type:CHANGE_USER_FORM_FIELD, payload}
+}
 
+export const setSettingsForm = (payload:IUserForm) => {
+  return {type:SET_SETTINGS_FORM, payload}
 }

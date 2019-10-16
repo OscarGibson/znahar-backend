@@ -1,42 +1,46 @@
 import React from 'react'
-import { Form, Row, Col } from 'react-bootstrap';
-// import { connect } from 'react-redux'
+import { Form, Row, Col } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { SettingsState } from '../../types'
 
-interface SettingsState {
-
-}
 
 const Settings = (props:SettingsState) => {
-
-    return (
-        <h1></h1>
-    )
-
+    console.log("Settings props", props)
+    const {
+        userForm,
+        generalBlockEditable,
+        privacyBlockEditable,
+        changeUserFormField,
+        submitUserForm,
+        submitPrivacyForm,
+        changeEditable
+    } = props
+    const { fname, lname, email, cell, password } = userForm
     return (
         <div className="Settings">
             <div className="general">
                 <div className="settings-nav">
-                    <h1 className="header"></h1>
-                    <button className="default-button">Change</button>
+                    <h1 className="settings-header">Загальні Налаштування</h1>
+                    <button onClick={() => {changeEditable(true, "general")}} className="settings-button default-button">Змінити</button>
                 </div>
 
                 <div className="settings-body">
-                    <Form>
-                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                    <Form onSubmit={submitUserForm}>
+                        <Form.Group as={Row} controlId="formPlaintextFName">
                             <Form.Label column sm="4">
                             Ім’я
                             </Form.Label>
                             <Col sm="8">
-                            <Form.Control plaintext readOnly defaultValue="Ім’я" />
+                            <Form.Control plaintext={!generalBlockEditable} name="fname" onChange={changeUserFormField} readOnly={!generalBlockEditable} value={fname} />
                             </Col>
                         </Form.Group>
 
-                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                        <Form.Group as={Row} controlId="formPlaintextLName">
                             <Form.Label column sm="4">
                             Прізвище
                             </Form.Label>
                             <Col sm="8">
-                            <Form.Control plaintext readOnly defaultValue="Прізвище" />
+                            <Form.Control plaintext={!generalBlockEditable} name="lname" onChange={changeUserFormField} readOnly={!generalBlockEditable} value={lname} />
                             </Col>
                         </Form.Group>
 
@@ -45,34 +49,42 @@ const Settings = (props:SettingsState) => {
                             Електронна скринька
                             </Form.Label>
                             <Col sm="8">
-                            <Form.Control plaintext readOnly defaultValue="Електронна скринька" />
+                            <Form.Control plaintext={!generalBlockEditable} name="email" onChange={changeUserFormField} readOnly={!generalBlockEditable} value={email} />
                             </Col>
                         </Form.Group>
 
-                        <Form.Group as={Row} controlId="formPlaintextEmail">
+                        <Form.Group as={Row} controlId="formPlaintextCell">
                             <Form.Label column sm="4">
                             Контактиний номер
                             </Form.Label>
                             <Col sm="8">
-                            <Form.Control plaintext readOnly defaultValue="Контактиний номер" />
+                            <Form.Control plaintext={!generalBlockEditable} name="cell" onChange={changeUserFormField} readOnly={!generalBlockEditable} value={cell} />
                             </Col>
                         </Form.Group>
+                    </Form>
+                </div>
+            </div>
+            <div className="privacy">
+                <div className="settings-nav">
+                    <h1 className="settings-header">Налаштування Приватності</h1>
+                    <button onClick={() => {changeEditable(true, "privacy")}} className="settings-button default-button">Змінити</button>
+                </div>
 
+                <div className="settings-body">
+                    <Form onSubmit={submitPrivacyForm}>
                         <Form.Group as={Row} controlId="formPlaintextPassword">
                             <Form.Label column sm="4">
                             Password
                             </Form.Label>
                             <Col sm="8">
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control plaintext={!privacyBlockEditable} name="password" onChange={changeUserFormField} readOnly={!privacyBlockEditable} type="password" placeholder="Password" value={password}/>
                             </Col>
                         </Form.Group>
                     </Form>
                 </div>
-                
             </div>
-            <div className="privacy"></div>
         </div>
     )
 }
 
-export default Settings
+export default connect()(Settings)

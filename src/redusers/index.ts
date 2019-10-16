@@ -26,7 +26,11 @@ import {
   SET_WAREHOUSES,
   VALIDATE_REGISTER_FORM,
   UNVALIDATE_REGISTER_FORM,
-  SET_LOGIN_ERRORS
+  SET_LOGIN_ERRORS,
+  CHANGE_PRIVACYBLOCK_EDITABLE,
+  CHANGE_GENERAL_EDITABLE,
+  CHANGE_USER_FORM_FIELD,
+  SET_SETTINGS_FORM
 } from "../actions/types";
 
 import {
@@ -38,10 +42,11 @@ import {
   loginForm,
   newsPage,
   newsPostPage,
-  promotionsPage
+  promotionsPage,
+  profileSettingsState
 } from './initState';
 
-import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage } from "../types";
+import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage, SettingsState } from "../types";
 
 
 const extractCell = (listOfCell:{phone:string}[]) => {
@@ -592,6 +597,42 @@ export const LoginReducer = (state = loginForm, action:any) => {
     return {
       ...state,
       errors:action.payload
+    }
+  }
+
+  return state
+}
+
+export const ProfileSettingsReducer = (state = profileSettingsState, action:any):SettingsState => {
+
+  if (action.type === CHANGE_GENERAL_EDITABLE) {
+    return {
+      ...state,
+      generalBlockEditable:action.payload
+    }
+  }
+
+  if (action.type === CHANGE_PRIVACYBLOCK_EDITABLE) {
+    return {
+      ...state,
+      privacyBlockEditable:action.payload
+    }
+  }
+
+  if (action.type === CHANGE_USER_FORM_FIELD) {
+    const { name, value } = action.payload
+    let newForm:{[name:string]:string} = {}
+    newForm[name] = value
+    return {
+      ...state,
+      ...newForm
+    }
+  }
+
+  if (action.type === SET_SETTINGS_FORM) {
+    return {
+      ...state,
+      userForm:action.payload
     }
   }
 

@@ -2,7 +2,7 @@ import { createStore, combineReducers } from "redux";
 import DefaultReducer, {
     SearchReducer, HomeReducer, ProfileReducer,
     RegisterReducer, LoginReducer, NewsReducer, NewsPostReducer,
-    PromotionsReducer
+    PromotionsReducer, ProfileSettingsReducer
 } from "../redusers";
 
 const rootReducer = combineReducers({
@@ -14,7 +14,8 @@ const rootReducer = combineReducers({
     LoginReducer,
     NewsReducer,
     NewsPostReducer,
-    PromotionsReducer
+    PromotionsReducer,
+    ProfileSettingsReducer
 })
 
 const store = createStore(rootReducer);

@@ -1,5 +1,5 @@
-const envPath = ():string => {
-    switch (process.env.NODE_ENV) {
+const envPath = (env:string):string => {
+    switch (env) {
         case "development":
             return "http://localhost:8000"
 
@@ -14,8 +14,8 @@ const envPath = ():string => {
     }
 }
 
-// const MAIN_BACKEND = envPath()
-const MAIN_BACKEND = "http://www.apteka-znahar.com.ua"
+const MAIN_BACKEND = envPath(process.env.NODE_ENV)
+// const MAIN_BACKEND = "http://www.apteka-znahar.com.ua"
 
 export const IMAGES_BACKEND = `${MAIN_BACKEND}`
 

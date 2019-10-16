@@ -320,6 +320,24 @@ export interface IHomePage {
     setNews:(payload:INewsItem[]) => void
 }
 
+export interface IUserForm {
+    fname:string,
+    lname:string,
+    email:string,
+    cell:string,
+    password:string
+}
+
+export interface SettingsState {
+    userForm:IUserForm,
+    generalBlockEditable:boolean,
+    privacyBlockEditable:boolean,
+    changeUserFormField:(event:any) => void,
+    submitUserForm:(event:any) => void,
+    submitPrivacyForm:(event:any) => void,
+    changeEditable:(editable:boolean, name:string) => void
+}
+
 export interface IProfilePage {
     topNavBarState:ITopNavBarState,
     mainMenuSimpleState:IMainMenuData,
@@ -333,6 +351,11 @@ export interface IProfilePage {
     clearCart:() => void,
     setUserFullData:(payload:IUser) => void,
     warehouses:IWarehouse[],
+    settings:SettingsState,
+    setPrivacyEditable:(isEditable:boolean) => void,
+    setGeneralEditable:(isEditable:boolean) => void,
+    setProfileFormField:(payload:{name:string, value:string}) => void,
+    setSettingsForm:(payload:IUserForm) => void
 }
 
 export interface IRootApp {
