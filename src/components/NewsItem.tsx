@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { INewsItem } from '../types'
-import { IMAGES_BACKEND } from '../constants';
 
 const NewsItem = ({
     image, title, 

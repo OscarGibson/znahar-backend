@@ -6,11 +6,10 @@ import NewsList from './NewsList';
 
 class NewsBlock extends React.Component<INewsBlock, INewsBlock> {
     render() {
-        const { newList, flexibleInfoList } = this.props
+        const { newList } = this.props
 
         return (
             <div className="NewsBlock">
-                {/* <FlexibleInfoList /> */}
                 <NewsList items={newList}/>
             </div>
         )

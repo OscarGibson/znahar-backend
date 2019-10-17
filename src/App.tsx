@@ -9,6 +9,7 @@ import {
   // topNavBarState,
   homePageState,
   infoLayerState,
+  mainMenuOriginState,
   // footerBlockState
 } from './redusers/initState'
 import store from './store';

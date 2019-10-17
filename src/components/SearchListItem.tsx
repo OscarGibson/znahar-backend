@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getWarehouseById } from '../redusers/initState';
 import ActionButton from './ActionButton';
-import { IProduct, IInfoLayer, IProductItem, IWarehouse } from '../types';
+import { IInfoLayer, IProductItem, IWarehouse } from '../types';
 import { showInfoLayer, addProductToCart, addItemTopCart } from '../actions';
 
 export interface SearchListItemProps {

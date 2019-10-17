@@ -19,7 +19,7 @@ import {
 import InfoLayer from '../components/InfoLayer'
 import Breadcrumbp from '../components/Breadcrumbp'
 import { ORDERS_URL, GET_USER_URL } from '../constants'
-import { Switch, Route, Router } from 'react-router'
+import { Switch, Route } from 'react-router'
 import ProfileComponents from '../components/ProfileComponents'
 import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';
 import { FormControlProps } from 'react-bootstrap';

@@ -2,11 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ISearchForm, IHandleSearch } from '../types'
 import ActionButton from './ActionButton';
-// import { warehouses } from '../redusers/initState';
-
-const XOR = (a:boolean,b:boolean) => {
-    return !( ( a && !b ) || ( !a && b ) )
-}
 
 const mapStateToProps = (reducer:any):ISearchForm => {
     const { searchFormState } = reducer.SearchReducer

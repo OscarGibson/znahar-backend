@@ -1,14 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { IHomePage } from '../types/Interfaces'
 import MainMenuBig from '../components/MainMenuBig'
+import { mainMenuOriginState } from '../redusers/initState'
 
 
-class NotFoundPage extends React.Component<IHomePage, IHomePage> {
+class NotFoundPage extends React.Component<{}, {}> {
     render() {
-        const {
-            mainMenuOriginState
-        } = this.props
         return (
             <div className="NotFoundPage">
                 <MainMenuBig {...mainMenuOriginState}/>
