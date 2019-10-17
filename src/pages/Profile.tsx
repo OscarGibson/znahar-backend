@@ -276,8 +276,8 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                         />
                     </div>
                 </div>
-                <div className="body standart-container">
-                    <div className="leftSidebar">
+                <div className="body standart-container row">
+                    <div className="leftSidebar col-md-3 col-sm-12">
                         <div className="userPhoto">
                             {renderUserPhoto(userState.photoUrl)}
                         </div>
@@ -296,7 +296,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                             }/>
                         </Switch>
                     </div>
-                    <div className="rightSidebar">
+                    <div className="rightSidebar col-md-9 col-sm-12">
                         <div className="userBio">
                             <h1 className="userName">{userState.fname} {userState.lname}</h1>
                             <p className="userEmail">{userState.email}</p>

@@ -26,17 +26,28 @@
     .body {
         display: flex;
         .leftSidebar {
-            width: 238px;
-            margin-right: 27px;
+            // width: 238px;
+            // margin-right: 27px;
 
             .userPhoto {
                 img {
-                    width: 238px;
+                    // width: 238px;
+                    width: 100%;
+                }
+            }
+        }
+        @media screen and (max-width: 767px) {
+            .leftSidebar {
+                .userPhoto {
+                    img {
+                        width: initial;
+                        max-height: 250px;
+                    }
                 }
             }
         }
         .rightSidebar {
-            width: 759px;
+            // width: 759px;
 
             .userBio {
                 margin-bottom: 41px;

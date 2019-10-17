@@ -20,7 +20,7 @@ class PromotionsSmallList extends React.Component<IPromotionsSmallList, IPromoti
     render() {
         const { items } = this.props
         return (
-            <div className="PromotionsSmallList">
+            <div className="PromotionsSmallList row">
                 {items.map( (item, index) => {
                     return (
                         <PromotionItem key={index} {...item}/>

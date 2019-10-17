@@ -18,11 +18,11 @@ const FooterBlock = ({
 }:IFooterBlock) => {
     return (
         <div className="FooterBlock standart-container">
-            <div className="row">
-                <div className="col-md-3">
+            <div className="row justify-content-center">
+                <div className="col-md-3 col-sm-12">
                     <FooterMenu {...footerMenu}/>
                 </div>
-                <div className="col-md-3">
+                <div className="col-md-3 col-sm-12">
                     <FooterContacts {...contactsList}/>
                 </div>
                 {/* <div className="col-md-3">
@@ -32,12 +32,12 @@ const FooterBlock = ({
                     <FooterBackForm {...backForm}/>
                 </div> */}
 
-                <div className="col-md-6">
+                <div className="col-md-6 col-sm-12">
                     <div className="row">
-                        <div className="col-md-5">
+                        <div className="col-md-5  col-sm-12">
                             <FooterSocial {...socialList}/>
                         </div>
-                        <div className="col-md-7">
+                        <div className="col-md-7  col-sm-12">
                             <FooterBackForm {...backForm}/>
                         </div>
                     </div>

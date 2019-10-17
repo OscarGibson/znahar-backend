@@ -1,6 +1,11 @@
 .FooterBlock {
     padding: 60px 0;
 
+    .row.justify-content-center {
+        margin: 0;
+        padding: 0;
+    }
+
     .footerHeader {
         margin-bottom: 20px;
         font-family: Montserrat;
@@ -23,6 +28,13 @@
             }
         }
         .menu {
+            @media screen and (max-width:767px) {
+                .menuItem {
+                    .menuLink {
+                        text-align: center;
+                    }
+                }
+            }
             .menuItem {
                 font-family: Montserrat;
                 font-size: 14px;
@@ -43,6 +55,11 @@
         }
     }
     .FooterContacts {
+        @media screen and (max-width:767px) {
+            .footerHeader, .contacts li {
+                text-align: center;
+            }
+        }
         .footerHeader {
             // margin-bottom: 40px;
         }
@@ -58,9 +75,13 @@
     .FooterSocial {
         .social {
             text-align: left;
-
             a {
                 margin-right: 6px;
+            }
+        }
+        @media screen and (max-width:767px) {
+            h2, .social {
+                text-align: center;
             }
         }
     }
@@ -68,18 +89,31 @@
         .form {
             text-align: right;
             input {
-                width: 278px;
+                // width: 278px;
+                width: 100%;
                 height: 37px;
                 margin-bottom: 12px;
             }
             textarea {
-                width: 278px;
+                // width: 278px;
+                width: 100%;
                 margin-bottom: 12px;
             }
 
             button {
                 height: 34px;
                 width: 131px;
+            }
+        }
+        @media screen and (max-width:767px) {
+            .form {
+                width: 250px;
+                text-align: center;
+                display: inline-flex;
+                flex-direction: column;
+            }
+            .footerHeader {
+                text-align: center;
             }
         }
     }

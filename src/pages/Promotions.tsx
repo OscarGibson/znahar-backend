@@ -63,13 +63,13 @@ class PromotionsPage extends React.Component<IPromotionsPage, IPromotionsPage> {
                 <MainMenuSimple { ...mainMenuSimpleState }/>
                 <div className="header">
                     <div className="content standart-container">
-                        <h1 className="title">Новини</h1>
+                        <h1 className="title">Акції</h1>
                         <Breadcrumbp
                             pages={[{
                                 name:"Головна",
                                 url:"/"
                             },{
-                                name:"Новини",
+                                name:"Акції",
                                 url:null
                             }]}
                         />
@@ -77,7 +77,7 @@ class PromotionsPage extends React.Component<IPromotionsPage, IPromotionsPage> {
                 </div>
 
                 <div className="body standart-container">
-                    <div className="promotions">
+                    <div className="promotions row">
                         {promotions.map( (item, index) => {
                             return (
                                 <PromotionItem key={index} {...item}/>

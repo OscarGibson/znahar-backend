@@ -10,6 +10,15 @@
     margin: auto;
 }
 
+@media screen and (max-width: 1024px) {
+    .standart-container {
+        width: 100%;
+        padding-left: 16px;
+        padding-right: 16px;
+        margin: auto;
+    }
+}
+
 .default-button {
     width: 228px;
     height: 36px;

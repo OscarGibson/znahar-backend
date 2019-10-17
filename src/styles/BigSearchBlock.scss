@@ -32,6 +32,11 @@
             width: 550px;
             border: 2px solid #f5a623;
         }
+        @media screen and (max-width: 767px) {
+            .form-control {
+                width: 350px;
+            }
+        }
         .custom-select {
             border: 2px solid #f5a623;
         }

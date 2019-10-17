@@ -33,7 +33,7 @@ const OrdersList = (props:OrdersListState) => {
                         <th>Назва Товару</th>
                         <th>Аптека</th>
                         <th>Ціна</th>
-                        <th>Кількість</th>
+                        {/* <th>Кількість</th> */}
                         <th></th>
                     </tr> 
                 </thead>
@@ -46,7 +46,7 @@ const OrdersList = (props:OrdersListState) => {
                                 <td>{name}</td>
                                 <td>{`№${warehouse_id} ${warehouse.name}`}</td>
                                 <td>{price}</td>
-                                <td>{count}</td>
+                                {/* <td>{count}</td> */}
                                 <td>
                                     <ActionButton
                                         text="Delete"

@@ -35,6 +35,13 @@
         }
     }
 
+    @media screen and (max-width: 767px){
+        .contentBlock {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+
     .imageBlock {
         position: absolute;
         bottom: 0;

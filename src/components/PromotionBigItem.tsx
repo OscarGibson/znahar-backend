@@ -32,7 +32,7 @@ class PromotionBigItem extends React.Component<IPromotionBigItemComponent, IProm
                                     action={() => {redirectToSearch(item.title)}}
                                 />
                             </div>
-                            <div className="imageBlock">
+                            <div className="imageBlock d-none d-md-block d-lg-block">
                                 <img src={`${IMAGES_BACKEND}${item.image}`} alt="photoUrl"/>
                             </div>
                         </div>

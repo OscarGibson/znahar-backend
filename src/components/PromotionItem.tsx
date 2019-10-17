@@ -25,7 +25,7 @@ class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
         } = this.props
 
         return (
-            <div onClick={() => {this.redirectToSearch(title)}} className="PromotionItem">
+            <div onClick={() => {this.redirectToSearch(title)}} className="PromotionItem col-md-3 col-sm-6 col-xs-12">
                 <div className="imageBlock">
                     <img src={`${IMAGES_BACKEND}${image}`} alt="photoUrl" className="image"/>
                     <p className="discount">-{discount}%</p>

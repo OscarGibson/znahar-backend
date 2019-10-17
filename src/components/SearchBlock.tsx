@@ -38,7 +38,7 @@ const SearchTableHeader = () => {
                 <th>Назва Товару</th>
                 <th>Аптека</th>
                 <th>Ціна</th>
-                <th>Кількість</th>
+                {/* <th>Кількість</th> */}
                 <th></th>
             </tr> 
         </thead>

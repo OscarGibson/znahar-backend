@@ -28,9 +28,9 @@
 
     .PromotionItem {
         height:284px;
-        width:226px;
+        // width:226px;
         display: inline-block;
-        margin: 12px;
+        // margin: 12px;
         cursor: pointer;
 
         h1, h3, p {
@@ -89,6 +89,12 @@
         
     }
 
+    // @media screen and (max-width: 767px) {
+    //     .PromotionItem {
+    //         width: 100%;
+    //     }
+    // }
+
     .default-button {
         margin-left: 12px;
 
@@ -133,6 +139,13 @@
                 color: #fff;
                 margin: 9px 3px;
             }
+        }
+    }
+
+    @media screen and (max-width: 767px){
+        .contentBlock {
+            width: 100%;
+            margin-left: 0;
         }
     }
 
