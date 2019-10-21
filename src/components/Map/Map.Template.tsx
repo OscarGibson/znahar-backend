@@ -5,10 +5,10 @@ import './Map.styles.scss'
 const MapItemTemplate = (props:MapItem) => {
     const { name, description, image } = props
     return (
-        <div className="MapItemTemplate col-md-3">
+        <div className="MapItemTemplate col-md-3 col-sm-6 col-xs-12">
             <img className="mb-2" src={image} alt="map"/>
-            <p className="map-name">{name}</p>
-            <p className="map-description">{description}</p>
+            <p className="map-name m-auto">{name}</p>
+            <p className="map-description m-auto">{description}</p>
         </div>
     )
 }

@@ -1,10 +1,12 @@
 .MapTemplate {
     .MapItemTemplate {
+        // text-align: left;
         img {
-            width: 238px;
-            height: 200px;
+            max-width: 90%;
+            // max-height: 200px;
         }
         p {
+            max-width: 90%;
             text-align: left;
             font-family: Montserrat;
             font-size: 12px;
