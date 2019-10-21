@@ -29,6 +29,7 @@ import NewsPost from './pages/NewsPost';
 import Promotions from './pages/Promotions';
 import { GET_SETTINGS_URL } from './constants';
 import { setSettings, setWarehouses } from './actions';
+import Maps from './pages/Maps';
 
 interface IRootAppAction {
   setSettings:(payload:ISettings) => void,
@@ -100,6 +101,7 @@ class AppTemplate extends React.Component<IRootAppAction, IRootAppAction> {
               <Route path="/news" exact component={News} />
               <Route path="/news/:postId" component={NewsPost}/>
               <Route path="/promotions" exact component={Promotions} />
+              <Route path="/map" component={Maps} />
               <Route path="/404" exact component={NotFoundPage} />
               <Redirect path="*" to="/404" />
             </Switch>

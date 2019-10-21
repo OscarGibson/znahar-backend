@@ -1,0 +1,23 @@
+.MapTemplate {
+    .MapItemTemplate {
+        img {
+            width: 238px;
+            height: 200px;
+        }
+        p {
+            text-align: left;
+            font-family: Montserrat;
+            font-size: 12px;
+            font-weight: 600;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.43;
+            letter-spacing: 0.31px;
+            color: #acacac;
+            &.map-name {
+                color: #353535;
+                font-size: 14px;
+            }
+        }
+    }
+}

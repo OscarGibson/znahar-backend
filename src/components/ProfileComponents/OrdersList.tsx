@@ -41,23 +41,24 @@ const OrdersList = (props:OrdersListState) => {
                     {products.map( (product, index) => {
                         const { name, warehouse_id, price, count, id } = product
                         const warehouse = getWarehouseById(warehouse_id, warehouses)
-                        return (
-                            <tr key={index}>
-                                <td>{name}</td>
-                                <td>{`№${warehouse_id} ${warehouse.name}`}</td>
-                                <td>{price}</td>
-                                {/* <td>{count}</td> */}
-                                <td>
-                                    <ActionButton
-                                        text="Delete"
-                                        iconName=""
-                                        iconSvgSrc=""
-                                        classList={[]}
-                                        action={() => {removeItemFromCart(id)}}
-                                    />
-                                </td>
-                            </tr>
-                        )
+                        if (warehouse)
+                            return (
+                                <tr key={index}>
+                                    <td>{name}</td>
+                                    <td>{`№${warehouse_id} ${warehouse.name}`}</td>
+                                    <td>{price}</td>
+                                    {/* <td>{count}</td> */}
+                                    <td>
+                                        <ActionButton
+                                            text="Delete"
+                                            iconName=""
+                                            iconSvgSrc=""
+                                            classList={[]}
+                                            action={() => {removeItemFromCart(id)}}
+                                        />
+                                    </td>
+                                </tr>
+                            )
                     })}
                 </tbody>
             </table>

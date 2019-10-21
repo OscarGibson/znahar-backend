@@ -467,7 +467,8 @@ export const profilePageState:IProfilePage = {
     setPrivacyEditable:(isEditable:boolean) => {},
     setGeneralEditable:(isEditable:boolean) => {},
     setProfileFormField:(payload:{name:string, value:string}) => {},
-    setSettingsForm:(payload:IUserForm) => {}
+    setSettingsForm:(payload:IUserForm) => {},
+    setHistory:() => {}
 }
 
 export const defaultState:IRootApp = {

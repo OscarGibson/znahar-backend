@@ -30,7 +30,8 @@ import {
   CHANGE_PRIVACYBLOCK_EDITABLE,
   CHANGE_GENERAL_EDITABLE,
   CHANGE_USER_FORM_FIELD,
-  SET_SETTINGS_FORM
+  SET_SETTINGS_FORM,
+  SET_HISTORY
 } from "../actions/types";
 
 import {
@@ -47,6 +48,7 @@ import {
 } from './initState';
 
 import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage, SettingsState } from "../types";
+import { HistoryState } from "../components/ProfileComponents/History";
 
 
 const extractCell = (listOfCell:{phone:string}[]) => {
@@ -636,6 +638,20 @@ export const ProfileSettingsReducer = (state = profileSettingsState, action:any)
     }
   }
 
+  return state
+}
+
+export const historyInitState:HistoryState = {
+  orders:[]
+}
+
+export const HistoryReducer = (state:HistoryState = historyInitState, action:any) => {
+  if (action.type === SET_HISTORY) {
+    const orders = action.payload
+    return {
+      orders
+    }
+  }
   return state
 }
 

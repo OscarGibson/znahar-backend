@@ -29,9 +29,11 @@ import {
   CHANGE_PRIVACYBLOCK_EDITABLE,
   CHANGE_GENERAL_EDITABLE,
   CHANGE_USER_FORM_FIELD,
-  SET_SETTINGS_FORM
+  SET_SETTINGS_FORM,
+  SET_HISTORY
 } from "./types";
 import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost, IWarehouse, ISettings, IUserForm } from "../types";
+import { HistoryItemState } from "../components/ProfileComponents/History";
 
 export function initProductsInSearch(payload:any) {
   return { type: INIT_PRODUCTS_SEARCH, payload };
@@ -157,4 +159,8 @@ export const setProfileFormField = (payload:{name:string, value:string}) => {
 
 export const setSettingsForm = (payload:IUserForm) => {
   return {type:SET_SETTINGS_FORM, payload}
+}
+
+export const setHistory = (orders:HistoryItemState[]) => {
+  return {type:SET_HISTORY, payload:orders}
 }

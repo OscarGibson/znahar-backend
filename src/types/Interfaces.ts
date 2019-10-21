@@ -1,3 +1,5 @@
+import { HistoryItemState } from "../components/ProfileComponents/History";
+
 export interface IAction {
     ():{type:string,action:any}
 }
@@ -355,7 +357,8 @@ export interface IProfilePage {
     setPrivacyEditable:(isEditable:boolean) => void,
     setGeneralEditable:(isEditable:boolean) => void,
     setProfileFormField:(payload:{name:string, value:string}) => void,
-    setSettingsForm:(payload:IUserForm) => void
+    setSettingsForm:(payload:IUserForm) => void,
+    setHistory:(orders:HistoryItemState[]) => void
 }
 
 export interface IRootApp {

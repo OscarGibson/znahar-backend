@@ -66,6 +66,25 @@ class Order(APIView):
                 "code": 500,
                 "error": str(e)
             }, 500)
+
+
+    def get(self, request, *args, **kwargs):
+        try:
+            URL = URL_ORDERS + f"?user_id={request.user.id}"
+            r = requests.get(url=URL, auth=AUTH)
+            if r.status_code == 200:
+                return Response(r.json(), 200)
+            else:
+                return Response({
+                    "message": f"Bad request, original exception: {r.text}",
+                    "code": 400
+                }, 400)
+        except Exception as e:
+            return Response({
+                "message": "Server error",
+                "code": 500,
+                "error": str(e)
+            }, 500)
         
 
 

@@ -2,8 +2,9 @@ import { createStore, combineReducers } from "redux";
 import DefaultReducer, {
     SearchReducer, HomeReducer, ProfileReducer,
     RegisterReducer, LoginReducer, NewsReducer, NewsPostReducer,
-    PromotionsReducer, ProfileSettingsReducer
-} from "../redusers";
+    PromotionsReducer, ProfileSettingsReducer, HistoryReducer
+} from "../redusers"
+import { MapReducer } from "../components/Map/Map.Reducer"
 
 const rootReducer = combineReducers({
     DefaultReducer,
@@ -15,7 +16,9 @@ const rootReducer = combineReducers({
     NewsReducer,
     NewsPostReducer,
     PromotionsReducer,
-    ProfileSettingsReducer
+    ProfileSettingsReducer,
+    HistoryReducer,
+    MapReducer
 })
 
 const store = createStore(rootReducer);

@@ -14,15 +14,17 @@ import {
     setPrivacyEditable,
     setGeneralEditable,
     setProfileFormField,
-    setSettingsForm
+    setSettingsForm,
+    setHistory
 } from '../actions'
 import InfoLayer from '../components/InfoLayer'
 import Breadcrumbp from '../components/Breadcrumbp'
-import { ORDERS_URL, GET_USER_URL } from '../constants'
+import { ORDERS_URL, GET_USER_URL, GET_HISTORY_URL } from '../constants'
 import { Switch, Route } from 'react-router'
 import ProfileComponents from '../components/ProfileComponents'
 import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';
 import { FormControlProps } from 'react-bootstrap';
+import { HistoryItemState } from '../components/ProfileComponents/History';
 
 interface IProductData {
     id:string,
@@ -46,7 +48,8 @@ const mapDispatchToProps = (dispatch:any) => {
         setPrivacyEditable:(isEditable:boolean) => {dispatch(setPrivacyEditable(isEditable))},
         setGeneralEditable:(isEditable:boolean) => {dispatch(setGeneralEditable(isEditable))},
         setProfileFormField:(payload:{name:string, value:string}) => {dispatch(setProfileFormField(payload))},
-        setSettingsForm:(payload:IUserForm) => {dispatch(setSettingsForm(payload))}
+        setSettingsForm:(payload:IUserForm) => {dispatch(setSettingsForm(payload))},
+        setHistory:(orders:HistoryItemState[]) => {dispatch(setHistory(orders))}
     }
 }
 
@@ -84,6 +87,25 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
         this.submitUserForm = this.submitUserForm.bind(this)
         this.submitPrivacyForm = this.submitPrivacyForm.bind(this)
         this.changeEditable = this.changeEditable.bind(this)
+        this.getOrdersHistory = this.getOrdersHistory.bind(this)
+    }
+
+    getOrdersHistory(accessToken:string) {
+        const { setHistory } = this.props
+        axios.get(GET_HISTORY_URL, {
+            headers: {Authorization: "Bearer " + accessToken}
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                const orders = response.data.data
+                setHistory(orders)
+            }
+        })
+        .catch((error) => {
+            console.log("ERROR", error)
+        })
+        .finally(() => {  
+        })
     }
 
     changeEditable(isEditable:boolean, name:string) {
@@ -127,7 +149,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
 
     componentDidMount() {
 
-        const accessToken = localStorage.getItem("accessToken")
+        const accessToken = localStorage.getItem("accessToken") || ""
         axios.get(GET_USER_URL, {
             headers: {Authorization: "Bearer " + accessToken}
         })
@@ -144,7 +166,10 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
         .finally(() => {
 
         })
+
+        this.getOrdersHistory(accessToken)
     }
+    
 
     sendFinishMessage(warehousesError:string[]) {
         const { showInfoLayer, warehouses } = this.props
@@ -318,7 +343,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                                     <ProfileComponents.Discounts/>
                                 }/>
                                 <Route path="/profile/history" exact component={() =>
-                                    <ProfileComponents.History />
+                                    <ProfileComponents.History warehouses={warehouses}/>
                                 }/>
                                 <Route path="/profile/settings" exact component={() =>
                                     <ProfileComponents.Settings
@@ -332,54 +357,6 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                                     />
                                 }/>
                             </Switch>
-
-                            {/* <div className="info">
-                                <span className="text">Мої Бронювання (2457.88 грн)</span>
-                                <ActionButton
-                                    text={"Відмінити"}
-                                    action={() => {}}
-                                    classList={["default-button", "button"]}
-                                    iconName=""
-                                    iconSvgSrc=""
-                                />
-                            </div> */}
-
-                            {/* <div className="ordersList">
-                                <table className="table">
-                                    <thead className="thead-dark">
-                                        <tr>
-                                            <th>Назва Товару</th>
-                                            <th>Аптека</th>
-                                            <th>Ціна</th>
-                                            <th>Кількість</th>
-                                            <th></th>
-                                        </tr> 
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Стрепсілс б/цукру лимон льодяники №16</td>
-                                            <td>№12, Пасічна, 70</td>
-                                            <td>69.45</td>
-                                            <td>1</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Стрепсілс б/цукру лимон льодяники №16</td>
-                                            <td>№12, Пасічна, 70</td>
-                                            <td>69.45</td>
-                                            <td>1</td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Стрепсілс б/цукру лимон льодяники №16</td>
-                                            <td>№12, Пасічна, 70</td>
-                                            <td>69.45</td>
-                                            <td>1</td>
-                                            <td></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div> */}
                         </div>
                     </div>
                 </div>

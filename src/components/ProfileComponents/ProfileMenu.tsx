@@ -5,7 +5,7 @@ const activeClass = "menu-item bd-callout"
 
 const pagesList = [
     ["orders", "Мої бронювання"],
-    ["discounts", "Ваучери на знижку"],
+    // ["discounts", "Ваучери на знижку"],
     ["settings", "Налаштування"],
     ["history", "Історія бронювань"]
 ]
