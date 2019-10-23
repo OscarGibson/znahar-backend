@@ -47,7 +47,7 @@ import {
   profileSettingsState
 } from './initState';
 
-import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage, SettingsState } from "../types";
+import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage, SettingsState, IWarehouse } from "../types";
 import { HistoryState } from "../components/ProfileComponents/History";
 
 
@@ -116,9 +116,20 @@ export const DefaultReducer = (state = defaultState, action:any) => {
   }
 
   if (action.type === SET_WAREHOUSES) {
+    let warehouses:IWarehouse[] = []
+    for (let warehouseData of action.payload) {
+      warehouses.push({
+        name:warehouseData.name,
+        description:warehouseData.description,
+        uuid:warehouseData.uuid,
+        photoUrl:warehouseData.image,
+        coordinates:undefined
+      })
+      
+    }
     const newState = {
       ...state,
-      warehouses:action.payload
+      warehouses
     }
     return newState
   }

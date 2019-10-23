@@ -290,24 +290,19 @@ export const warehouses:IWarehouse[] = []
 //     coordinates:undefined
 // }]
 
-const warehousesIdList:{[id:string]:number} = {
-    "1":0,
-    "2":1,
-    "3":2,
-    "4":3,
-    "5":4,
-    "6":5,
-    "7":6,
-    "8":7,
-    "9":8,
-    "10":9,
-    "11":10,
-    "12":11
-}
-
 export const getWarehouseById = (id:string, warehouses:IWarehouse[]):IWarehouse => {
-    console.log("getWarehouseById", id, warehouses)
-    return warehouses[warehousesIdList[id]]
+    for (let warehouse of warehouses) {
+        console.log("ID", id, warehouse.uuid)
+        if (id == warehouse.uuid)
+            return warehouse
+    }
+    return {
+        name:"",
+        description:"",
+        uuid:id,
+        photoUrl:"",
+        coordinates:undefined
+    }
 }
 
 export const infoLayerState:IInfoLayer = {

@@ -19,8 +19,6 @@ const mapDispatchToProps = (dispatch:any) => {
 
 const mapStateToProps = (reducer:any):IHomePage => {
     const { HomeReducer } = reducer
-    const { BigSearchBlock } = HomeReducer
-    const { warehouses } = reducer.DefaultReducer
     return {
         ...HomeReducer
     }
