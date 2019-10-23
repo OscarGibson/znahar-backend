@@ -1,15 +1,19 @@
 .BigSearchBlock {
     height:420px;
     padding-top: 117px;
-    background-image: url("/static/images/BG.jpg");
-    background-position-y: 64%;
+    background-color: #f1f6f9;
+    // background-image: url("/static/images/BG.jpg");
+    // background-position-y: 64%;
+    // background-image: url("/static/images/"), url(paper.gif);
+    // background-position: right bottom, left top;
+    // background-repeat: no-repeat, repeat;
 
     h1, h3 {
         text-align: left;
         font-family: Montserrat;
         font-style: normal;
         font-stretch: normal;
-        color: #fff;
+        color: #353535;
     }
 
     h1 {

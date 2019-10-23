@@ -36,13 +36,13 @@ class Maps extends React.Component<MapPageProps, MapPageProps> {
                 <MainMenuSimple { ...mainMenuSimpleState }/>
                 <div className="header">
                     <div className="content standart-container">
-                        <h1 className="title">Найблища Аптека</h1>
+                        <h1 className="title">Найближча Аптека</h1>
                         <Breadcrumbp
                             pages={[{
                                 name:"Головна",
                                 url:"/"
                             },{
-                                name:"Найблища Аптека",
+                                name:"Найближча Аптека",
                                 url:null
                             }]}
                         />

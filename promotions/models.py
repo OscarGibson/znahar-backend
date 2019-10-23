@@ -9,7 +9,7 @@ class Promotion(models.Model):
 
     @property
     def discount_price(self):
-        return self.price - (self.price * self.discount)
+        return self.price - (self.price * (self.discount / 100))
 
     def __str__(self):
         return self.title
@@ -27,4 +27,4 @@ class PromotionBig(models.Model):
 
     @property
     def discount_price(self):
-        return self.price - (self.price * self.discount)
+        return self.price - (self.price * (self.discount / 100))

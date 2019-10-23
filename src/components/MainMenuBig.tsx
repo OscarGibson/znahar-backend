@@ -18,18 +18,21 @@ const addSpanForSR = (isItemActive:boolean) => {
 const MainMenuBig = ({items, logoUrl}:IMainMenuData) => {
     return (
         <div className="MainMenuBig">
-            <div className="logo">
+            {/* <div className="logo">
                 <a className="navbar-brand" href="/">
                     <img src={logoUrl} alt="Logo"/>
                 </a>
-            </div>
-            <div className="row menu">
+            </div> */}
+            <div className="row standart-container menu">
                 <div className="col">
                     <nav className="navbar navbar-expand-lg navbar-light">
+                        <a className="navbar-brand" href="/">
+                            <img src={logoUrl} alt="Logo"/>
+                        </a>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
+                        <div className="navbarNav collapse navbar-collapse justify-content-center" id="navbarNav">
                             <ul className="navbar-nav nav">
                             {items.map( (item, index) => {
                                 return (

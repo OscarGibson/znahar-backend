@@ -4,7 +4,7 @@ import { MapItem } from './Map.types'
 
 const getMaps = (accessToken:string, setMaps:(mapItems:MapItem[]) => void) => {
     axios.get(GET_MAPS_URL, {
-        headers: {Authorization: "Bearer " + accessToken}
+        // headers: {Authorization: "Bearer " + accessToken}
     })
     .then((response) => {
         if (response.status === 200) {
