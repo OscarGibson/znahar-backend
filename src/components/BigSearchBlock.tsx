@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { IBigSearchBlock } from '../types';
 import SearchFormHome from './SearchFormHome';
@@ -19,13 +19,21 @@ const action = (searchKey:string, selectedFiler:string|undefined) => {
 class BigSearchBlock extends React.Component<IBigSearchBlock, IBigSearchBlock> {
     render() {
         return (
-            <div className="BigSearchBlock">
-                <div className="standart-container">
-                    <h1>Знайдіть та забронюй</h1>
-                    <h3>Ви зможете отримати ваше бронювання у зручній для вас аптеці, без черги</h3>
-                    <SearchFormHome action={action}/> 
+            <Fragment>
+                <div className="warning">
+                    <div className="standart-container">
+                        <h1>!Увага!</h1>
+                        <h3>Сайт працює в тестовому режимі</h3>
+                    </div>
                 </div>
-            </div>
+                <div className="BigSearchBlock">
+                    <div className="standart-container">
+                        <h1>Знайдіть та забронюй</h1>
+                        <h3>Ви зможете отримати ваше бронювання у зручній для вас аптеці, без черги</h3>
+                        <SearchFormHome action={action}/> 
+                    </div>
+                </div>
+            </Fragment>
         )
     }
 }
