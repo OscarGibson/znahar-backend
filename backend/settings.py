@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Third-party
     'corsheaders',
     'rest_framework',
+    'cloudinary',
     # Custom
     'base',
     'customUser',
