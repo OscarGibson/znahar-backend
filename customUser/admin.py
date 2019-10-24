@@ -5,7 +5,7 @@ from .models import User
 class UserAdmin(admin.ModelAdmin):
     class Meta:
         model = User
-        fields = ("username", "email", "fname", "lname", "cell", "photoUrl")
+        fields = ("username", "email", "fname", "lname", "cell", "photoUrl", "photo")
         # readonly_fields = ("password",)
 
 admin.site.register(User, UserAdmin)

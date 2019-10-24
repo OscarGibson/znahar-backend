@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+import cloudinary
 
 
 class User(AbstractUser):
@@ -36,6 +37,7 @@ class User(AbstractUser):
         blank=True,
         null=True
     )
+    photo = cloudinary.models.CloudinaryField('image')
     cell = models.CharField(max_length=16, null=True)
 
     USERNAME_FIELD = "email"

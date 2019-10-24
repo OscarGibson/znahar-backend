@@ -1,4 +1,5 @@
 from django.db import models
+import cloudinary
 
 
 class SingletonModel(models.Model):
@@ -24,6 +25,7 @@ class Warehouse(models.Model):
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=512)
     image = models.ImageField(upload_to="uploads")
+    photo = cloudinary.models.CloudinaryField('image')
     # latitude = models.FloatField()
     # longtitude = models.FloatField()
 
