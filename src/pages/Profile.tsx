@@ -248,7 +248,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
         .then((response) => {
             if (response.status === 201) {
                 showInfoLayer({
-                    text:"Вітаємо, ви успішно здійснили бронювання, найблищим часом наш працівник зателефонує вам для уточнення деталей",
+                    text:"Вітаємо, ви успішно здійснили бронювання, найближчиим часом наш працівник зателефонує вам для уточнення деталей",
                     timer:2,
                 })
             } else {

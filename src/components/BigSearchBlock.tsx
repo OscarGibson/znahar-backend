@@ -23,7 +23,7 @@ class BigSearchBlock extends React.Component<IBigSearchBlock, IBigSearchBlock> {
                 <div className="warning">
                     <div className="standart-container">
                         <h1>!Увага!</h1>
-                        <h3>Сайт працює в тестовому режимі</h3>
+                        <h3>Прийом замовлень на сайті тимчасово недоступний</h3>
                     </div>
                 </div>
                 <div className="BigSearchBlock">
