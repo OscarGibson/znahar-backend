@@ -32,7 +32,8 @@ import {
   SET_SETTINGS_FORM,
   SET_HISTORY,
   CHANGE_SEARCH_KEY,
-  CHANGE_FILTER
+  CHANGE_FILTER,
+  APPLY_DISCOUNT
 } from "./types";
 import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost, IWarehouse, ISettings, IUserForm } from "../types";
 import { HistoryItemState } from "../components/ProfileComponents/History";
@@ -146,12 +147,10 @@ export const setLoginErrors = (errors:string) => {
 }
 
 export const setPrivacyEditable = (isEditable:boolean) => {
-  console.log("setPrivacyEditable", isEditable)
   return {type:CHANGE_PRIVACYBLOCK_EDITABLE, payload:isEditable}
 }
 
 export const setGeneralEditable = (isEditable:boolean) => {
-  console.log("setGeneralEditable", isEditable)
   return {type:CHANGE_GENERAL_EDITABLE, payload:isEditable}
 }
 
@@ -173,4 +172,8 @@ export const changeSearchKey = (searchKey:string) => {
 
 export const changeFilter = (filter:string) => {
   return {type:CHANGE_FILTER, payload:filter}
+}
+
+export const applyDiscount = (discountPrice:number) => {
+  return {type:APPLY_DISCOUNT, payload:discountPrice}
 }

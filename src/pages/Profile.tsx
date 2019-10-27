@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import MainMenuSimple from '../components/MainMenuSimple'
-import { IProfilePage, IInfoLayer, IWarehouse, IUser, IUserForm } from '../types'
+import { IProfilePage, IInfoLayer, IWarehouse, IUser, IUserForm, ICart } from '../types'
 import { getWarehouseById } from '../redusers/initState'
 import axios from 'axios'
 import {
@@ -15,11 +15,12 @@ import {
     setGeneralEditable,
     setProfileFormField,
     setSettingsForm,
-    setHistory
+    setHistory,
+    applyDiscount
 } from '../actions'
 import InfoLayer from '../components/InfoLayer'
 import Breadcrumbp from '../components/Breadcrumbp'
-import { ORDERS_URL, GET_USER_URL, GET_HISTORY_URL } from '../constants'
+import { ORDERS_URL, GET_USER_URL, GET_HISTORY_URL, CHECK_DISCOUNT_URL } from '../constants'
 import { Switch, Route } from 'react-router'
 import ProfileComponents from '../components/ProfileComponents'
 import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';
@@ -36,6 +37,10 @@ interface IOrderRequest {
     products:IProductData[]
 }
 
+interface IProfilePageExtend extends IProfilePage {
+    applyDiscount:(discount:number) => void
+}
+
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
@@ -49,7 +54,8 @@ const mapDispatchToProps = (dispatch:any) => {
         setGeneralEditable:(isEditable:boolean) => {dispatch(setGeneralEditable(isEditable))},
         setProfileFormField:(payload:{name:string, value:string}) => {dispatch(setProfileFormField(payload))},
         setSettingsForm:(payload:IUserForm) => {dispatch(setSettingsForm(payload))},
-        setHistory:(orders:HistoryItemState[]) => {dispatch(setHistory(orders))}
+        setHistory:(orders:HistoryItemState[]) => {dispatch(setHistory(orders))},
+        applyDiscount:(discount:number) => {dispatch(applyDiscount(discount))}
     }
 }
 
@@ -76,8 +82,8 @@ const renderUserPhoto = (photoUrl:string) => {
         )
 }
 
-class Profile extends React.Component<IProfilePage, IProfilePage> {
-    constructor(props:IProfilePage, state:IProfilePage) {
+class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
+    constructor(props:IProfilePageExtend, state:IProfilePage) {
         super(props, state)
 
         this.removeItemFromCart = this.removeItemFromCart.bind(this)
@@ -88,6 +94,8 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
         this.submitPrivacyForm = this.submitPrivacyForm.bind(this)
         this.changeEditable = this.changeEditable.bind(this)
         this.getOrdersHistory = this.getOrdersHistory.bind(this)
+        this.checkDiscount = this.checkDiscount.bind(this)
+        this.normalizeOrdersList = this.normalizeOrdersList.bind(this)
     }
 
     getOrdersHistory(accessToken:string) {
@@ -140,7 +148,6 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
     changeUserFormField(event: React.FormEvent<ReplaceProps<"input", BsPrefixProps<"input"> & FormControlProps>>) {
         const { setProfileFormField } = this.props
         const form = event.currentTarget
-        console.log("FORM: ", form)
         setProfileFormField({
             name:form.name || "",
             value:form.value || ""
@@ -167,7 +174,10 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
 
         })
 
+        const { cartState } = this.props
+
         this.getOrdersHistory(accessToken)
+        this.checkDiscount(this.normalizeOrdersList(cartState))
     }
     
 
@@ -200,6 +210,59 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
         removeProductFromCart(itemId)
     }
 
+    normalizeOrdersList(cartState:ICart) {
+        let orders:{[key:string]:IOrderRequest} = {}
+
+        for (let productItem of cartState.products) {
+            if (orders[productItem.warehouse_id]) {
+                orders[productItem.warehouse_id].products.push({
+                    id:productItem.id,
+                    quantity:productItem.count
+                })
+            } else {
+                orders[productItem.warehouse_id] = {
+                    warehouse_id:productItem.warehouse_id,
+                    products:[{
+                        id:productItem.id,
+                        quantity:productItem.count
+                    }]
+                }
+            }
+        }
+
+        let finalOrders:IOrderRequest[] = []
+
+        for (let warehouseId in orders) {
+            finalOrders.push(orders[warehouseId])
+        }
+        return finalOrders
+    }
+
+    checkDiscount(finalOrders:IOrderRequest[]) {
+        const accessToken = localStorage.getItem("accessToken")
+        axios.post(CHECK_DISCOUNT_URL, {
+            orders:finalOrders
+        }, {
+            headers: {Authorization: "Bearer " + accessToken}
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                const { total_price, price } = response.data.data
+                const { applyDiscount } = this.props
+                if (price !== total_price)
+                    applyDiscount(total_price)
+            } else {
+                //
+            }
+        })
+        .catch((error) => {
+            //
+        })
+        .finally(() => {
+            // 
+        })
+    }
+
     createOrder() {
         const { cartState, userState, showInfoLayer } = this.props
         if (userState.cell === "") {
@@ -209,33 +272,7 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
             })
         }
 
-        let orders:{[key:string]:IOrderRequest} = {}
-        // let ordersLength:number = 0
-
-        for (let productItem of cartState.products) {
-            if (orders[productItem.warehouse_id]) {
-                orders[productItem.warehouse_id].products.push({
-                    id:productItem.id,
-                    quantity:productItem.count
-                })
-                // ordersLength++
-            } else {
-                orders[productItem.warehouse_id] = {
-                    warehouse_id:productItem.warehouse_id,
-                    products:[{
-                        id:productItem.id,
-                        quantity:productItem.count
-                    }]
-                }
-                // ordersLength++
-            }
-        }
-
-        let finalOrders:IOrderRequest[] = []
-
-        for (let warehouseId in orders) {
-            finalOrders.push(orders[warehouseId])
-        }
+        const finalOrders = this.normalizeOrdersList(cartState)
 
         const accessToken = localStorage.getItem("accessToken")
 
@@ -334,9 +371,10 @@ class Profile extends React.Component<IProfilePage, IProfilePage> {
                                         products={products}
                                         warehouses={warehouses}
                                         totalCount={totalCount}
-                                        price={price}
+                                        price={totalPrice.toFixed(2)}
                                         removeItemFromCart={this.removeItemFromCart}
                                         createOrder={this.createOrder}
+                                        totalPrice={totalPriceDiscount}
                                     />
                                 }/>
                                 <Route path="/profile/discounts" exact component={() =>

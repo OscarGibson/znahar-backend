@@ -9,12 +9,23 @@ interface OrdersListState {
     warehouses:IWarehouse[],
     totalCount:number,
     price:string,
+    totalPrice:number,
     removeItemFromCart:(id:string) => void,
     createOrder:() => void
 }
 
+const discountBlock = (totalPrice:number) => {
+    console.log("totalPrice", totalPrice)
+    if (totalPrice !== -1)
+        return (
+            <div className="info">
+                <span className="text">{`Зі знижкою ${totalPrice.toFixed(2)} грн`}</span>
+            </div>
+        )
+}
+
 const OrdersList = (props:OrdersListState) => {
-    const { products, warehouses, removeItemFromCart, totalCount, price, createOrder } = props
+    const { products, warehouses, removeItemFromCart, totalCount, price, createOrder, totalPrice } = props
     return (
         <div className="ordersList cart">
             <div className="info">
@@ -27,6 +38,7 @@ const OrdersList = (props:OrdersListState) => {
                     iconSvgSrc=""
                 />
             </div>
+            {discountBlock(totalPrice)}
             <table className="table">
                 <thead className="thead-dark">
                     <tr>

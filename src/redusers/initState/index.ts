@@ -295,7 +295,6 @@ export const warehouses:IWarehouse[] = []
 
 export const getWarehouseById = (id:string, warehouses:IWarehouse[]):IWarehouse => {
     for (let warehouse of warehouses) {
-        console.log("ID", id, warehouse.uuid)
         if (id == warehouse.uuid)
             return warehouse
     }

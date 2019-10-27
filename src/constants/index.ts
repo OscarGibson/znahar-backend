@@ -22,6 +22,7 @@ export const IMAGES_BACKEND = `${MAIN_BACKEND}`
 export const GET_PRODUCTS_URL = `${MAIN_BACKEND}/znahar/products/`
 export const REGISTER_USER = `${MAIN_BACKEND}/api/user/register`
 export const ORDERS_URL = `${MAIN_BACKEND}/znahar/orders/`
+export const CHECK_DISCOUNT_URL = `${MAIN_BACKEND}/znahar/check/`
 export const LOGIN_URL = `${MAIN_BACKEND}/api/token/`
 export const REFRESH_TOKEN_URL = `${MAIN_BACKEND}/api/token/refresh`
 export const GET_USER_URL = `${MAIN_BACKEND}/api/user/`

@@ -33,7 +33,8 @@ import {
   SET_SETTINGS_FORM,
   SET_HISTORY,
   CHANGE_SEARCH_KEY,
-  CHANGE_FILTER
+  CHANGE_FILTER,
+  APPLY_DISCOUNT
 } from "../actions/types";
 
 import {
@@ -252,6 +253,16 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
   if (action.type === INIT_PRODUCTS_SEARCH) {    
     return {
       ...state
+    }
+  }
+  if (action.type === APPLY_DISCOUNT) {
+    const { cartState } = state
+    return {
+      ...state,
+      cartState: {
+        ...cartState,
+        totalPriceDiscount:action.payload
+      }
     }
   }
 

@@ -15,6 +15,7 @@ URL = 'http://a3.apteka-znahar.com.ua:15890/RT/hs/WebStore'
 
 URL_PRODUCTS = f'{URL}/products'
 URL_ORDERS = f'{URL}/orders'
+URL_CHECK = f'{URL}/check'
 HEADERS = {'Accept': 'application/json'}
 AUTH = ('R','R')
 
@@ -93,6 +94,27 @@ class Products(APIView):
         headers = {'Accept': 'application/json'}
 
         r = requests.get(url=URL_PRODUCTS + params, headers=HEADERS, auth=AUTH)
+
+        print(r.text)
+        print(r.status_code)
+
+        if (r.status_code == 200):
+            return Response(r.json(), 200)
+
+        else:
+            return Response({
+                "message": "Request error",
+                "code": 400
+            }, 400)
+
+
+class CheckDiscount(APIView):
+    
+    def post(self, request, *args, **kwargs):
+        headers = {'Accept': 'application/json'}
+
+        payload = json.dumps(request.data)
+        r = requests.post(url=URL_CHECK, headers=HEADERS, auth=AUTH, data=payload)
 
         print(r.text)
         print(r.status_code)
