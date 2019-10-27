@@ -5,7 +5,7 @@ import ActionButton from './ActionButton';
 import { IN_ALL_WAREHOUSES } from '../constants'
 
 interface ISearchFormFilter extends ISearchForm {
-    selectedFilter:string|undefined
+    // selectedFilter:string|undefined
 }
 
 interface ISearchFormCustom extends ISearchForm {

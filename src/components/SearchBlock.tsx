@@ -3,15 +3,17 @@ import { connect } from 'react-redux'
 import SearchList from './SearchList'
 import SearchForm from './SearchForm'
 import { IHandleSearch, IWarehouse } from '../types'
+import Paginator from './Paginator'
 
 interface SearchBlockProps {
     products:Array<any>,
     isRequestSended:boolean,
     isResponseRecieved:boolean,
     searchInput:string,
+    selectedFilter:string,
     searchFormSubmitted:boolean,
     handleSearch:IHandleSearch,
-    warehousesList:IWarehouse[]
+    warehousesList:IWarehouse[],
 }
 
 interface SearchBlockState {
@@ -23,13 +25,20 @@ const mapStateToProps = (reducer:any, other:any) => {
     const { warehouses } = reducer.DefaultReducer
     const { productsRequestState, searchFormState } = SearchReducer
     const { products, isRequestSended, isResponseRecieved } = productsRequestState
-    const { searchFormSubmitted, searchInput } = searchFormState
+    const { searchFormSubmitted, searchInput, selectedFilter } = searchFormState
     return {
         products, isRequestSended, isResponseRecieved,
         searchInput, searchFormSubmitted,
-        warehousesList:warehouses
+        warehousesList:warehouses,
+        selectedFilter
     }
 }
+
+// const mapDispatchToProps = (dispatch:any) => {
+//     return {
+//         changePage:(newPage:number) => {dispatch(Paginator.Actions.changePage(newPage))}
+//     }
+// }
 
 const SearchTableHeader = () => {
     return(
@@ -50,6 +59,15 @@ const XOR = (a:boolean,b:boolean) => {
 }
 
 class SearchBlock extends React.Component<SearchBlockProps, SearchBlockState> {
+    constructor(props:SearchBlockProps, state:SearchBlockState) {
+        super(props, state)
+
+        this.moveTo = this.moveTo.bind(this)
+    }
+    moveTo(offset:number, limit:number, newPage:number) {
+        const { handleSearch, searchInput, selectedFilter } = this.props
+        handleSearch(searchInput, selectedFilter)
+    }
     render() {
         const {
             products,
@@ -71,7 +89,8 @@ class SearchBlock extends React.Component<SearchBlockProps, SearchBlockState> {
                         isProductsLoaded={isProductsLoaded}
                         warehousesList={warehousesList}
                     />
-                </table>     
+                </table>
+                {products.length !== 0 ? <Paginator.Component moveTo={this.moveTo}/> : ""} 
             </div>
             
         )

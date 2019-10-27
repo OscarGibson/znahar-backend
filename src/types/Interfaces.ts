@@ -1,4 +1,5 @@
-import { HistoryItemState } from "../components/ProfileComponents/History";
+import { HistoryItemState } from "../components/ProfileComponents/History"
+import { PaginatorPropsType } from "../components/Paginator/Paginator.types"
 
 export interface IAction {
     ():{type:string,action:any}
@@ -41,7 +42,8 @@ export interface IGetProductsRequest {
 export interface ISearchForm {
     searchInput:string,
     searchFormSubmitted:boolean,
-    warehouses:IWarehouse[]
+    warehouses:IWarehouse[],
+    selectedFilter:string
 }
 
 export interface ITopNavBarState {
@@ -306,7 +308,8 @@ export interface ISearchState {
     setProductsSuccess:IHandleSearch,
     getProductsRequestSended:IHandle,
     infoLayerState:IInfoLayer,
-    cartState:ICart
+    cartState:ICart,
+    paginationState:PaginatorPropsType
 }
 
 export interface IHomePage {

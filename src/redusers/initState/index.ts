@@ -37,6 +37,8 @@ import {
     SettingsState,
     IUserForm
 } from '../../types'
+import { initState as paginatorInitState } from '../../components/Paginator/Paginator.state'
+import { IN_ALL_WAREHOUSES } from '../../constants';
 
 export const initProducts:IProduct[] = []
 
@@ -56,7 +58,8 @@ export const searchFormState:ISearchForm = {
     // action:(searchKey:string, selectedFiler:string|undefined) => {
     //     window.location.href = `/search?searchKey=${searchKey}&selectedFilter=${selectedFiler}`
     // },
-    warehouses:[]
+    warehouses:[],
+    selectedFilter:IN_ALL_WAREHOUSES
 }
 
 export const mainMenuSimpleState:IMainMenuData = {
@@ -413,7 +416,8 @@ export const searchInitState:ISearchState = {
     setProductsSuccess:(products) => {  },
     getProductsRequestSended:() => { },
     infoLayerState:infoLayerState,
-    cartState:cartState
+    cartState:cartState,
+    paginationState:paginatorInitState
 }
 
 export const homePageState:IHomePage = {

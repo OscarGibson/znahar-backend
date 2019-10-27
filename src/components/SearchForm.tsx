@@ -1,7 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 import { ISearchForm, IHandleSearch } from '../types'
-import ActionButton from './ActionButton';
+import ActionButton from './ActionButton'
+import { changeSearchKey, changeFilter } from '../actions'
 
 const mapStateToProps = (reducer:any):ISearchForm => {
     const { searchFormState } = reducer.SearchReducer
@@ -13,29 +14,26 @@ const mapStateToProps = (reducer:any):ISearchForm => {
 }
 
 interface ISearchFormFilter extends ISearchForm {
-    selectedFilter:string
+    // selectedFilter:string
 }
 
 interface ISearchFormCustom extends ISearchForm {
-    action:IHandleSearch
+    action:IHandleSearch,
+    changeSearchKey:(searchKey:string) => void,
+    changeFilter:(filter:string) => void
 }
 
-// const dispatchToProps = (dispatch:any) => {
-//     return {
-//         getProductsInSearch: (searchKey:string) => dispatch(getProductsInSearch(searchKey)),
-//         getProductsFake: (searchKey:string) => dispatch(getProductsFake(searchKey))
-//     }
-// }
+const mapDispatchToProps = (dispatch:any) => {
+    return {
+        changeSearchKey:(searchKey:string) => {dispatch(changeSearchKey(searchKey))},
+        changeFilter:(filter:string) => {dispatch(changeFilter(filter))}
+    }
+}
 
 class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchFormFilter> {
 
     constructor(props:ISearchFormCustom, state:ISearchFormFilter) {
         super(props, state)
-
-        this.state = {
-            ...props,
-            selectedFilter:"У всіх Аптеках"
-        }
 
         this.handleSearchFormSubmit = this.handleSearchFormSubmit.bind(this)
         this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this)
@@ -57,19 +55,17 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchForm
 
     handleSearchFieldChange(event:React.ChangeEvent<HTMLInputElement>):void {
         event.preventDefault()
-        this.setState({
-            searchInput: event.target.value
-        })
+        const { changeSearchKey } = this.props
+        changeSearchKey(event.target.value)
     }
 
     handleFilterChange(event:React.ChangeEvent<HTMLSelectElement>):void {
-        this.setState({
-            selectedFilter: event.target.value
-        })
+        const { changeFilter } = this.props
+        changeFilter(event.target.value)
     }
 
     render() {
-        const { searchInput, warehouses } = this.state
+        const { searchInput, warehouses } = this.props
         return (
             <div className="SearchForm">
                 <div className="content standart-container">
@@ -114,6 +110,6 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchForm
     }
 }
 
-const SearchForm = connect(mapStateToProps)(SearchFormComponent)
+const SearchForm = connect(mapStateToProps, mapDispatchToProps)(SearchFormComponent)
 
 export default SearchForm

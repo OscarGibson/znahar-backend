@@ -31,7 +31,9 @@ import {
   CHANGE_GENERAL_EDITABLE,
   CHANGE_USER_FORM_FIELD,
   SET_SETTINGS_FORM,
-  SET_HISTORY
+  SET_HISTORY,
+  CHANGE_SEARCH_KEY,
+  CHANGE_FILTER
 } from "../actions/types";
 
 import {
@@ -309,8 +311,7 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
       },
       searchFormState: {
         ...searchFormState,
-        searchFormSubmitted:true,
-        searchInput:"",
+        searchFormSubmitted:true
       },
     }
   }
@@ -542,6 +543,27 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
       topNavBarState: {
         ...topNavBarState,
         cartOrdersCount:newProducts.length
+      }
+    }
+  }
+
+  if (action.type === CHANGE_SEARCH_KEY) {
+    const { searchFormState } = state
+    return {
+      ...state,
+      searchFormState:{
+        ...searchFormState,
+        searchInput:action.payload
+      }
+    }
+  }
+  if (action.type === CHANGE_FILTER) {
+    const { searchFormState } = state
+    return {
+      ...state,
+      searchFormState:{
+        ...searchFormState,
+        selectedFilter:action.payload
       }
     }
   }

@@ -11,31 +11,33 @@ import { ISearchState } from '../types'
 import MainMenuSimple from '../components/MainMenuSimple'
 import InfoLayer from '../components/InfoLayer'
 import { GET_PRODUCTS_URL, IN_ALL_WAREHOUSES } from '../constants'
+import { changePage } from '../components/Paginator/Paginator.actions'
 
 
-// interface SearchProps extends ISearchState {
-//     getProductsRequestSended: IAction,
-//     setProductsSuccess: IActionPayload
-// }
+interface ISearchStateExtend extends ISearchState {
+    changePage:(newPage:number) => void
+}
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
         getProductsRequestSended: () => dispatch(getProductsRequestSended()),
-        setProductsSuccess: (products:any) => dispatch(setProductsSuccess(products))
+        setProductsSuccess: (products:any) => dispatch(setProductsSuccess(products)),
+        changePage:(newPage:number) => {dispatch(changePage(newPage))}
     }
   }
 
-const mapStateToProps = (reducer:any) => {
-    const { SearchReducer } = reducer
+const mapStateToProps = (reducer:any):ISearchStateExtend => {
+    const { SearchReducer, PaginatorReducer } = reducer
     return {
-        ...SearchReducer
+        ...SearchReducer,
+        paginationState:PaginatorReducer
     }
 }
 
 
-class SearchPage extends React.Component<ISearchState, ISearchState> {
+class SearchPage extends React.Component<ISearchStateExtend, ISearchState> {
 
-    constructor(props:ISearchState, state:ISearchState) {
+    constructor(props:ISearchStateExtend, state:ISearchState) {
         super(props, state)
 
         this.state = {
@@ -64,19 +66,21 @@ class SearchPage extends React.Component<ISearchState, ISearchState> {
         )
     }
 
-    handleSearch(searchKey:string, warehouse_id:string) {
+    handleSearch(searchKey:string, warehouse_id:string = IN_ALL_WAREHOUSES, offset:number=0, limit:number=10) {
         const { 
             getProductsRequestSended,
-            setProductsSuccess
+            setProductsSuccess,
+            paginationState,
+            changePage
         } = this.props
         getProductsRequestSended()
 
         let params:{[key:string]:any} = {
-            offset:0,
-            limit:10,
+            offset:paginationState.offset,
+            limit:paginationState.limit,
             filter_name:searchKey,
         }
-        if (warehouse_id === "У всіх Аптеках")
+        if (warehouse_id === IN_ALL_WAREHOUSES)
             params["warehouses"] = [1,2,3,4,5,6,7,8,9]
         else
             params["warehouses"] = [warehouse_id]
@@ -86,7 +90,8 @@ class SearchPage extends React.Component<ISearchState, ISearchState> {
         })
         .then((response) => {
             if (response.data.code === 200) {
-                setProductsSuccess(response.data)    
+                setProductsSuccess(response.data)
+                changePage((paginationState.offset / paginationState.limit) + 1)
             }
         })
         .catch((error) => {
@@ -103,6 +108,10 @@ class SearchPage extends React.Component<ISearchState, ISearchState> {
         const { products, isRequestSended, isResponseRecieved } = productsRequestState
         const { searchFormSubmitted, searchInput } = searchFormState
 
+        const search = window.location.search
+        const params = new URLSearchParams(search)
+        const searchInputParam = params.get('searchKey')
+
         return (
             <div className="search-page">
                 <MainMenuSimple { ...mainMenuSimpleState }/>
@@ -110,7 +119,7 @@ class SearchPage extends React.Component<ISearchState, ISearchState> {
                     products={products}
                     isRequestSended={isRequestSended}
                     isResponseRecieved={isResponseRecieved}
-                    searchInput={searchInput}
+                    searchInput={searchInput || searchInputParam}
                     searchFormSubmitted={searchFormSubmitted}
                     handleSearch={this.handleSearch}
                 />

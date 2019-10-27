@@ -30,7 +30,9 @@ import {
   CHANGE_GENERAL_EDITABLE,
   CHANGE_USER_FORM_FIELD,
   SET_SETTINGS_FORM,
-  SET_HISTORY
+  SET_HISTORY,
+  CHANGE_SEARCH_KEY,
+  CHANGE_FILTER
 } from "./types";
 import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost, IWarehouse, ISettings, IUserForm } from "../types";
 import { HistoryItemState } from "../components/ProfileComponents/History";
@@ -163,4 +165,12 @@ export const setSettingsForm = (payload:IUserForm) => {
 
 export const setHistory = (orders:HistoryItemState[]) => {
   return {type:SET_HISTORY, payload:orders}
+}
+
+export const changeSearchKey = (searchKey:string) => {
+  return {type:CHANGE_SEARCH_KEY, payload:searchKey}
+}
+
+export const changeFilter = (filter:string) => {
+  return {type:CHANGE_FILTER, payload:filter}
 }

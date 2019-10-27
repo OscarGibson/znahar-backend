@@ -5,6 +5,7 @@ import DefaultReducer, {
     PromotionsReducer, ProfileSettingsReducer, HistoryReducer
 } from "../redusers"
 import { MapReducer } from "../components/Map/Map.Reducer"
+import { PaginatorReducer } from "../components/Paginator/Paginator.reducer"
 
 const rootReducer = combineReducers({
     DefaultReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
     PromotionsReducer,
     ProfileSettingsReducer,
     HistoryReducer,
-    MapReducer
+    MapReducer,
+    PaginatorReducer
 })
 
 const store = createStore(rootReducer);
