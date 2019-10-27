@@ -55,7 +55,7 @@ const OrdersList = (props:OrdersListState) => {
                         const warehouse = getWarehouseById(warehouse_id, warehouses)
                         if (warehouse)
                             return (
-                                <tr key={index}>
+                                <tr key={`order-item-${index}`}>
                                     <td>{name}</td>
                                     <td>{`№${warehouse_id} ${warehouse.name}`}</td>
                                     <td>{price.toFixed(2)}</td>

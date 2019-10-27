@@ -87,13 +87,7 @@ class AppTemplate extends React.Component<IRootAppAction, IRootAppAction> {
             <TopNavBar />
             <Switch>
               <Route path="/" exact component={Home} />
-              <Route path="/search" component={() =>
-                <Search
-                  {...searchInitState}
-                  // getProductsRequestSended={getProductsRequestSended}
-                  // setProductsSuccess={setProductsSuccess}
-                />
-              }/>
+              <Route path="/search" component={Search}/>
               <Route path="/profile" component={Profile} />
               <Route path="/register" component={Register}/>
               <Route path="/login" component={Login}/>

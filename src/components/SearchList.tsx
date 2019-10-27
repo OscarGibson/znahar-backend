@@ -36,31 +36,26 @@ class SearchListComponent extends React.Component<SearchListProps, SearchListSta
             products, isProductsLoaded, warehousesList
         } = this.props
 
-        if (isProductsLoaded)
-            return (
-                <tbody>
-                    {products.map((product:SearchListItemProps, index:number) => {
-                        return (
-                            <SearchListItem 
-                                key={index}
-                                id={product.id}
-                                index={index}
-                                name={product.name}
-                                warehouse_id={product.warehouse_id}
-                                photoUrl={product.photoUrl}
-                                price={product.price}
-                                discount={product.discount}
-                                remain={product.remain}
-                                warehousesList={warehousesList}
-                            />
-                        )   
-                    })}
-                </tbody>
-            )
-        else
-            return (
-                <h1>No results</h1>
-            )
+        return (
+            <tbody>
+                {products.map((product:SearchListItemProps, index:number) => {
+                    return (
+                        <SearchListItem 
+                            key={index}
+                            id={product.id}
+                            index={index}
+                            name={product.name}
+                            warehouse_id={product.warehouse_id}
+                            photoUrl={product.photoUrl}
+                            price={product.price}
+                            discount={product.discount}
+                            remain={product.remain}
+                            warehousesList={warehousesList}
+                        />
+                    )   
+                })}
+            </tbody>
+        )
     }
 }
 

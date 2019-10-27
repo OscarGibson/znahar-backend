@@ -430,8 +430,8 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
 
     const cartStateJsonStr:string = JSON.stringify(newCartState)
     localStorage.setItem("cart", cartStateJsonStr)
-
-    const newState = {
+    
+    return {
       ...state,
       cartState: newCartState,
       topNavBarState: {
@@ -439,8 +439,6 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
         cartOrdersCount:newProducts.length
       }
     }
-    console.log("newState", newState)
-    return newState
   }
 
   if (action.type === PLUS_PRODUCT_TO_CART) {

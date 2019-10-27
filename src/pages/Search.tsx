@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { mainMenuSimpleState } from '../redusers/initState'
 import { 
     getProductsRequestSended,
-    setProductsSuccess
+    setProductsSuccess,
+    changeSearchKey
 } from '../actions'
 import SearchBlock from '../components/SearchBlock'
 import axios from 'axios'
@@ -15,14 +16,16 @@ import { changePage } from '../components/Paginator/Paginator.actions'
 
 
 interface ISearchStateExtend extends ISearchState {
-    changePage:(newPage:number) => void
+    changePage:(newPage:number) => void,
+    changeSearchKey:(searchKey:string) => void,
 }
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
         getProductsRequestSended: () => dispatch(getProductsRequestSended()),
         setProductsSuccess: (products:any) => dispatch(setProductsSuccess(products)),
-        changePage:(newPage:number) => {dispatch(changePage(newPage))}
+        changePage:(newPage:number) => {dispatch(changePage(newPage))},
+        changeSearchKey:(searchKey:string) => {dispatch(changeSearchKey(searchKey))},
     }
   }
 
@@ -46,6 +49,7 @@ class SearchPage extends React.Component<ISearchStateExtend, ISearchState> {
 
         this.handleSearch = this.handleSearch.bind(this)
         this.initSearch = this.initSearch.bind(this)
+        console.log("constructor")
     }
 
     componentDidMount() {
@@ -53,10 +57,14 @@ class SearchPage extends React.Component<ISearchStateExtend, ISearchState> {
     }
 
     initSearch() {
+        console.log("initSearch")
         const search = window.location.search
         const params = new URLSearchParams(search)
         const searchInput = params.get('searchKey')
         const selectedFilter = params.get('selectedFilter')
+        const { changeSearchKey } = this.props
+        if (searchInput && searchInput !== "")
+            changeSearchKey(searchInput)
         this.handleSearch(
             searchInput === null ? "" : searchInput,
             selectedFilter === null ? IN_ALL_WAREHOUSES : selectedFilter,
