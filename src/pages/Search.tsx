@@ -10,7 +10,7 @@ import axios from 'axios'
 import { ISearchState } from '../types'
 import MainMenuSimple from '../components/MainMenuSimple'
 import InfoLayer from '../components/InfoLayer'
-import { GET_PRODUCTS_URL } from '../constants';
+import { GET_PRODUCTS_URL, IN_ALL_WAREHOUSES } from '../constants'
 
 
 // interface SearchProps extends ISearchState {
@@ -43,13 +43,26 @@ class SearchPage extends React.Component<ISearchState, ISearchState> {
         }
 
         this.handleSearch = this.handleSearch.bind(this)
+        this.initSearch = this.initSearch.bind(this)
     }
 
-    // componentWillUnmount() {
-    //     const { cartState } = this.props
-    //     const cartStateJsonStr:string = JSON.stringify(cartState)
-    //     localStorage.setItem("cart", cartStateJsonStr)
-    // }
+    componentDidMount() {
+        this.initSearch()
+        // const { cartState } = this.props
+        // const cartStateJsonStr:string = JSON.stringify(cartState)
+        // localStorage.setItem("cart", cartStateJsonStr)
+    }
+
+    initSearch() {
+        const search = window.location.search
+        const params = new URLSearchParams(search)
+        const searchInput = params.get('searchKey')
+        const selectedFilter = params.get('selectedFilter')
+        this.handleSearch(
+            searchInput === null ? "" : searchInput,
+            selectedFilter === null ? IN_ALL_WAREHOUSES : selectedFilter,
+        )
+    }
 
     handleSearch(searchKey:string, warehouse_id:string) {
         const { 

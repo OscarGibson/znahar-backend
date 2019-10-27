@@ -44,20 +44,6 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchForm
 
     }
 
-    // componentDidMount() {
-    //     const search = window.location.search
-    //     const params = new URLSearchParams(search)
-    //     const searchInput = params.get('searchKey')
-    //     const selectedFilter = params.get('selectedFilter')
-
-    //     const { action } = this.props
-    //     this.handleSearch(
-    //         searchInput === null ? "" : searchInput,
-    //         selectedFilter === null ? "У всіх Аптеках" : selectedFilter,
-    //         action
-    //     )
-    // }
-
     handleSearch(searchInput:string, selectedFilter:string, action:IHandleSearch) {
         action(searchInput, selectedFilter)
     }

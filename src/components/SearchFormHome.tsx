@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ISearchForm, IWarehouse, IHandleSearch } from '../types'
 import ActionButton from './ActionButton';
+import { IN_ALL_WAREHOUSES } from '../constants'
 
 interface ISearchFormFilter extends ISearchForm {
     selectedFilter:string|undefined
@@ -28,7 +29,7 @@ class SearchFormHome extends React.Component<ISearchFormCustom, ISearchFormFilte
 
         this.state = {
             ...props,
-            selectedFilter:undefined
+            selectedFilter:IN_ALL_WAREHOUSES
         }
 
         this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
