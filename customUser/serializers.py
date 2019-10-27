@@ -18,6 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.lname = validated_data['lname']
         user.username = "{} {}".format(validated_data['fname'], validated_data['lname'])
         user.cell = validated_data['cell']
+        user.photo = validated_data['photo']
         user.save()
 
         return user
@@ -25,4 +26,4 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         # Tuple of serialized model fields (see link [2])
-        fields = ( "id", "email", "password", "fname", "lname", "photoUrl", "cell")
+        fields = ( "id", "email", "password", "fname", "lname", "photoUrl", "cell", "photo")
