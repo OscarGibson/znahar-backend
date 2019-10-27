@@ -40,12 +40,10 @@ class Order(APIView):
     
     def post(self, request, *args, **kwargs):
         try:
-            data = {
-                "phonenumber":request.user.cell,
-                **request.data
-            }
-            print("DATA:", data)
-            payload = json.dumps(data)
+            for order in request.data["orders"]:
+                order["phonenumber"] = request.user.cell
+            print("DATA:", request.data)
+            payload = json.dumps(request.data)
             URL = URL_ORDERS + f"?user_id={request.user.id}"
             r = requests.post(url=URL, auth=AUTH, data=payload)
             print(r.status_code)
