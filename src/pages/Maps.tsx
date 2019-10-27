@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import Map from '../components/Map'
-import { MapItem } from '../components/Map/Map.types';
-import MainMenuSimple from '../components/MainMenuSimple';
-import { mainMenuSimpleState } from '../redusers/initState';
-import Breadcrumbp from '../components/Breadcrumbp';
+import { MapItem } from '../components/Map/Map.types'
+import MainMenuSimple from '../components/MainMenuSimple'
+import { mainMenuSimpleState } from '../redusers/initState'
+import Breadcrumbp from '../components/Breadcrumbp'
 
 interface MapPageProps {
     setMaps:(mapItems:MapItem[]) => void

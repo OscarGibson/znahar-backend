@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { MapData, MapItem } from './Map.types'
 import './Map.styles.scss'
+
 
 const MapItemTemplate = (props:MapItem) => {
     const { name, description, image } = props
@@ -22,6 +23,8 @@ const MapTemplate = (props:MapData) => {
                     <MapItemTemplate key={`map-item-${index}`} {...mapItem}/>
                 )
             })}
+            <div style={{ height: '100vh', width: '100%' }}>
+            </div>
         </div>
     )
 }

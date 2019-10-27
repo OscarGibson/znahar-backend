@@ -16,12 +16,6 @@ const LimitOption = (props:{option:number, limit:number, changeLimit:(newLimit:P
     )
 }
 
-// const Navigation = () => {
-//     return (
-
-//     )
-// }
-
 const Arrow = (props:{delta:number, limit:number, currentPage:number, totalPages:number, moveToAction:(offset:number, limit:number, newPage:number) => void}) => {
     const { delta, limit, currentPage, totalPages, moveToAction} = props
     const newPage = currentPage + delta
