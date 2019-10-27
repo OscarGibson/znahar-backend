@@ -33,8 +33,8 @@ class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
                 <h1 className="name">{title}</h1>
                 <h3 className="description">{description}</h3>
                 <div className="priceBlock">
-                    <p className="price">{discount_price}грн</p>
-                    <p className="discountPrice">{price}грн</p>
+                    <p className="price">{discount_price.toFixed(2)}грн</p>
+                    <p className="discountPrice">{price.toFixed(2)}грн</p>
                 </div>
             </div>
         )

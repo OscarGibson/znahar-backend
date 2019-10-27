@@ -58,7 +58,7 @@ const HistoryItem = (props:HistoryItemState) => {
                                 <tr key={`history-item-${id}-${index}`}>
                                     <td>{name}</td>
                                     <td>{`№${warehouse_id} ${warehouse.name}`}</td>
-                                    <td>{price}</td>
+                                    <td>{price.toFixed(2)}</td>
                                     <td>{quantity}</td>
                                 </tr>
                             )
@@ -72,7 +72,7 @@ const HistoryItem = (props:HistoryItemState) => {
                     <tr key={`history-item-${id}-totalDiscount`}>
                         <td>Всього зі знижкою</td>
                         <td></td>
-                        <td>{total_price}</td>
+                        <td>{total_price.toFixed(2)}</td>
                         <td></td>
                     </tr>
                 </tbody>

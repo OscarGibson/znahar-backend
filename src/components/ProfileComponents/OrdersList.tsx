@@ -46,7 +46,7 @@ const OrdersList = (props:OrdersListState) => {
                                 <tr key={index}>
                                     <td>{name}</td>
                                     <td>{`№${warehouse_id} ${warehouse.name}`}</td>
-                                    <td>{price}</td>
+                                    <td>{price.toFixed(2)}</td>
                                     {/* <td>{count}</td> */}
                                     <td>
                                         <ActionButton

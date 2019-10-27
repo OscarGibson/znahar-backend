@@ -48,7 +48,7 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchForm
 
     handleSearchFormSubmit(event:React.FormEvent<HTMLFormElement>):void {
         event.preventDefault()
-        const { searchInput, selectedFilter } = this.state
+        const { searchInput, selectedFilter } = this.props
         const { action } = this.props
         this.handleSearch(searchInput, selectedFilter, action)
     }

@@ -91,7 +91,7 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
             <tr key={id}>
                 <td>{name}</td>
                 <td>{`#${warehouse.uuid} ${warehouse.name}`}</td>
-                <td>{price}грн</td>
+                <td>{price.toFixed(2)}грн</td>
                 {/* <td></td> */}
                 <td>
                     <ActionButton
