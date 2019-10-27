@@ -344,7 +344,6 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
       searchFormState: {
         ...searchFormState,
         searchFormSubmitted:false,
-        searchInput:""
       },
     }
   }
@@ -366,7 +365,6 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
       searchFormState: {
         ...searchFormState,
         searchFormSubmitted:false,
-        searchInput:""
       },
     }
   }

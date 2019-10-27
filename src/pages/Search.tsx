@@ -50,9 +50,6 @@ class SearchPage extends React.Component<ISearchStateExtend, ISearchState> {
 
     componentDidMount() {
         this.initSearch()
-        // const { cartState } = this.props
-        // const cartStateJsonStr:string = JSON.stringify(cartState)
-        // localStorage.setItem("cart", cartStateJsonStr)
     }
 
     initSearch() {
@@ -66,7 +63,7 @@ class SearchPage extends React.Component<ISearchStateExtend, ISearchState> {
         )
     }
 
-    handleSearch(searchKey:string, warehouse_id:string = IN_ALL_WAREHOUSES, offset:number=0, limit:number=10) {
+    handleSearch(searchKey:string, warehouse_id:string = IN_ALL_WAREHOUSES) {
         const { 
             getProductsRequestSended,
             setProductsSuccess,
@@ -81,7 +78,7 @@ class SearchPage extends React.Component<ISearchStateExtend, ISearchState> {
             filter_name:searchKey,
         }
         if (warehouse_id === IN_ALL_WAREHOUSES)
-            params["warehouses"] = [1,2,3,4,5,6,7,8,9]
+            params["warehouses"] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14]
         else
             params["warehouses"] = [warehouse_id]
 
