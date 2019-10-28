@@ -88,7 +88,7 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
         } = this.props
         const warehouse = getWarehouseById(warehouse_id, warehousesList)
         return (
-            <tr key={id}>
+            <tr key={`products-list-item-${id}`} className="products-list-item">
                 <td>{name}</td>
                 <td>{`#${warehouse.uuid} ${warehouse.name}`}</td>
                 <td>{price.toFixed(2)}грн</td>

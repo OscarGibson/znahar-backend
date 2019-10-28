@@ -34,7 +34,8 @@ import {
   SET_HISTORY,
   CHANGE_SEARCH_KEY,
   CHANGE_FILTER,
-  APPLY_DISCOUNT
+  APPLY_DISCOUNT,
+  CHANGE_PRODUCT_ITEM_QUANTITY
 } from "../actions/types";
 
 import {
@@ -50,7 +51,7 @@ import {
   profileSettingsState
 } from './initState';
 
-import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage, SettingsState, IWarehouse } from "../types";
+import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage, SettingsState, IWarehouse, IProduct } from "../types";
 import { HistoryState } from "../components/ProfileComponents/History";
 
 
@@ -366,6 +367,38 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
         ...searchFormState,
         searchFormSubmitted:false,
       },
+    }
+  }
+
+  if (action.type === CHANGE_PRODUCT_ITEM_QUANTITY) {
+    const { productId, warehouseId, increment, currentQuantity } = action.payload
+    const { cartState } = state
+    const newQuantity = currentQuantity + increment
+    let newProducts:IProductItem[] = []
+    let newPrice:number = 0
+    if (newQuantity !== 0 && newQuantity !== 50) {
+
+      for (let product of cartState.products) {
+        if (product.id === productId && product.warehouse_id === warehouseId) {
+          newProducts.push({
+            ...product,
+            count:newQuantity
+          })
+          newPrice += product.price * newQuantity
+        } else {
+          newProducts.push(product)
+          newPrice += product.price * product.count
+        }
+      }
+
+      return {
+        ...state,
+        cartState: {
+          ...cartState,
+          products:newProducts,
+          totalPrice:newPrice
+        },
+      }
     }
   }
 

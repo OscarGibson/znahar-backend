@@ -33,7 +33,7 @@ class SearchListComponent extends React.Component<SearchListProps, SearchListSta
 
     render() {
         const {
-            products, isProductsLoaded, warehousesList
+            products, warehousesList
         } = this.props
 
         return (

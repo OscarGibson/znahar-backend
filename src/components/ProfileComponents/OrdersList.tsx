@@ -3,6 +3,7 @@ import { IProductItem, IWarehouse } from '../../types'
 import { getWarehouseById } from '../../redusers/initState'
 import ActionButton from '../ActionButton'
 import { connect } from 'react-redux'
+import { plusProductItem, minusProductItem } from '../../actions';
 
 interface OrdersListState {
     products:IProductItem[],
@@ -11,7 +12,9 @@ interface OrdersListState {
     price:string,
     totalPrice:number,
     removeItemFromCart:(id:string) => void,
-    createOrder:() => void
+    createOrder:() => void,
+    plusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => void,
+    minusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => void
 }
 
 const discountBlock = (totalPrice:number) => {
@@ -24,8 +27,20 @@ const discountBlock = (totalPrice:number) => {
         )
 }
 
+const mapDispatchToProps = (dispatch:any) => {
+    return {
+        plusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => {
+            dispatch(plusProductItem(productId, warehouseId, currentQuantity))
+        },
+        minusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => {
+            dispatch(minusProductItem(productId, warehouseId, currentQuantity))
+        }
+    }
+}
+
 const OrdersList = (props:OrdersListState) => {
-    const { products, warehouses, removeItemFromCart, totalCount, price, createOrder, totalPrice } = props
+    const { products, warehouses, removeItemFromCart,
+        totalCount, price, createOrder, totalPrice, plusProductItem, minusProductItem } = props
     return (
         <div className="ordersList cart">
             <div className="info">
@@ -45,7 +60,7 @@ const OrdersList = (props:OrdersListState) => {
                         <th>Назва Товару</th>
                         <th>Аптека</th>
                         <th>Ціна</th>
-                        {/* <th>Кількість</th> */}
+                        <th>Кількість</th>
                         <th></th>
                     </tr> 
                 </thead>
@@ -58,14 +73,18 @@ const OrdersList = (props:OrdersListState) => {
                                 <tr key={`order-item-${index}`}>
                                     <td>{name}</td>
                                     <td>{`№${warehouse_id} ${warehouse.name}`}</td>
-                                    <td>{price.toFixed(2)}</td>
-                                    {/* <td>{count}</td> */}
+                                    <td>{price.toFixed(2)}грн</td>
+                                    <td className="td-buttons">
+                                        <span className="button" onClick={() => {minusProductItem(id, warehouse_id, count)}}>-</span>
+                                        <span className="button">{count}</span>
+                                        <span className="button" onClick={() => {plusProductItem(id, warehouse_id, count)}}>+</span>
+                                    </td>
                                     <td>
                                         <ActionButton
-                                            text="Delete"
+                                            text=""
                                             iconName=""
-                                            iconSvgSrc=""
-                                            classList={[]}
+                                            iconSvgSrc="/static/svg/huge_bin.svg"
+                                            classList={["delete-icon"]}
                                             action={() => {removeItemFromCart(id)}}
                                         />
                                     </td>
@@ -78,4 +97,4 @@ const OrdersList = (props:OrdersListState) => {
     )
 }
 
-export default connect()(OrdersList)
+export default connect(null, mapDispatchToProps)(OrdersList)

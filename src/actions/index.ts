@@ -33,7 +33,8 @@ import {
   SET_HISTORY,
   CHANGE_SEARCH_KEY,
   CHANGE_FILTER,
-  APPLY_DISCOUNT
+  APPLY_DISCOUNT,
+  CHANGE_PRODUCT_ITEM_QUANTITY
 } from "./types";
 import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost, IWarehouse, ISettings, IUserForm } from "../types";
 import { HistoryItemState } from "../components/ProfileComponents/History";
@@ -176,4 +177,12 @@ export const changeFilter = (filter:string) => {
 
 export const applyDiscount = (discountPrice:number) => {
   return {type:APPLY_DISCOUNT, payload:discountPrice}
+}
+
+export const plusProductItem = (productId:string, warehouseId:string, currentQuantity:number) => {
+  return {type:CHANGE_PRODUCT_ITEM_QUANTITY, payload:{productId, warehouseId, currentQuantity, increment:1}}
+}
+
+export const minusProductItem = (productId:string, warehouseId:string, currentQuantity:number) => {
+  return {type:CHANGE_PRODUCT_ITEM_QUANTITY, payload:{productId, warehouseId, currentQuantity, increment:-1}}
 }
