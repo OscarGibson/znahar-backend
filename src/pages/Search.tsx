@@ -86,7 +86,7 @@ class SearchPage extends React.Component<ISearchStateExtend, ISearchState> {
             filter_name:searchKey,
         }
         if (warehouse_id === IN_ALL_WAREHOUSES)
-            params["warehouses"] = [1,2,3,4,5,6,7,8,9]
+            params["warehouses"] = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
         else
             params["warehouses"] = [warehouse_id]
 
