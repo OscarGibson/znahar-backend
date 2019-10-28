@@ -2,7 +2,7 @@ export interface MapItem {
     uuid:string,
     name:string,
     description:string,
-    image:string
+    photo:string
 }
 
 export interface MapData {
