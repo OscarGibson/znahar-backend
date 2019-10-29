@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { IProductItem, IWarehouse } from '../../types'
 import { getWarehouseById } from '../../redusers/initState'
 import ActionButton from '../ActionButton'
 import { connect } from 'react-redux'
-import { plusProductItem, minusProductItem } from '../../actions';
+import { plusProductItem, minusProductItem } from '../../actions'
 
 interface OrdersListState {
     products:IProductItem[],
@@ -38,22 +38,45 @@ const mapDispatchToProps = (dispatch:any) => {
     }
 }
 
-const OrdersList = (props:OrdersListState) => {
-    const { products, warehouses, removeItemFromCart,
-        totalCount, price, createOrder, totalPrice, plusProductItem, minusProductItem } = props
-    return (
-        <div className="ordersList cart">
+const renderInfoBlock = (totalCount:number, createOrder:() => void, price:string, totalPrice:number) => {
+    if (totalCount === 0) {
+        return (
             <div className="info">
-                <span className="text">{`Мої Бронювання (${totalCount}од. / ${price} грн)`}</span>
+                <span className="text">Мої Бронювання</span>
                 <ActionButton
-                    text={"Підтвердити"}
-                    action={createOrder}
+                    text={"Пошук Товарів"}
+                    action={() => {window.location.href = "/search"}}
                     classList={["default-button", "button"]}
                     iconName=""
                     iconSvgSrc=""
                 />
             </div>
-            {discountBlock(totalPrice)}
+        )
+    } else {
+        return (
+            <Fragment>
+                <div className="info">
+                    <span className="text">{`Мої Бронювання (${totalCount}од. / ${price} грн)`}</span>
+                    <ActionButton
+                        text={"Підтвердити"}
+                        action={createOrder}
+                        classList={["default-button", "button"]}
+                        iconName=""
+                        iconSvgSrc=""
+                    />
+                </div>
+                {discountBlock(totalPrice)}
+            </Fragment>
+        )
+    }
+}
+
+const OrdersList = (props:OrdersListState) => {
+    const { products, warehouses, removeItemFromCart,
+        totalCount, price, createOrder, totalPrice, plusProductItem, minusProductItem } = props
+    return (
+        <div className="ordersList cart">
+            {renderInfoBlock(totalCount, createOrder, price, totalPrice)}
             <table className="table">
                 <thead className="thead-dark">
                     <tr>
