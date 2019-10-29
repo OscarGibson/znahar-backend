@@ -243,3 +243,21 @@
         }    
     }
 }
+
+@media screen and (max-width: 767px) {
+    .News {
+        .body {
+            .leftBlock {
+                width: 100%;
+                .post {
+                    .image, .title, .content {
+                        width: 100%;
+                    }
+                }
+            }
+            .rightBlock {
+                display: none;
+            }
+        }
+    }
+}

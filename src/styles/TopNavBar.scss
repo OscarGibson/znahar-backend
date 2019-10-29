@@ -119,3 +119,20 @@ $top-green: #daf58e;
     }
     
 }
+
+@media screen and (max-width: 767px) {
+    .TopNavBar {
+        height: fit-content;
+        .right-block {
+            margin-right: 15px;
+            a {
+                .cart {
+                    width: 75px;
+                    span {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}

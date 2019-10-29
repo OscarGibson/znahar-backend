@@ -5,3 +5,18 @@
         }
     }
 }
+@media screen and (max-width: 767px) {
+    .SearchFormHome {
+        .input-group {
+            .input-group-append, .input {
+                width: 100%;
+            }
+            .input-group-append {
+                margin-top: 1rem;
+                .default-button {
+                    margin: auto;
+                }
+            }
+        }
+    }
+}
