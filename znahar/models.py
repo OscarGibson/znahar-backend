@@ -24,8 +24,7 @@ class Warehouse(models.Model):
     uuid = models.CharField(max_length=32, unique=True, default="000000")
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=512)
-    image = models.ImageField(upload_to="uploads")
-    photo = cloudinary.models.CloudinaryField('image')
+    photo = cloudinary.models.CloudinaryField('image', null=True)
     # latitude = models.FloatField()
     # longtitude = models.FloatField()
 

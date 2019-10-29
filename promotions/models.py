@@ -1,9 +1,10 @@
 from django.db import models
+import cloudinary
 
 
 class Promotion(models.Model):
     title = models.CharField(max_length=64)
-    image = models.ImageField(upload_to="uploads")
+    photo = cloudinary.models.CloudinaryField('image', null=True)
     discount = models.IntegerField()
     price = models.FloatField()
 
@@ -18,7 +19,7 @@ class Promotion(models.Model):
 class PromotionBig(models.Model):
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=512)
-    image = models.ImageField(upload_to="uploads")
+    photo = cloudinary.models.CloudinaryField('image', null=True)
     discount = models.IntegerField()
     price = models.FloatField()
 

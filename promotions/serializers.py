@@ -8,7 +8,7 @@ class PromotionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Promotion
-        fields = ("id", "title", "price", "discount", "discount_price", "image")
+        fields = ("id", "title", "price", "discount", "discount_price", "photo")
 
 
 class PromotionBigSerializer(serializers.ModelSerializer):
@@ -17,4 +17,4 @@ class PromotionBigSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PromotionBig
-        fields = ("id", "title", "description", "price", "discount", "discount_price", "image")
+        fields = ("id", "title", "description", "price", "discount", "discount_price", "photo")
