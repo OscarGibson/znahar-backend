@@ -26,4 +26,4 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserModel
         # Tuple of serialized model fields (see link [2])
-        fields = ( "id", "email", "password", "fname", "lname", "photoUrl", "cell", "photo")
+        fields = ( "id", "email", "password", "fname", "lname", "cell", "photo")
