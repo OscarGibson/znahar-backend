@@ -15,7 +15,7 @@ class NewsList extends React.Component<INewsList, INewsList> {
             <div className="NewsList standart-container">
                 <h1 className="title">Актуальні Новини</h1>
                 <div className="divider"></div>
-                <div className="itemsList">
+                <div className="itemsList row">
                     {items.map( (item, index) => {
                         return (
                             <NewsItem key={index} {...item}/>

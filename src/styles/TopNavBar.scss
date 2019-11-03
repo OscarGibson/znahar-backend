@@ -3,15 +3,17 @@ $top-green: #daf58e;
 
 .TopNavBar {
     display: flex;
+    justify-content: space-between;
     height: $block-height;
     background-image: url("/static/images/BG.jpg");
     background-position-y: bottom;
 
-    &-block {
-        flex: 1 1 auto;
-    }
+    // &-block {
+    //     flex: 1 1 auto;
+    // }
 
     & .left-block {
+        display: inline-block;
         margin-left: 24px;
         text-align: left;
 
@@ -34,6 +36,7 @@ $top-green: #daf58e;
     }
 
     & .right-block {
+        display: inline-block;
         // margin-right: 24px;
         text-align: right;
 
@@ -134,5 +137,14 @@ $top-green: #daf58e;
                 }
             }
         }
+    }
+}
+
+@media screen and (max-width: 285px) {
+    .TopNavBar {
+        flex-direction: column;
+        // .right-block, .left-block {
+            
+        // }
     }
 }
