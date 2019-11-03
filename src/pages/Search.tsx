@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch:any) => {
         getProductsRequestSended: () => dispatch(getProductsRequestSended()),
         setProductsSuccess: (products:any) => dispatch(setProductsSuccess(products)),
         changePage:(newPage:number) => {dispatch(changePage(newPage))},
-        changeSearchKey:(searchKey:string) => {dispatch(changeSearchKey(searchKey))},
+        changeSearchKey:(searchKey:string) => {dispatch(changeSearchKey(searchKey))}
     }
   }
 
@@ -57,7 +57,6 @@ class SearchPage extends React.Component<ISearchStateExtend, ISearchState> {
     }
 
     initSearch() {
-        console.log("initSearch")
         const search = window.location.search
         const params = new URLSearchParams(search)
         const searchInput = params.get('searchKey')
@@ -71,18 +70,21 @@ class SearchPage extends React.Component<ISearchStateExtend, ISearchState> {
         )
     }
 
-    handleSearch(searchKey:string, warehouse_id:string = IN_ALL_WAREHOUSES) {
+    handleSearch(searchKey:string, warehouse_id:string = IN_ALL_WAREHOUSES, newOffset= -1, newLimit= -1) {
         const { 
             getProductsRequestSended,
             setProductsSuccess,
             paginationState,
-            changePage
+            changePage,
         } = this.props
         getProductsRequestSended()
 
+        let offset = newOffset === -1 ? paginationState.offset : newOffset
+        let limit = newLimit === -1 ? paginationState.limit : newLimit
+
         let params:{[key:string]:any} = {
-            offset:paginationState.offset,
-            limit:paginationState.limit,
+            offset,
+            limit,
             filter_name:searchKey,
         }
         if (warehouse_id === IN_ALL_WAREHOUSES)
@@ -96,7 +98,7 @@ class SearchPage extends React.Component<ISearchStateExtend, ISearchState> {
         .then((response) => {
             if (response.data.code === 200) {
                 setProductsSuccess(response.data)
-                changePage((paginationState.offset / paginationState.limit) + 1)
+                changePage((offset / limit) + 1)
             }
         })
         .catch((error) => {

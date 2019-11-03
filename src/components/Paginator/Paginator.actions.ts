@@ -13,8 +13,13 @@ export const changePage = (newPage:number) => {
     return {type:Constants.CHANGE_PAGE, payload:newPage}
 }
 
+export const changeOffset = (newOffset:number) => {
+    return {type:Constants.CHANGE_OFFSET, payload:newOffset}
+}
+
 export default {
     setState,
     changeLimit,
-    changePage
+    changePage,
+    changeOffset
 }

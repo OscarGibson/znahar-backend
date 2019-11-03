@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { PaginatorPropsType, PAGINATION_OPTIONS } from './Paginator.types'
 import './Paginator.styles.scss'
 
 interface PaginatorPropsExtend extends PaginatorPropsType {
-    moveTo:(offset:number, limit:number, newPage:number) => void,
-    changeLimit:(newLimit:PAGINATION_OPTIONS) => void
+    moveTo:(limit:number, newPage:number) => void,
+    changeLimit:(newLimit:PAGINATION_OPTIONS) => void,
 }
 
 
@@ -16,13 +16,15 @@ const LimitOption = (props:{option:number, limit:number, changeLimit:(newLimit:P
     )
 }
 
-const Arrow = (props:{delta:number, limit:number, currentPage:number, totalPages:number, moveToAction:(offset:number, limit:number, newPage:number) => void}) => {
+const Arrow = (props:{
+        delta:number, limit:number, currentPage:number,
+        totalPages:number, moveToAction:(limit:number, newPage:number) => void
+    }) => {
     const { delta, limit, currentPage, totalPages, moveToAction} = props
     const newPage = currentPage + delta
     const symbol = delta > 0 ? ">" : "<"
-    console.log(newPage, currentPage, delta, limit)
     if (newPage !== 0 && newPage !== totalPages) {
-        return (<span className="button active" onClick={() => moveToAction(limit * newPage, limit, newPage)}>{symbol}</span>)
+        return (<span className="button active" onClick={() => moveToAction(limit, newPage)}>{symbol}</span>)
     } else {
         return (<span className="button">{symbol}</span>)
     }
@@ -39,9 +41,13 @@ const PaginatorTemplate = (props:PaginatorPropsExtend) => {
                     <LimitOption option={PAGINATION_OPTIONS.P30_PER_PAGE} limit={limit} changeLimit={changeLimit}/>
                     товарів на сторінку</div>
                 <div className="p-2 bd-highlight">Сторінка
-                    <Arrow delta={-1} limit={limit} currentPage={currentPage} totalPages={totalPages} moveToAction={moveTo}/>
+                    <Arrow
+                        delta={-1} limit={limit} currentPage={currentPage}
+                        totalPages={totalPages} moveToAction={moveTo}/>
                     <span className="button active">{currentPage}</span>
-                    <Arrow delta={1} limit={limit} currentPage={currentPage} totalPages={totalPages} moveToAction={moveTo}/>
+                    <Arrow
+                        delta={1} limit={limit} currentPage={currentPage}
+                        totalPages={totalPages} moveToAction={moveTo}/>
                 </div>
             </div>
         </div>

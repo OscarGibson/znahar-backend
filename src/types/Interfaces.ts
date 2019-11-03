@@ -11,7 +11,7 @@ export interface IHandle {
     ():void
 }
 export interface IHandleSearch {
-    (searchKey:string, selectedFilter?:string):void
+    (searchKey:string, selectedFilter?:string, offset?:number, limit?:number):void
 }
 export interface IHandleActionButton {
     (e:any):void

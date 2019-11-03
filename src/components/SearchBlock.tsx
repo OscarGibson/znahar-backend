@@ -4,6 +4,7 @@ import SearchList from './SearchList'
 import SearchForm from './SearchForm'
 import { IHandleSearch, IWarehouse } from '../types'
 import Paginator from './Paginator'
+import { PAGINATION_OPTIONS } from './Paginator/Paginator.types';
 
 interface SearchBlockProps {
     products:Array<any>,
@@ -14,6 +15,8 @@ interface SearchBlockProps {
     searchFormSubmitted:boolean,
     handleSearch:IHandleSearch,
     warehousesList:IWarehouse[],
+    changeOffset:(newOffset:number) => void,
+    changeLimit:(newLimit:PAGINATION_OPTIONS) => void
 }
 
 interface SearchBlockState {
@@ -34,11 +37,12 @@ const mapStateToProps = (reducer:any, other:any) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch:any) => {
-//     return {
-//         changePage:(newPage:number) => {dispatch(Paginator.Actions.changePage(newPage))}
-//     }
-// }
+const mapDispatchToProps = (dispatch:any) => {
+    return {
+        changeOffset:(newOffset:number) => {dispatch(Paginator.Actions.changeOffset(newOffset))},
+        changeLimit:(newLimit:PAGINATION_OPTIONS) => {dispatch(Paginator.Actions.changeLimit(newLimit))}
+    }
+}
 
 const SearchTableHeader = () => {
     return(
@@ -63,10 +67,18 @@ class SearchBlock extends React.Component<SearchBlockProps, SearchBlockState> {
         super(props, state)
 
         this.moveTo = this.moveTo.bind(this)
+        this.changeLimit = this.changeLimit.bind(this)
     }
-    moveTo(offset:number, limit:number, newPage:number) {
-        const { handleSearch, searchInput, selectedFilter } = this.props
-        handleSearch(searchInput, selectedFilter)
+    changeLimit(newLimit:number) {
+        const { changeLimit, handleSearch, searchInput, selectedFilter } = this.props
+        changeLimit(newLimit)
+        handleSearch(searchInput, selectedFilter, -1, newLimit)
+    }
+
+    moveTo(limit:number, newPage:number) {
+        const { handleSearch, searchInput, selectedFilter, changeOffset } = this.props
+        changeOffset(limit * (newPage - 1))
+        handleSearch(searchInput, selectedFilter, limit * (newPage - 1))
     }
     render() {
         const {
@@ -90,11 +102,11 @@ class SearchBlock extends React.Component<SearchBlockProps, SearchBlockState> {
                         warehousesList={warehousesList}
                     />
                 </table>
-                {products.length !== 0 ? <Paginator.Component moveTo={this.moveTo}/> : ""} 
+                {products.length !== 0 ? <Paginator.Component changeLimit={this.changeLimit} moveTo={this.moveTo}/> : ""} 
             </div>
             
         )
     }
 }
 
-export default connect(mapStateToProps)(SearchBlock)
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBlock)
