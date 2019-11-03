@@ -37,7 +37,13 @@
             }
 
             .custom-select {
+                width: 350px;
                 border: 2px solid #f5a623;
+            }
+            @media screen and (max-width: 350px) {
+                .custom-select {
+                    width: 100%;
+                }
             }
             .default-button {
                 width: 136px;
