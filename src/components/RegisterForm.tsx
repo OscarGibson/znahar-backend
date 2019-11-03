@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Form, InputGroup, Button, FormControlProps } from 'react-bootstrap'
+import { Form, Button, FormControlProps } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
 import { IRegisterForm } from '../types'
 import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';

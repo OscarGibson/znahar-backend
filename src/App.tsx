@@ -4,18 +4,8 @@ import axios from 'axios';
 import './App.css';
 import Home from './pages/Home';
 import Search from './pages/Search';
-import { 
-  searchInitState,
-  // topNavBarState,
-  homePageState,
-  infoLayerState,
-  mainMenuOriginState,
-  // footerBlockState
-} from './redusers/initState'
-import store from './store';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
-import { Provider } from "react-redux";
-import { IAction, IActionPayload, IRootApp, ISettings, IWarehouse } from './types'
+import { IRootApp, ISettings, IWarehouse } from './types'
 import TopNavBar from './components/TopNavBar';
 import BottomFooterBlock from './components/BottomFooterBlock';
 import FooterBlock from './components/FooterBlock';

@@ -31,11 +31,11 @@ export interface SearchListItemState {
     remain:number
 }
 
-const mapStateToProps = (reducer:any, other:any) => {
-    return {
+// const mapStateToProps = (reducer:any, other:any) => {
+//     return {
         
-    }
-}
+//     }
+// }
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
@@ -83,8 +83,8 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
 
     render() {
         const {
-            id, index, name, warehouse_id, photoUrl, price,
-            discount, remain, warehousesList
+            id, name, warehouse_id, price,
+            warehousesList
         } = this.props
         const warehouse = getWarehouseById(warehouse_id, warehousesList)
         return (

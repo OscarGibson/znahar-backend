@@ -74,11 +74,11 @@ const mapStateToProps = (reducer:any) => {
 const renderUserPhoto = (photoUrl:string) => {
     if (photoUrl)
         return (
-            <img src={photoUrl} alt="user photo"/>
+            <img src={photoUrl}/>
         )
     else
         return (
-            <img src="/static/images/user.png" alt="user photo"/>
+            <img src="/static/images/user.png"/>
         )
 }
 
@@ -117,7 +117,6 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
     }
 
     changeEditable(isEditable:boolean, name:string) {
-        console.log("changeEditable", isEditable, name)
         let changeAction
         if (name === "privacy")
             changeAction = this.props.setPrivacyEditable
@@ -167,7 +166,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                 setSettingsForm({...response.data, password:"******"})
             }
         })
-        .catch((error) => {
+        .catch((_error) => {
             window.location.href = "/login"
         })
         .finally(() => {
@@ -313,13 +312,6 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
     render() {
         const { mainMenuSimpleState, userState, cartState, infoLayerState, warehouses, settings } = this.props
         const { products, totalCount, totalPriceDiscount, totalPrice } = cartState
-
-        let price:string
-
-        if (totalPriceDiscount === -1)
-            price = totalPrice.toFixed(2)
-        else
-            price = totalPriceDiscount.toFixed(2)
 
         return (
             <div className="Profile">

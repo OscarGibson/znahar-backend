@@ -24,10 +24,6 @@ const mapStateToProps = (reducers:any):PaginatorPropsType => {
 }
 
 class PaginatorComponent extends React.Component<PaginatorPropsExtend, PaginatorPropsType> {
-    constructor(props:PaginatorPropsExtend, state:PaginatorPropsType) {
-        super(props, state)
-    }
-
     render() {
         return (
             <PaginatorTemplate {...this.props}/>

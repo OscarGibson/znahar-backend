@@ -18,7 +18,6 @@ import {
     IFooterBlock,
     IContactsList,
     ISocialList,
-    IBackForm,
     IBackFormAction,
     IWarehouse,
     IInfoLayer,
@@ -295,7 +294,7 @@ export const warehouses:IWarehouse[] = []
 
 export const getWarehouseById = (id:string, warehouses:IWarehouse[]):IWarehouse => {
     for (let warehouse of warehouses) {
-        if (id == warehouse.uuid)
+        if (id === warehouse.uuid)
             return warehouse
     }
     return {

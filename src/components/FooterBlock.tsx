@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { IFooterBlock, IRootApp } from '../types';
+import { IFooterBlock } from '../types';
 import FooterMenu from './FooterMenu';
 import FooterContacts from './FooterContacts';
 import FooterSocial from './FooterSocial';

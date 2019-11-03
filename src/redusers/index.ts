@@ -51,7 +51,7 @@ import {
   profileSettingsState
 } from './initState';
 
-import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage, SettingsState, IWarehouse, IProduct } from "../types";
+import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage, SettingsState, IWarehouse } from "../types";
 import { HistoryState } from "../components/ProfileComponents/History";
 
 
@@ -282,7 +282,7 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
 
   if (action.type === SET_PRODUCTS_FAKE) {    
     const { searchFormState } = state
-    const { message, code, data, total } = action.payload
+    const { message } = action.payload
     return {
       ...state,
       productsRequestState: {

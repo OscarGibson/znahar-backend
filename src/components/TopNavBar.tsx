@@ -95,8 +95,8 @@ const handleRefreshToken = (refreshToken:string) => {
 
 const getUserInfo = (
         accessToken:string,
-        refreshToken:string,
-        refreshCallBack:(refreshToken:string) => void,
+        _refreshToken:string,
+        _refreshCallBack:(refreshToken:string) => void,
         setUserDataAction:(payoad:string) => void
     ) => {
     axios.get(GET_USER_URL, {
@@ -105,7 +105,11 @@ const getUserInfo = (
     .then((response) => {
         if (response.status === 200) {
             const { fname, lname, email} = response.data
-            const userName = email
+            let userName:string
+            if (fname !== "")
+                userName = `${fname} ${lname}`
+            else
+                userName = email
             localStorage.setItem("userName", userName)
             setUserDataAction(userName)
         } else if (response.status === 401) {

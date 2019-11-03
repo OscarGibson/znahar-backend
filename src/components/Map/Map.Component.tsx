@@ -16,10 +16,6 @@ const mapStateToProps = (reducers:any):MapData => {
 }
 
 class MapComponent extends React.Component<MapProps, MapProps> {
-    constructor(props:MapProps, state:MapProps) {
-        super(props, state)
-    }
-
     render() {
         const { maps } = this.props
         return (

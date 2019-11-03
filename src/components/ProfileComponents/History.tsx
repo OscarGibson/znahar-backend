@@ -27,14 +27,8 @@ interface HistoryProps extends HistoryState {
     warehouses:IWarehouse[],
 }
 
-const getStatus = (maked:boolean) => {
-    return 
-}
-
-
-
 const HistoryItem = (props:HistoryItemState) => {
-    const { id, Products, warehouses, warehouse_id, total_price, price, created_at, maked } = props
+    const { id, Products, warehouses, warehouse_id, total_price, price, maked } = props
     return (
         <Fragment>
             <div className="info">
