@@ -51,6 +51,14 @@ export const productsRequestState:IGetProductsRequest = {
     isResponseRecieved:false
 }
 
+export const mainWarehouse:IWarehouse = {
+    name:IN_ALL_WAREHOUSES,
+    description:"",
+    photoUrl:"",
+    uuid:IN_ALL_WAREHOUSES,
+    coordinates:undefined
+}
+
 export const searchFormState:ISearchForm = {
     searchInput: "",
     searchFormSubmitted:false,

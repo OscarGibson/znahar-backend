@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { ISearchForm, IHandleSearch } from '../types'
+import { ISearchForm, IHandleSearch, IWarehouse } from '../types'
 import ActionButton from './ActionButton'
 import { changeSearchKey, changeFilter } from '../actions'
+import { IN_ALL_WAREHOUSES } from '../constants'
+import { mainWarehouse } from '../redusers/initState';
 
 const mapStateToProps = (reducer:any):ISearchForm => {
     const { searchFormState } = reducer.SearchReducer
@@ -64,8 +66,18 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchForm
         changeFilter(event.target.value)
     }
 
+    renderWarehouseOption(warehouse:IWarehouse, selectedFilter:string, index:number) {
+        let selected = warehouse.uuid == selectedFilter ? true : false
+        let name = warehouse.name === warehouse.uuid ? `${warehouse.name}` : `№${warehouse.uuid} ${warehouse.name}`
+        return (
+            <option selected={selected} key={`warehouse-${index}`} value={warehouse.uuid}>
+                {name}
+            </option>
+        )
+    }
+
     render() {
-        const { searchInput, warehouses } = this.props
+        const { searchInput, warehouses, selectedFilter } = this.props
         return (
             <div className="SearchForm">
                 <div className="content standart-container">
@@ -85,12 +97,9 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchForm
                             aria-label="Example select with button addon"
                             onChange={this.handleFilterChange}
                             >
-                            <option selected>У всіх Аптеках</option>
-                            {warehouses.map((warehouse, index) => {
+                            {[mainWarehouse, ...warehouses].map((warehouse, index) => {
                                 return (
-                                    <option key={`warehouse-${index}`} value={warehouse.uuid}>
-                                        {`№${warehouse.uuid} ${warehouse.name}`}
-                                    </option>
+                                    this.renderWarehouseOption(warehouse, selectedFilter, index)
                                 )
                             })}
                         </select>
