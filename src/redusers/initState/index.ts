@@ -76,8 +76,8 @@ export const mainMenuSimpleState:IMainMenuData = {
         name:"Новини",
         url:"/news"
     },{
-        name:"Контакти",
-        url:"/contacts"
+        name:"Оптовим кліентам",
+        url:"/for-clients"
     }],
 
 }
@@ -294,7 +294,7 @@ export const warehouses:IWarehouse[] = []
 
 export const getWarehouseById = (id:string, warehouses:IWarehouse[]):IWarehouse => {
     for (let warehouse of warehouses) {
-        if (id === warehouse.uuid)
+        if (id == warehouse.uuid)
             return warehouse
     }
     return {
