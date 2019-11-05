@@ -33,7 +33,7 @@ class PromotionBigItem extends React.Component<IPromotionBigItemComponent, IProm
                                 />
                             </div>
                             <div className="imageBlock d-none d-md-block d-lg-block">
-                                <img src={`${IMAGES_BACKEND}${item.image}`} alt="photoUrl"/>
+                                <img src={`${IMAGES_BACKEND}${item.photo}`} alt="photoUrl"/>
                             </div>
                         </div>
                     )

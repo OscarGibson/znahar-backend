@@ -79,7 +79,7 @@ export interface IActionButton {
 
 export interface IPromotionItem {
     id:number,
-    image:string,
+    photo:string,
     title:string,
     description:string,
     price:number,

@@ -110,9 +110,6 @@ class CheckDiscount(APIView):
         payload = json.dumps(request.data)
         r = requests.post(url=URL_CHECK, headers=HEADERS, auth=AUTH, data=payload)
 
-        print(r.text)
-        print(r.status_code)
-
         if (r.status_code == 200):
             return Response(r.json(), 200)
 

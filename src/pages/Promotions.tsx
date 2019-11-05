@@ -100,7 +100,7 @@ class PromotionsPage extends React.Component<IPromotionsPage, IPromotionsPage> {
                                         />
                                     </div>
                                     <div className="imageBlock">
-                                        <img src={`${IMAGES_BACKEND}${item.image}`} alt="photoUrl"/>
+                                        <img src={`${IMAGES_BACKEND}${item.photo}`} alt="photoUrl"/>
                                     </div>
                                 </div>
                             )

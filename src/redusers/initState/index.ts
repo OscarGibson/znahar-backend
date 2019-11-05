@@ -106,7 +106,7 @@ export const actionButton:IActionButton = {
 
 export const promotionBigItem:IPromotionBigItem = {
     id:-1,
-    image:"/static/images/big-pills.png",
+    photo:"/static/images/big-pills.png",
     title:"Profilaktone",
     description:"Містить масло печінки акули, вітаміни А, D, E, C та мінерали Цинк і Селен. Масло печінки акули, що міститься в продукті походить від уловів біля Ісландії та Фарерських островів.",
     price:100,

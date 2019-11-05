@@ -16,7 +16,7 @@ class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
     }
     render() {
         const {
-            image,
+            photo,
             title,
             description,
             price,
@@ -27,7 +27,7 @@ class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
         return (
             <div onClick={() => {this.redirectToSearch(title)}} className="PromotionItem col-md-3 col-sm-6 col-xs-12">
                 <div className="imageBlock">
-                    <img src={`${IMAGES_BACKEND}${image}`} alt="photoUrl" className="image"/>
+                    <img src={`${IMAGES_BACKEND}/${photo}`} alt="photoUrl" className="image"/>
                     <p className="discount">-{discount}%</p>
                 </div>
                 <h1 className="name">{title}</h1>
