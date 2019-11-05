@@ -19,8 +19,6 @@ class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
             photo,
             title,
             description,
-            price,
-            discount_price,
             discount
         } = this.props
 
@@ -28,13 +26,13 @@ class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
             <div onClick={() => {this.redirectToSearch(title)}} className="PromotionItem col-md-3 col-sm-6 col-xs-12">
                 <div className="imageBlock">
                     <img src={`${IMAGES_BACKEND}/${photo}`} alt="photoUrl" className="image"/>
-                    <p className="discount">-{discount}%</p>
+                    {/* <p className="discount">-{discount}%</p> */}
                 </div>
                 <h1 className="name">{title}</h1>
                 <h3 className="description">{description}</h3>
                 <div className="priceBlock">
-                    <p className="price">{discount_price.toFixed(2)}грн</p>
-                    <p className="discountPrice">{price.toFixed(2)}грн</p>
+                    {/* <p className="price">{discount_price.toFixed(2)}грн</p>
+                    <p className="discountPrice">{price.toFixed(2)}грн</p> */}
                 </div>
             </div>
         )
