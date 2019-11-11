@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getWarehouseById } from '../redusers/initState';
 import ActionButton from './ActionButton';
@@ -13,8 +13,10 @@ export interface SearchListItemProps {
     photoUrl:string,
     price:number,
     discount:number,
+    discount_type:number,
     remain:number,
     warehousesList:IWarehouse[],
+    producer:string,
     showInfoLayer:(payload:any) => void,
     addProductToCart:(payload:IProductItem) => void,
     addItemTopCart:(payload:number) => void
@@ -51,6 +53,30 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
         super(props, state)
 
         this.addToCart = this.addToCart.bind(this)
+        this.getPrice = this.getPrice.bind(this)
+    }
+
+    getPrice(price:number, discount:number, type:number) {
+        if (discount && type) {
+            let newPrice:number
+            if (type === 1) {
+                newPrice = price - (price * discount / 100)
+            } else if (type === 2) {
+                newPrice = price - discount
+            } else {
+                newPrice = price
+            }
+            return (
+                <Fragment>
+                    <span className="old-price">{price.toFixed(2)}грн</span><br/>
+                    <span className="new-price">{newPrice.toFixed(2)}грн</span>
+                </Fragment>
+            )
+        } else {
+            return (
+                <span>{price.toFixed(2)}грн</span>
+            )
+        }
     }
 
     addToCart() {
@@ -62,6 +88,8 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
             photoUrl,
             price,
             discount,
+            discount_type,
+            producer,
             remain,
             showInfoLayer,
             addProductToCart,
@@ -75,6 +103,7 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
             id, index, name, warehouse_id,
             photo_url:photoUrl,
             discount, remain, price,
+            producer, discount_type,
             count:1
         }
         addProductToCart(newProduct)
@@ -84,15 +113,15 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
     render() {
         const {
             id, name, warehouse_id, price,
-            warehousesList
+            warehousesList, producer, discount, discount_type
         } = this.props
         const warehouse = getWarehouseById(warehouse_id, warehousesList)
         return (
             <tr key={`products-list-item-${id}`} className="products-list-item">
-                <td>{name}</td>
+                <td><span></span><span></span> {name}</td>
+                <td>{producer}</td>
                 <td>{`#${warehouse.uuid} ${warehouse.name}`}</td>
-                <td>{price.toFixed(2)}грн</td>
-                {/* <td></td> */}
+                <td>{this.getPrice(price, discount, discount_type)}</td>
                 <td>
                     <ActionButton
                         text={"Забронювати"}

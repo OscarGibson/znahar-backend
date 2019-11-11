@@ -26,7 +26,9 @@ export interface IProduct {
     photo_url:string,
     price:number,
     discount:number,
-    remain:number
+    discount_type:number,
+    remain:number,
+    producer:string,
 }
 
 export interface IGetProductsRequest {

@@ -291,10 +291,12 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
           id: "1",
           index: 1,
           name: action.payload,
+          producer:"noname",
           photo_url: "http://URL",
           warehouse_id: "9",
           price: 100,
           discount: 15,
+          discount_type:1,
           remain: 102
         }],
         isRequestSended:true,

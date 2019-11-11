@@ -123,6 +123,14 @@
                                 }
                                 
                             }
+
+                            .old-price {
+                                text-decoration: line-through;
+                            }
+                            .new-price {
+                                color: #f33;
+                                font-size: .75rem;
+                            }
                         }
                     }
                 }

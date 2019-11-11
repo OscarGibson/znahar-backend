@@ -71,9 +71,33 @@ const renderInfoBlock = (totalCount:number, createOrder:() => void, price:string
     }
 }
 
+const getPrice = (price:number, discount:number, type:number) => {
+    if (discount && type) {
+        let newPrice:number
+        if (type === 1) {
+            newPrice = price - (price * discount / 100)
+        } else if (type === 2) {
+            newPrice = price - discount
+        } else {
+            newPrice = price
+        }
+        return (
+            <Fragment>
+                <span className="old-price">{price.toFixed(2)}грн</span><br/>
+                <span className="new-price">{newPrice.toFixed(2)}грн</span>
+            </Fragment>
+        )
+    } else {
+        return (
+            <span>{price.toFixed(2)}грн</span>
+        )
+    }
+}
+
 const OrdersList = (props:OrdersListState) => {
     const { products, warehouses, removeItemFromCart,
-        totalCount, price, createOrder, totalPrice, plusProductItem, minusProductItem } = props
+        totalCount, price, createOrder, totalPrice,
+        plusProductItem, minusProductItem } = props
     return (
         <div className="ordersList cart">
             {renderInfoBlock(totalCount, createOrder, price, totalPrice)}
@@ -89,14 +113,14 @@ const OrdersList = (props:OrdersListState) => {
                 </thead>
                 <tbody>
                     {products.map( (product, index) => {
-                        const { name, warehouse_id, price, count, id } = product
+                        const { name, warehouse_id, price, count, id, discount, discount_type } = product
                         const warehouse = getWarehouseById(warehouse_id, warehouses)
                         if (warehouse)
                             return (
                                 <tr key={`order-item-${index}`}>
                                     <td>{name}</td>
                                     <td>{`№${warehouse_id} ${warehouse.name}`}</td>
-                                    <td>{price.toFixed(2)}грн</td>
+                                    <td>{getPrice(price, discount, discount_type)}</td>
                                     <td className="td-buttons">
                                         <span className="button" onClick={() => {minusProductItem(id, warehouse_id, count)}}>-</span>
                                         <span className="button">{count}</span>

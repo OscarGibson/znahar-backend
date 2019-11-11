@@ -45,10 +45,12 @@ class SearchListComponent extends React.Component<SearchListProps, SearchListSta
                             id={product.id}
                             index={index}
                             name={product.name}
+                            producer={product.producer}
                             warehouse_id={product.warehouse_id}
                             photoUrl={product.photoUrl}
                             price={product.price}
                             discount={product.discount}
+                            discount_type={product.discount_type}
                             remain={product.remain}
                             warehousesList={warehousesList}
                         />

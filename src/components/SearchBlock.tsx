@@ -49,9 +49,9 @@ const SearchTableHeader = () => {
         <thead className="thead-dark">
             <tr>
                 <th>Назва Товару</th>
+                <th>Виробник</th>
                 <th>Аптека</th>
                 <th>Ціна</th>
-                {/* <th>Кількість</th> */}
                 <th></th>
             </tr> 
         </thead>
