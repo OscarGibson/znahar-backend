@@ -25,6 +25,7 @@ class Warehouse(models.Model):
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=512)
     photo = cloudinary.models.CloudinaryField('image', null=True)
+    ordering = models.IntegerField()
     # latitude = models.FloatField()
     # longtitude = models.FloatField()
 

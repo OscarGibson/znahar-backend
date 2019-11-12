@@ -122,7 +122,7 @@ class CheckDiscount(APIView):
 class WarehousesAPI:
 
     model = Warehouse
-    queryset = model.objects.all()
+    queryset = model.objects.all().order_by('ordering')
     permission_classes = [
         permissions.AllowAny
     ]
@@ -140,7 +140,7 @@ class Settings(APIView):
     def get(self, request, *args, **kwargs):
 
         settings = SiteSettings.load()
-        warehouses = Warehouse.objects.all()
+        warehouses = Warehouse.objects.all().order_by('ordering')
 
         return Response({
             "message": "Site settings",

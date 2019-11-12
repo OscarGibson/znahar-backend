@@ -6,7 +6,7 @@ class WarehouseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Warehouse
-        fields = ( "uuid", "name", "description", "photo")
+        fields = ( "uuid", "name", "description", "photo", "ordering")
 
 class CellNumberSerializer(serializers.ModelSerializer):
 
