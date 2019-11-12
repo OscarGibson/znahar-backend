@@ -1,10 +1,14 @@
 from django.db import models
-import cloudinary
+# from django_resized import ResizedImageField
+from cloudinary.models import CloudinaryField
 
+
+# class CustomImageField(CloudinaryField, ResizedImageField):
+#     pass
 
 class Promotion(models.Model):
     title = models.CharField(max_length=64)
-    photo = cloudinary.models.CloudinaryField('image', null=True)
+    photo = CloudinaryField('image', null=True)
     discount = models.IntegerField(null=True, blank=True)
     price = models.FloatField(null=True, blank=True)
 
@@ -22,7 +26,7 @@ class Promotion(models.Model):
 class PromotionBig(models.Model):
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=512)
-    photo = cloudinary.models.CloudinaryField('image', null=True)
+    photo = CloudinaryField('image', null=True)
     discount = models.IntegerField(null=True, blank=True)
     price = models.FloatField(null=True, blank=True)
 

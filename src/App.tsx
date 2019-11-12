@@ -1,25 +1,25 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-import './App.css';
-import Home from './pages/Home';
-import Search from './pages/Search';
-import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import React from 'react'
+import { connect } from 'react-redux'
+import axios from 'axios'
+import './App.css'
+import Home from './pages/Home'
+import Search from './pages/Search'
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 import { IRootApp, ISettings, IWarehouse } from './types'
-import TopNavBar from './components/TopNavBar';
-import BottomFooterBlock from './components/BottomFooterBlock';
-import FooterBlock from './components/FooterBlock';
-import NotFoundPage from './pages/NotFoundPage';
-import Profile from './pages/Profile';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import ForClients from './pages/ForClients';
-import News from './pages/News';
-import NewsPost from './pages/NewsPost';
-import Promotions from './pages/Promotions';
-import { GET_SETTINGS_URL } from './constants';
-import { setSettings, setWarehouses } from './actions';
-import Maps from './pages/Maps';
+import TopNavBar from './components/TopNavBar'
+import BottomFooterBlock from './components/BottomFooterBlock'
+import FooterBlock from './components/FooterBlock'
+import NotFoundPage from './pages/NotFoundPage'
+import Profile from './pages/Profile'
+import Register from './pages/Register'
+import Login from './pages/Login'
+import News from './pages/News'
+import NewsPost from './pages/NewsPost'
+import Promotions from './pages/Promotions'
+import { GET_SETTINGS_URL } from './constants'
+import { setSettings, setWarehouses } from './actions'
+import Maps from './pages/Maps'
+import Jobs from './pages/Jobs'
 
 interface IRootAppAction {
   setSettings:(payload:ISettings) => void,
@@ -81,7 +81,7 @@ class AppTemplate extends React.Component<IRootAppAction, IRootAppAction> {
               <Route path="/profile" component={Profile} />
               <Route path="/register" component={Register}/>
               <Route path="/login" component={Login}/>
-              {/* <Route path="/for-clients" component={ForClients} /> */}
+              <Route path="/jobs" component={Jobs} />
               <Route path="/news" exact component={News} />
               <Route path="/news/:postId" component={NewsPost}/>
               <Route path="/promotions" exact component={Promotions} />

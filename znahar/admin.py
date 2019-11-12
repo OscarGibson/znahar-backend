@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Warehouse, SiteSettings, CellNumber
+from .models import Warehouse, SiteSettings, CellNumber, Jobs
 
 class WarehouseAdmin(admin.ModelAdmin):
     class Meta:
@@ -8,3 +8,4 @@ class WarehouseAdmin(admin.ModelAdmin):
 admin.site.register(Warehouse, WarehouseAdmin)
 admin.site.register(SiteSettings)
 admin.site.register(CellNumber)
+admin.site.register(Jobs)

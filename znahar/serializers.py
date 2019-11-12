@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Warehouse, SiteSettings, CellNumber
+from .models import Warehouse, SiteSettings, CellNumber, Jobs
 
 
 class WarehouseSerializer(serializers.ModelSerializer):
@@ -21,4 +21,11 @@ class SiteSettingsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SiteSettings
+        fields = "__all__"
+
+
+class JobsSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Jobs
         fields = "__all__"

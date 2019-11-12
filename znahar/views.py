@@ -6,8 +6,8 @@ import requests
 import json
 # from django.views.decorators.csrf import csrf_exempt
 # from django.utils.decorators import method_decorator
-from .models import Warehouse, SiteSettings
-from .serializers import WarehouseSerializer, SiteSettingsSerializer
+from .models import Warehouse, SiteSettings, Jobs
+from .serializers import WarehouseSerializer, SiteSettingsSerializer, JobsSerializer
 
 
 # URL = 'http://194.44.237.46:8008'
@@ -134,6 +134,15 @@ class WarehousesRetrieveAPI(WarehousesAPI, RetrieveAPIView):
 
 class WarehousesListAPI(WarehousesAPI, ListAPIView):pass
 
+
+class JobsAPI(ListAPIView):
+
+    model = Jobs
+    queryset = model.objects.all().order_by('ordering')
+    permission_classes = [
+        permissions.AllowAny
+    ]
+    serializer_class = JobsSerializer
 
 class Settings(APIView):
 

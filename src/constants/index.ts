@@ -32,5 +32,6 @@ export const GET_SETTINGS_URL = `${MAIN_BACKEND}/znahar/settings/`
 export const GET_WAREHOUSES_URL = `${MAIN_BACKEND}/znahar/warehouses/`
 export const GET_HISTORY_URL = `${MAIN_BACKEND}/znahar/orders/`
 export const GET_MAPS_URL = GET_WAREHOUSES_URL
+export const GET_JOBS_URL = `${MAIN_BACKEND}/znahar/jobs/`
 
 export const IN_ALL_WAREHOUSES = "У всіх Аптеках"

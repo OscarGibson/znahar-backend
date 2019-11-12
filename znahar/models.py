@@ -47,3 +47,12 @@ class SiteSettings(SingletonModel):
 
     def __str__(self):
         return "Setting Object"
+
+
+class Jobs(models.Model):
+    title = models.CharField(max_length=64)
+    description = models.TextField()
+    ordering = models.IntegerField()
+
+    def __str__(self):
+        return self.title
