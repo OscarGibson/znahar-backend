@@ -83,6 +83,9 @@ export const mainMenuSimpleState:IMainMenuData = {
     },{
         name:"Новини",
         url:"/news"
+    },{
+        name:"Вакансії",
+        url:"/jobs"
     }],
 
 }
@@ -176,6 +179,9 @@ export const footerMenu:IMainMenuData = {
     },{
         name:"Новини",
         url:"/news"
+    },{
+        name:"Вакансії",
+        url:"/jobs"
     },{
         name:"Мій Кабінет",
         url:"/profile"
