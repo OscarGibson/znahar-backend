@@ -17,7 +17,8 @@ const envPath = (env:string):string => {
 const MAIN_BACKEND = envPath(process.env.NODE_ENV)
 // const MAIN_BACKEND = "http://www.apteka-znahar.com.ua"
 
-export const IMAGES_BACKEND = `http://res.cloudinary.com/hswukmday`
+// export const IMAGES_BACKEND = `http://res.cloudinary.com/hswukmday`
+export const IMAGES_BACKEND = ``
 
 export const GET_PRODUCTS_URL = `${MAIN_BACKEND}/znahar/products/`
 export const REGISTER_USER = `${MAIN_BACKEND}/api/user/register`

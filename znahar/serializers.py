@@ -4,6 +4,8 @@ from .models import Warehouse, SiteSettings, CellNumber, Jobs
 
 class WarehouseSerializer(serializers.ModelSerializer):
 
+    photo = serializers.ReadOnlyField(source='photo_500')
+
     class Meta:
         model = Warehouse
         fields = ( "uuid", "name", "description", "photo", "ordering")

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { setPromotions } from '../actions'
 import { IPromotionsPage } from '../types'
 import axios from 'axios'
-import { GET_PROMOTIONS_URL, IMAGES_BACKEND } from '../constants';
+import { GET_PROMOTIONS_URL } from '../constants';
 import MainMenuSimple from '../components/MainMenuSimple';
 import { mainMenuSimpleState } from '../redusers/initState';
 import Breadcrumbp from '../components/Breadcrumbp';
@@ -100,7 +100,7 @@ class PromotionsPage extends React.Component<IPromotionsPage, IPromotionsPage> {
                                         />
                                     </div>
                                     <div className="imageBlock">
-                                        <img src={`${IMAGES_BACKEND}${item.photo}`} alt="photoUrl"/>
+                                        <img src={`${item.photo}`} alt="photoUrl"/>
                                     </div>
                                 </div>
                             )

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { IPromotionBigItem } from '../types';
 import ActionButton from './ActionButton';
-import { IMAGES_BACKEND } from '../constants';
+// import { IMAGES_BACKEND } from '../constants';
 
 interface IPromotionBigItemComponent {
     items:IPromotionBigItem[]
@@ -33,7 +33,7 @@ class PromotionBigItem extends React.Component<IPromotionBigItemComponent, IProm
                                 />
                             </div>
                             <div className="imageBlock d-none d-md-block d-lg-block">
-                                <img src={`${IMAGES_BACKEND}${item.photo}`} alt="photoUrl"/>
+                                <img src={`${item.photo}`} alt="photoUrl"/>
                             </div>
                         </div>
                     )

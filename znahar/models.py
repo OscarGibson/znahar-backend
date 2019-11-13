@@ -32,6 +32,12 @@ class Warehouse(models.Model):
     def __str__(self):
         return f"#{self.uuid} {self.name}"
 
+    @property
+    def photo_500(self):
+        self.photo.url_options = {"width":500, "height":375}
+        print(self.photo.url)
+        return self.photo.url
+
 class CellNumber(models.Model):
     phone = models.CharField(max_length=16)
     def __str__(self):
