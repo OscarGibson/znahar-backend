@@ -28,7 +28,7 @@ class BigSearchBlock extends React.Component<IBigSearchBlock, IBigSearchBlock> {
                 </div>
                 <div className="BigSearchBlock">
                     <div className="standart-container">
-                        <h1>Знайдіть та забронюй</h1>
+                        <h1>Знайдіть та забронюйте</h1>
                         <h3>Ви зможете отримати ваше бронювання у зручній для вас аптеці, без черги</h3>
                         <SearchFormHome action={action}/> 
                     </div>

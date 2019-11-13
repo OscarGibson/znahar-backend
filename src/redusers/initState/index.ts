@@ -160,7 +160,7 @@ export const subscribeForm:ISubscribeForm = {
 }
 
 export const subscribeBlockState:ISubscribeBlock = {
-    title:"Зекономте час та гроші!",
+    title:"Економте час та гроші!",
     description:"Підпишіться і ми надсилатимемо вам найкращі пропозиції",
     subscribeForm:subscribeForm
 }
