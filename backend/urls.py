@@ -43,6 +43,7 @@ urlpatterns = [
     path('profile/discounts', include('base.urls'), name='index'),
     path('profile/settings', include('base.urls'), name='index'),
     path('profile/history', include('base.urls'), name='index'),
+    path('jobs', include('base.urls'), name='index'),
     path('404', include('base.urls'), name='index'),
 ]
 
