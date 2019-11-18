@@ -4,11 +4,23 @@
 
     .PromotionsSmallList {
 
+        .slider {
+            position: relative;
+            height:226px;
+            width:100%;
+            margin-bottom: 30px;
+            overflow: hidden;
+
+            &-inner {
+                position: absolute;
+            }
+        }
+
         text-align: left;
         padding: 8px;
 
         .PromotionItem {
-            height:284px;
+            height:226px;
             width:226px;
             display: inline-block;
             cursor: pointer;
