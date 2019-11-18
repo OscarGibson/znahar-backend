@@ -1,0 +1,28 @@
+.TopNav {
+    background-image: url("/static/images/BG.jpg");
+    background-position-y: bottom;
+
+    .nav-item {
+        &.cart {
+            background-color: #daf58e;
+            a, i {
+                color:#000;
+                &:hover, &:focus {
+                    color:#222;
+                }
+            }
+        }
+    }
+    .navbar-nav.navbar-mini {
+        flex-direction: row;
+        .nav-item {
+            // min-width: 30px;
+        }
+    }
+
+    .navbar-nav {
+        .dropdown-menu {
+            position: absolute;
+        }
+    }
+}

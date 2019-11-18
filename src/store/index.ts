@@ -6,6 +6,7 @@ import DefaultReducer, {
 } from "../redusers"
 import { MapReducer } from "../components/Map/Map.Reducer"
 import { PaginatorReducer } from "../components/Paginator/Paginator.reducer"
+import { TopNavReducer } from "../components/TopNav/TopNav.reducer"
 
 const rootReducer = combineReducers({
     DefaultReducer,
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
     ProfileSettingsReducer,
     HistoryReducer,
     MapReducer,
-    PaginatorReducer
+    PaginatorReducer,
+    TopNavReducer
 })
 
 const store = createStore(rootReducer);

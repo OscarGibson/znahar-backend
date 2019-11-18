@@ -6,7 +6,7 @@ import Home from './pages/Home'
 import Search from './pages/Search'
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 import { IRootApp, ISettings, IWarehouse } from './types'
-import TopNavBar from './components/TopNavBar'
+// import TopNavBar from './components/TopNavBar'
 import BottomFooterBlock from './components/BottomFooterBlock'
 import FooterBlock from './components/FooterBlock'
 import NotFoundPage from './pages/NotFoundPage'
@@ -20,6 +20,7 @@ import { GET_SETTINGS_URL } from './constants'
 import { setSettings, setWarehouses } from './actions'
 import Maps from './pages/Maps'
 import Jobs from './pages/Jobs'
+import TopNav from './components/TopNav'
 
 interface IRootAppAction {
   setSettings:(payload:ISettings) => void,
@@ -74,7 +75,8 @@ class AppTemplate extends React.Component<IRootAppAction, IRootAppAction> {
       <div>
         <Router>
           <div className="App">
-            <TopNavBar />
+            {/* <TopNavBar /> */}
+            <TopNav.Component />
             <Switch>
               <Route path="/" exact component={Home} />
               <Route path="/search" component={Search}/>
