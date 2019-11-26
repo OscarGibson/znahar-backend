@@ -4,6 +4,10 @@ import { IPromotionItem } from '../types'
 import PromotionItem from './PromotionItem'
 import ActionButton from './ActionButton'
 
+import OwlCarousel from 'react-owl-carousel'
+import 'owl.carousel/dist/assets/owl.carousel.css'
+import 'owl.carousel/dist/assets/owl.theme.default.css'
+
 
 interface IPromotionsSmallList {
     items:IPromotionItem[]
@@ -29,39 +33,38 @@ const chunk = (array:IPromotionItem[], size:number):IPromotionItem[][] => {
 class PromotionsSmallList extends React.Component<IPromotionsSmallList, IPromotionsSmallList> {
     render() {
         const { items } = this.props
-        return (
-            <div className="PromotionsSmallList row">
-                <div className="slider">
-                    <div id="multi-item-example" className="carousel slide carousel-multi-item" data-ride="carousel">
-                        <div className="carousel-inner">
-                            {chunk(items, 4).map( (itemGroup, index) => {
-                                return (
-                                    <div key={`promotion-group-${index}`} className={`carousel-item ${index === 0 ? "active" : ""}`}>
-                                    {itemGroup.map( (item, index_2) => {
-                                        return (
-                                            <PromotionItem key={`promotion-item-${index}-${index_2}`} {...item}/>
-                                        )
-                                    })}
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </div>
+        if (items.length > 0)
+            return (
+                <div className="PromotionsSmallList row">
+                    <OwlCarousel
+                        className="owl-theme"
+                        loop
+                        margin={10}
+                        nav
+                    >
+                    {items.map( (item, index) => {
+                        return (
+                            <div key={`promotion-item-${index}`} onClick={() => {window.location.href = `/search?searchKey=${item.title}`}} className="item" style={{cursor:"pointer"}}>
+                                <div className="imageBlock">
+                                    <img src={`${item.photo}`} alt="photoUrl" className="image"/>
+                                </div>
+                            </div>
+                        )
+                    })}
+                    </OwlCarousel>
+                    <ActionButton
+                        text={"Показати всі Пропозиції"}
+                        action={() => {window.location.href = "/promotions"}}
+                        iconName=""
+                        iconSvgSrc=""
+                        classList={["default-button"]}
+                    />
                 </div>
-                <ActionButton
-                    text={"Показати всі Пропозиції"}
-                    action={() => {window.location.href = "/promotions"}}
-                    iconName=""
-                    iconSvgSrc=""
-                    classList={["default-button"]}
-                />
-                {/* <div className="controls-top mr-auto">
-                    <a className="btn-floating" href="#multi-item-example" data-slide="prev"><i className="fas fa-chevron-left"></i></a>
-                    <a className="btn-floating" href="#multi-item-example" data-slide="next"><i
-                        className="fas fa-chevron-right"></i></a>
-                </div> */}
-            </div>
-        )
+            )
+        else
+            return (
+                <div className="PromotionsSmallList row"></div>
+            )
     }
 }
 

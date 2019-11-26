@@ -4,6 +4,28 @@
 
     .PromotionsSmallList {
 
+        .owl-carousel {
+            .owl-nav {
+                button {
+                    display: inline-block;
+                    background-color: #4f7906;
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 0;
+                    &:focus {
+                        outline: none;
+                    }
+                    span {
+                        margin-top: 2px;
+                        font-size: 51px;
+                        height: 26px;
+                        display: inline-block;
+                        line-height: 10px;
+                    }
+                }
+            }
+        }
+
         .slider {
             position: relative;
             height:226px;
