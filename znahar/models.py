@@ -26,8 +26,8 @@ class Warehouse(models.Model):
     description = models.CharField(max_length=512)
     photo = cloudinary.models.CloudinaryField('image', null=True)
     ordering = models.IntegerField()
-    # latitude = models.FloatField()
-    # longtitude = models.FloatField()
+    latitude = models.FloatField(null=True, blank=True)
+    longtitude = models.FloatField(null=True, blank=True)
 
     def __str__(self):
         return f"#{self.uuid} {self.name}"
@@ -35,7 +35,6 @@ class Warehouse(models.Model):
     @property
     def photo_500(self):
         self.photo.url_options = {"width":500, "height":375}
-        print(self.photo.url)
         return self.photo.url
 
 class CellNumber(models.Model):

@@ -1,13 +1,17 @@
 import React from 'react'
 import { MapData, MapItem } from './Map.types'
 import './Map.styles.scss'
-// import { IMAGES_BACKEND } from '../../constants';
+import { number } from 'prop-types'
 
 
 const MapItemTemplate = (props:MapItem) => {
-    const { name, description, photo } = props
+    const moveToMap = (latitude:number, longtitude:number) => {
+        if (latitude && longtitude)
+            window.open(`https://www.google.com.ua/maps/@${latitude},${longtitude},17z?hl=ua`,'_blank')
+    }
+    const { name, description, photo, latitude, longtitude } = props
     return (
-        <div className="MapItemTemplate col-md-3 col-sm-6 col-xs-12">
+        <div onClick={() => {moveToMap(latitude, longtitude)}} className="MapItemTemplate col-md-3 col-sm-6 col-xs-12" style={{cursor:"pointer"}}>
             <img className="mb-2" src={`${photo}`} alt="map"/>
             <p className="map-name m-auto">{name}</p>
             <p className="map-description m-auto">{description}</p>
