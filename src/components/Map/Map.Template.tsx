@@ -1,8 +1,24 @@
 import React from 'react'
 import { MapData, MapItem } from './Map.types'
 import './Map.styles.scss'
-import { number } from 'prop-types'
+import GoogleMapReact from 'google-map-react'
+import { GOOGLE_MAPS_API_KEY } from '../../constants'
+import { mainMenuSimpleState } from '../../redusers/initState'
 
+
+const MapPoint = (props:{lat:number, lng:number}) => {
+    return (
+    <div className="MapPoint">
+        <img className="map-pointer-logo" src={mainMenuSimpleState.logoUrl} alt="logo"/>
+        <i className="fa fa-map-marker map-marker" aria-hidden="true"></i>
+    </div>
+    )
+}
+
+const defaultCenter = {
+    lat:49.8341743,
+    lng:24.0043998
+}
 
 const MapItemTemplate = (props:MapItem) => {
     const moveToMap = (latitude:number, longtitude:number) => {
@@ -29,6 +45,23 @@ const MapTemplate = (props:MapData) => {
                 )
             })}
             <div style={{ height: '100vh', width: '100%' }}>
+                <GoogleMapReact
+                    bootstrapURLKeys={{ key: GOOGLE_MAPS_API_KEY }}
+                    defaultCenter={defaultCenter}
+                    defaultZoom={13}
+                    >
+                    {maps.map( (mapItem, index ) => {
+                        const { latitude, longtitude } = mapItem
+                        if (latitude && longtitude)
+                            return (
+                                <MapPoint
+                                    key={`map-point-${index}`}
+                                    lat={latitude}
+                                    lng={longtitude}
+                                />
+                            )    
+                    })}
+                </GoogleMapReact>
             </div>
         </div>
     )

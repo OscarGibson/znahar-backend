@@ -1,4 +1,17 @@
 .MapTemplate {
+    .MapPoint {
+        position: relative;
+        .map-marker {
+            margin-left: -12px;
+            color: rgb(214, 0, 0);
+            font-size: 32px;
+        }
+        .map-pointer-logo {
+            width: 100px;
+            // height: 100px;
+            margin-left: -50px;
+        }    
+    }
     .MapItemTemplate {
         // text-align: left;
         img {

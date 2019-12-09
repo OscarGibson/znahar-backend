@@ -1,0 +1,5 @@
+1) switch to postgres
+2) sending mails
+3) images storage - done
+4) edit user profile
+5) deploy to GAE

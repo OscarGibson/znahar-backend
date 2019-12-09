@@ -36,3 +36,5 @@ export const GET_MAPS_URL = GET_WAREHOUSES_URL
 export const GET_JOBS_URL = `${MAIN_BACKEND}/znahar/jobs/`
 
 export const IN_ALL_WAREHOUSES = "У всіх Аптеках"
+
+export const GOOGLE_MAPS_API_KEY = "AIzaSyChgeJrzhZ47098issZ0zJ_uJvZM122NxQ"
