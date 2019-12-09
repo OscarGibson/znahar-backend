@@ -3,3 +3,5 @@
 3) images storage - done
 4) edit user profile
 5) deploy to GAE
+6) ckeditor on jobs
+7) add text on promotions
