@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "znahar",
+  "private_key_id": "ed9e0d9843451c2e829d3fde397c06763d94ab57",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCx6CM6DsbMXxFA\n/Fn1qVyIZ6f8BKAiCVq9RUCr1h2NfLip+T4LSq0Lsw+rk4o9S+JI+Rzl19PhXLVZ\n9NH4CflWm0J/w2+0Kzo5T5yALQNn/ftwCd56dq2iOcmp0TYf14HMJgmGyri8AraU\n4/+Pf0CbzmzT/FVPi9R72tuz9wr0cZ/9RanetV6Q+PURBMRXLbFnNIPCZ3ktxNNZ\nuJGQLjFW9r0XWOmb8+2kwapGyboZOxHySfK9shBplyEPnOaWBGoPow3AkODSR24K\n++F4rO+dHnKUtawlaVPyFZ+IDVA+Jp1f0D6aH/mn5hPhvHPFyDCD26VvQKS5WzO5\nSr7KSw89AgMBAAECggEAFMbhTE+6+FW28GG4SNgfYh/G7sgEgo0Yn4eVsqvGFkbF\nUzZ0QEHXnUjrcNSBfcCdu/t53D7dNBHNbSTKG79gcvSdasnigwZUXaqWQqLfJbcz\n9OT2KlOvWgWJL2+rNENJGZQsoyUMN4rSk2dgKnxISZntPEGZHfnc1h0ccPNOQHdN\nlSilPZU+mcsy8aXWuNAWW2xHowKzJs72X39DaHOzmmopweqBLxXVTTbT/DoLKSdn\nr5uIOJoKnWgQbWTlA8GyzMV8GZc4MmIxt3pAaN0RIGf35BX4mlCDRr68FPQ1/Tt+\n4auTeZI2bEKhP6dPriOf/ZFF7JTpqczYfSLUpDvkmQKBgQDpgJWsi2/XpB3QVPJQ\nUorjTl7SEpcWGKRAeTgWItr79m+W+4vjWiwumL3gZ73MhD2CImWRrsbjhVm86BA2\nXgOnt0nE6tXhksEhV+axJUeppW4b8sSsjLv9dS/VXPnisMiscl1lJzTp+nuoGqj+\nxxrCLSuWr8sibNOv2RZhmwsaCQKBgQDDDEVHNj1RX847rS/Q9Kmn+YXtg9GvorUV\naGUomFfqF0KiSeqbBVCPMKtJqiGl0D2k++kIuhYsZmMTWKpAMo+DCb7gsW3XJjmg\nOJCn/UB/eSt9uQQ7nfU9KM0tk6YH6kBpURt6sfPQ/THpMEIuOsfzXsgXDDoSmgtD\nn5s/gYeolQKBgAg3UAzsMxlBWxMzifstjFmHLmrx4IMUhuMF4OVWgKIQ/8guPbPY\nPmm9UiENRW5m0Ms9bpl7rt/el1PATqG7GSHTnzLgmHoBce48a4+cIjNj8MXm+uif\nYxX+A5rcVKaXVdhLheHDSWdaOvOlTID6fISMllYNBXbGoYQ0fUcd73wRAoGAGgU+\nDMUAoyV71txA38h0BbO1GT2XsK2tKMD3ldXVDKazvgDMaofn+mJMx5QJzxwbzTHK\nId7pbFzwZLlUZSIZoSqgq0sgUy6HS4egTLjtbNQWaDxRgz6MY+9Yh/cFlFK86w/l\n8ZVh6ISOrwRAH/i5ig8f9GsuKCMi04+sX2mBVo0CgYBl7Qp9s0w+M09Q+ecijOTy\nWef/eoePGlvVDSx2BYGmNfZM1yJgmOoKPFo91AjTs8LUfkerwzR+Y0/kOFdIWqkW\nR1Ww5ircmHTvUqJpZh6fgxDmrnScPUCNQC0YdT2aogtf3PltySbJzv+ruA9NBAVW\nY454mbupLnelwB5bkZg4yA==\n-----END PRIVATE KEY-----\n",
+  "client_email": "znahar-storage@znahar.iam.gserviceaccount.com",
+  "client_id": "116913341846838867609",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/znahar-storage%40znahar.iam.gserviceaccount.com"
+}

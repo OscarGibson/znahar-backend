@@ -16,7 +16,7 @@ class SingletonModel(models.Model):
 
     @classmethod
     def load(cls):
-        obj, created = cls.objects.get_or_create(pk=1)
+        obj, _created = cls.objects.get_or_create(pk=1)
         return obj
 
 
@@ -24,7 +24,8 @@ class Warehouse(models.Model):
     uuid = models.CharField(max_length=32, unique=True, default="000000")
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=512)
-    photo = cloudinary.models.CloudinaryField('image', null=True)
+    # photo = cloudinary.models.CloudinaryField('image', null=True)
+    photo = models.ImageField(upload_to='upload/warehouses')
     ordering = models.IntegerField()
     latitude = models.FloatField(null=True, blank=True)
     longtitude = models.FloatField(null=True, blank=True)

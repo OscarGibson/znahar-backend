@@ -8,7 +8,8 @@ from cloudinary.models import CloudinaryField
 
 class Promotion(models.Model):
     title = models.CharField(max_length=64)
-    photo = CloudinaryField('image', null=True)
+    # photo = CloudinaryField('image', null=True)
+    photo = models.ImageField(upload_to='upload/promotions')
     discount = models.IntegerField(null=True, blank=True)
     price = models.FloatField(null=True, blank=True)
 
@@ -31,7 +32,8 @@ class Promotion(models.Model):
 class PromotionBig(models.Model):
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=512)
-    photo = CloudinaryField('image', null=True)
+    # photo = CloudinaryField('image', null=True)
+    photo = models.ImageField(upload_to='upload/promotions')
     discount = models.IntegerField(null=True, blank=True)
     price = models.FloatField(null=True, blank=True)
 
