@@ -9,8 +9,7 @@ import { mainMenuSimpleState } from '../../redusers/initState'
 const MapPoint = (props:{lat:number, lng:number}) => {
     return (
     <div className="MapPoint">
-        <img className="map-pointer-logo" src={mainMenuSimpleState.logoUrl} alt="logo"/>
-        <i className="fa fa-map-marker map-marker" aria-hidden="true"></i>
+        <i className="fas fa-map-marker-alt map-marker"></i>
     </div>
     )
 }

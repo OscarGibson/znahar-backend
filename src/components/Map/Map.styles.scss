@@ -1,19 +1,22 @@
 .MapTemplate {
     .MapPoint {
         position: relative;
+        min-height: 50px;
         .map-marker {
-            margin-left: -12px;
-            color: rgb(214, 0, 0);
+            position: absolute;
+            top: -32px;
+            left: -12px;
+            color: rgb(218, 52, 11);
             font-size: 32px;
         }
         .map-pointer-logo {
             width: 100px;
-            // height: 100px;
             margin-left: -50px;
         }    
     }
     .MapItemTemplate {
-        // text-align: left;
+        margin-bottom: 24px;
+        // text-align: left;49.825823, 24.073076
         img {
             max-width: 90%;
             // max-height: 200px;
