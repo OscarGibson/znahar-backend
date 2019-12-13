@@ -5,3 +5,5 @@
 5) deploy to GAE
 6) ckeditor on jobs
 7) add text on promotions
+--------------
+1) add popup to IGVK
