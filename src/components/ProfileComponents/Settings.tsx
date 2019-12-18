@@ -5,7 +5,6 @@ import { SettingsState } from '../../types'
 
 
 const Settings = (props:SettingsState) => {
-    console.log("Settings props", props)
     const {
         userForm,
         generalBlockEditable,

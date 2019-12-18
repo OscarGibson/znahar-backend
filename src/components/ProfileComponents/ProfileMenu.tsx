@@ -14,6 +14,11 @@ const isActive = (pageName:string, currentPageName:string):string => {
     return pageName === currentPageName ? activeClass : "menu-item"
 }
 
+const logout = () => {
+    localStorage.removeItem("accessToken")
+    window.location.href = "/login"
+}
+
 const ProfileMenu = (props:{currentPageName:string}) => {
     const { currentPageName } = props
     return (
@@ -25,7 +30,7 @@ const ProfileMenu = (props:{currentPageName:string}) => {
                     )
                 })}
                 <hr/>
-                <li className="menu-item">Вийти</li>
+                <li className="menu-item" onClick={logout}>Вийти</li>
             </ul>
         </div>
     )

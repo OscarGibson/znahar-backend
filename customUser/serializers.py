@@ -23,6 +23,9 @@ class UserSerializer(serializers.ModelSerializer):
 
         return user
 
+    def update(self, instance, validated_data):
+        return super(UserSerializer, self).update(instance, validated_data)
+
     class Meta:
         model = UserModel
         # Tuple of serialized model fields (see link [2])

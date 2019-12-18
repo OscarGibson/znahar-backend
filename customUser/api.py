@@ -37,3 +37,7 @@ class GetUpdateUserView(RetrieveUpdateAPIView):
     def put(self, request, pk=None):
         self.kwargs = {'pk':request.user.pk}
         return super(GetUpdateUserView, self).put(request, pk=request.user.pk)
+
+    def patch(self, request, pk=None):
+        self.kwargs = {'pk':request.user.pk}
+        return super(GetUpdateUserView, self).patch(request, pk=request.user.pk)

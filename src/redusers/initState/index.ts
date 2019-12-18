@@ -248,7 +248,8 @@ export const userInitState:IUser = {
     fname:"",
     lname:"",
     email:"",
-    cell:""
+    cell:"",
+    photo:""
 }
 
 let initCartState:ICart

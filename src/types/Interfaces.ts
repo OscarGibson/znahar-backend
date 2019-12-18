@@ -233,7 +233,8 @@ export interface IUser {
     fname:string,
     lname:string,
     email:string,
-    cell:string
+    cell:string,
+    photo:string,
 }
 
 

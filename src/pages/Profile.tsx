@@ -25,7 +25,8 @@ import { Switch, Route } from 'react-router'
 import ProfileComponents from '../components/ProfileComponents'
 import { ReplaceProps, BsPrefixProps } from 'react-bootstrap/helpers';
 import { FormControlProps } from 'react-bootstrap';
-import { HistoryItemState } from '../components/ProfileComponents/History';
+import { HistoryItemState } from '../components/ProfileComponents/History'
+import ImageUploader from 'react-images-upload'
 
 interface IProductData {
     id:string,
@@ -96,6 +97,28 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
         this.getOrdersHistory = this.getOrdersHistory.bind(this)
         this.checkDiscount = this.checkDiscount.bind(this)
         this.normalizeOrdersList = this.normalizeOrdersList.bind(this)
+        this.onDropImage = this.onDropImage.bind(this)
+    }
+
+    onDropImage(pictures:File[]) {
+        const photo = pictures[pictures.length - 1]
+        const accessToken = localStorage.getItem("accessToken") || ""
+        let data = new FormData()
+        data.append('photo', photo, photo.name);
+        axios.patch(GET_USER_URL, data,{
+            headers: {Authorization: "Bearer " + accessToken, 'content-type': 'multipart/form-data'}
+        })
+        .then((response) => {
+            if (response.status === 200) {
+                const { setUserFullData } = this.props
+                setUserFullData(response.data)
+            }
+        })
+        .catch((_error) => {
+            window.location.href = "/login"
+        })
+        .finally(() => {  
+        })
     }
 
     getOrdersHistory(accessToken:string) {
@@ -333,7 +356,15 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                 <div className="body standart-container row">
                     <div className="leftSidebar col-md-3 col-sm-12">
                         <div className="userPhoto">
-                            {renderUserPhoto(userState.photoUrl)}
+                            {renderUserPhoto(userState.photo)}
+                            <ImageUploader
+                                buttonText='Завантажити зображення'
+                                onChange={this.onDropImage}
+                                imgExtension={['.jpg', '.gif', '.png', '.gif']}
+                                maxFileSize={5242880}
+                                label=""
+                                withIcon={false}
+                            />
                         </div>
                         <Switch>
                             <Route path="/profile/orders" exact component={() =>
