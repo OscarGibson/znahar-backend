@@ -33,7 +33,7 @@ class User(AbstractUser):
         null=True
     )
     # photo = cloudinary.models.CloudinaryField('image', null=True, blank=True)
-    photo = photo = models.ImageField(upload_to='upload/users')
+    photo = photo = models.ImageField(upload_to='upload/users', null=True, blank=True)
     cell = models.CharField(max_length=16, null=True)
 
     USERNAME_FIELD = "email"
