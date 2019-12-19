@@ -28,6 +28,7 @@
     "react-animated-css": "^1.2.1",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.9.0",
+    "react-images-upload": "^1.2.7",
     "react-owl-carousel": "^2.3.1",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.0.1",
