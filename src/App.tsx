@@ -81,7 +81,7 @@ class AppTemplate extends React.Component<IRootAppAction, IRootAppAction> {
               <Route path="/" exact component={Home} />
               <Route path="/search" component={Search}/>
               <Route path="/profile" component={Profile} />
-              <Route path="/register" component={Register}/>
+              {/* <Route path="/register" component={Register}/> */}
               <Route path="/login" component={Login}/>
               <Route path="/jobs" component={Jobs} />
               <Route path="/news" exact component={News} />

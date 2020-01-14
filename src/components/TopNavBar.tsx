@@ -163,7 +163,7 @@ const TopNavBar = ({phonesNumbers, isUserAuth, cartOrdersCount, setUserData, use
                 </div>
             </div>
             <div className="right-block TopNavBar-block">
-                {renderAuth(isUserAuth, userName)}
+                {/* {renderAuth(isUserAuth, userName)} */}
                 <Link to="/profile/orders">
                     <ActionButton
                         text={`Ваш кошик: ${cartOrdersCount} товарів`}

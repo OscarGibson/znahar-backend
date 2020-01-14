@@ -178,27 +178,27 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
 
     componentDidMount() {
 
-        const accessToken = localStorage.getItem("accessToken") || ""
-        axios.get(GET_USER_URL, {
-            headers: {Authorization: "Bearer " + accessToken}
-        })
-        .then((response) => {
-            if (response.status === 200) {
-                const { setUserFullData, setSettingsForm } = this.props
-                setUserFullData(response.data)
-                setSettingsForm({...response.data, password:"******"})
-            }
-        })
-        .catch((_error) => {
-            window.location.href = "/login"
-        })
-        .finally(() => {
+        // const accessToken = localStorage.getItem("accessToken") || ""
+        // axios.get(GET_USER_URL, {
+        //     headers: {Authorization: "Bearer " + accessToken}
+        // })
+        // .then((response) => {
+        //     if (response.status === 200) {
+        //         const { setUserFullData, setSettingsForm } = this.props
+        //         setUserFullData(response.data)
+        //         setSettingsForm({...response.data, password:"******"})
+        //     }
+        // })
+        // .catch((_error) => {
+        //     window.location.href = "/login"
+        // })
+        // .finally(() => {
 
-        })
+        // })
 
         const { cartState } = this.props
 
-        this.getOrdersHistory(accessToken)
+        // this.getOrdersHistory(accessToken)
         this.checkDiscount(this.normalizeOrdersList(cartState))
     }
     
@@ -264,8 +264,6 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
         const accessToken = localStorage.getItem("accessToken")
         axios.post(CHECK_DISCOUNT_URL, {
             orders:finalOrders
-        }, {
-            headers: {Authorization: "Bearer " + accessToken}
         })
         .then((response) => {
             if (response.status === 200) {
@@ -301,8 +299,6 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
 
         axios.post(ORDERS_URL, {
             orders:finalOrders
-        }, {
-            headers: {Authorization: "Bearer " + accessToken}
         })
         .then((response) => {
             if (response.status === 201) {
@@ -354,7 +350,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                     </div>
                 </div>
                 <div className="body standart-container row">
-                    <div className="leftSidebar col-md-3 col-sm-12">
+                    {/* <div className="leftSidebar col-md-3 col-sm-12">
                         <div className="userPhoto">
                             {renderUserPhoto(userState.photo)}
                             <ImageUploader
@@ -380,13 +376,13 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                                 <ProfileComponents.ProfileMenu currentPageName="settings"/>
                             }/>
                         </Switch>
-                    </div>
+                    </div> */}
                     <div className="rightSidebar col-md-9 col-sm-12">
-                        <div className="userBio">
+                        {/* <div className="userBio">
                             <h1 className="userName">{userState.fname} {userState.lname}</h1>
                             <p className="userEmail">{userState.email}</p>
                             <p className="userCell">{userState.cell}</p>
-                        </div>
+                        </div> */}
                         <div className="cartOrders">
                             <Switch>
                                 <Route path="/profile/orders" exact component={() =>
@@ -403,9 +399,9 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                                 <Route path="/profile/discounts" exact component={() =>
                                     <ProfileComponents.Discounts/>
                                 }/>
-                                <Route path="/profile/history" exact component={() =>
+                                {/* <Route path="/profile/history" exact component={() =>
                                     <ProfileComponents.History warehouses={warehouses}/>
-                                }/>
+                                }/> */}
                                 <Route path="/profile/settings" exact component={() =>
                                     <ProfileComponents.Settings
                                         userForm={settings.userForm}

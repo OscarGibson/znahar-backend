@@ -37,7 +37,7 @@ const ButtonsList = (props:{itemCount:number, logged:boolean, userName:string}) 
     const { itemCount, logged, userName } = props
     return (
         <ul className="navbar-nav ml-auto navbar-mini">
-            <ProileNavigation logged={logged} userName={userName}/>
+            {/* <ProileNavigation logged={logged} userName={userName}/> */}
             <li className="nav-item cart">
                 <Link className="nav-link p-1" to="/profile/orders">
                     <i className="fas fa-shopping-cart"></i><span className="d-none d-lg-inline"> Ваш кошик: </span>{itemCount}
