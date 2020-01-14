@@ -4,6 +4,8 @@ import { getWarehouseById } from '../../redusers/initState'
 import ActionButton from '../ActionButton'
 import { connect } from 'react-redux'
 import { plusProductItem, minusProductItem } from '../../actions'
+import { Form, Row, Col } from 'react-bootstrap'
+
 
 interface OrdersListState {
     products:IProductItem[],
@@ -64,6 +66,18 @@ const renderInfoBlock = (totalCount:number, createOrder:() => void, price:string
                         iconName=""
                         iconSvgSrc=""
                     />
+                    <div className="settings-body">
+                        <Form onSubmit={() => {}}>
+                            <Form.Group as={Row} controlId="formPlaintextCell">
+                                <Form.Label column sm="4">
+                                Контактиний номер
+                                </Form.Label>
+                                <Col sm="8">
+                                <Form.Control plaintext={false} name="cell" onChange={() => {}} readOnly={false} value={"0000"} />
+                                </Col>
+                            </Form.Group>
+                        </Form>
+                    </div>
                 </div>
                 {discountBlock(totalPrice)}
             </Fragment>
