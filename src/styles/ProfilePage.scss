@@ -204,19 +204,6 @@
                         color: #ffffff;
                     }
                 }
-                .settings-body {
-                    form {
-                        label {
-                            text-align: left;
-                            color: #5e6c84;
-                        }
-                    }
-                    padding: 20px;
-                    margin-bottom: 40px;
-                    box-shadow: 0 2px 4px 2px rgba(53, 53, 53, 0.11);
-                    border: solid 2px #f1f6f9;
-                    background-color: #ffffff;
-                }
             }
         }
     }
@@ -227,4 +214,18 @@
         border-left-width: .25rem;
         border-radius: .25rem;
     }
+}
+
+.settings-body {
+    form {
+        label {
+            text-align: left;
+            color: #5e6c84;
+        }
+    }
+    padding: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 4px 2px rgba(53, 53, 53, 0.11);
+    border: solid 2px #f1f6f9;
+    background-color: #ffffff;
 }

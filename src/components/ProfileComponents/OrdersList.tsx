@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react'
-import { IProductItem, IWarehouse } from '../../types'
+import { IProductItem, IWarehouse, IUser } from '../../types'
 import { getWarehouseById } from '../../redusers/initState'
 import ActionButton from '../ActionButton'
 import { connect } from 'react-redux'
-import { plusProductItem, minusProductItem } from '../../actions'
-import { Form, Row, Col } from 'react-bootstrap'
+import { plusProductItem, minusProductItem, setUserFullData } from '../../actions'
 
 
 interface OrdersListState {
@@ -13,14 +12,15 @@ interface OrdersListState {
     totalCount:number,
     price:string,
     totalPrice:number,
+    userState:IUser,
     removeItemFromCart:(id:string) => void,
     createOrder:() => void,
     plusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => void,
-    minusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => void
+    minusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => void,
+    setUserFullData:(userState:IUser) => void
 }
 
 const discountBlock = (totalPrice:number) => {
-    console.log("totalPrice", totalPrice)
     if (totalPrice !== -1)
         return (
             <div className="info">
@@ -36,11 +36,18 @@ const mapDispatchToProps = (dispatch:any) => {
         },
         minusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => {
             dispatch(minusProductItem(productId, warehouseId, currentQuantity))
-        }
+        },
+        setUserFullData:(userState:IUser) => {dispatch(setUserFullData(userState))}
     }
 }
 
-const renderInfoBlock = (totalCount:number, createOrder:() => void, price:string, totalPrice:number) => {
+const RenderInfoBlock = (
+        props:{totalCount:number,
+        createOrder:() => void,
+        price:string,
+        totalPrice:number}
+    ) => {
+        const { totalCount, createOrder, price,  totalPrice} = props
     if (totalCount === 0) {
         return (
             <div className="info">
@@ -66,18 +73,6 @@ const renderInfoBlock = (totalCount:number, createOrder:() => void, price:string
                         iconName=""
                         iconSvgSrc=""
                     />
-                    <div className="settings-body">
-                        <Form onSubmit={() => {}}>
-                            <Form.Group as={Row} controlId="formPlaintextCell">
-                                <Form.Label column sm="4">
-                                Контактиний номер
-                                </Form.Label>
-                                <Col sm="8">
-                                <Form.Control plaintext={false} name="cell" onChange={() => {}} readOnly={false} value={"0000"} />
-                                </Col>
-                            </Form.Group>
-                        </Form>
-                    </div>
                 </div>
                 {discountBlock(totalPrice)}
             </Fragment>
@@ -111,10 +106,17 @@ const getPrice = (price:number, discount:number, type:number) => {
 const OrdersList = (props:OrdersListState) => {
     const { products, warehouses, removeItemFromCart,
         totalCount, price, createOrder, totalPrice,
-        plusProductItem, minusProductItem } = props
+        plusProductItem, minusProductItem, userState } = props
+        const { cell } = userState
+
     return (
         <div className="ordersList cart">
-            {renderInfoBlock(totalCount, createOrder, price, totalPrice)}
+            <RenderInfoBlock 
+                totalCount={totalCount}
+                createOrder={createOrder}
+                price={price}
+                totalPrice={totalPrice}
+            />
             <table className="table">
                 <thead className="thead-dark">
                     <tr>

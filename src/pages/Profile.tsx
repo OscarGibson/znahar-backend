@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import MainMenuSimple from '../components/MainMenuSimple'
 import { IProfilePage, IInfoLayer, IWarehouse, IUser, IUserForm, ICart } from '../types'
-import { getWarehouseById } from '../redusers/initState'
+import { getWarehouseById, userInitState } from '../redusers/initState'
 import axios from 'axios'
 import {
     removeProductFromCart,
@@ -24,6 +24,9 @@ import { ORDERS_URL, CHECK_DISCOUNT_URL } from '../constants'
 import { Switch, Route } from 'react-router'
 import ProfileComponents from '../components/ProfileComponents'
 import { HistoryItemState } from '../components/ProfileComponents/History'
+import { Form } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
+import { Col } from 'react-bootstrap'
 
 interface IProductData {
     id:string,
@@ -78,11 +81,12 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
         this.sendFinishMessage = this.sendFinishMessage.bind(this)
         this.checkDiscount = this.checkDiscount.bind(this)
         this.normalizeOrdersList = this.normalizeOrdersList.bind(this)
+        this.changeCellPhone = this.changeCellPhone.bind(this)
     }
 
     componentDidMount() {
-        const { cartState } = this.props
-        this.checkDiscount(this.normalizeOrdersList(cartState))
+        const { cartState, userState } = this.props
+        this.checkDiscount(this.normalizeOrdersList(cartState, userState.cell))
     }
     
 
@@ -115,8 +119,8 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
         removeProductFromCart(itemId)
     }
 
-    normalizeOrdersList(cartState:ICart) {
-        let orders:{[key:string]:IOrderRequest} = {}
+    normalizeOrdersList(cartState:ICart, cell:string) {
+        let orders:any = {}
 
         for (let productItem of cartState.products) {
             if (orders[productItem.warehouse_id]) {
@@ -130,7 +134,8 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                     products:[{
                         id:productItem.id,
                         quantity:productItem.count
-                    }]
+                    }],
+                    cell
                 }
             }
         }
@@ -167,14 +172,16 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
 
     createOrder() {
         const { cartState, userState, showInfoLayer } = this.props
-        if (userState.cell === "") {
+        const { cell } = userState
+        if (cell === "") {
             showInfoLayer({
                 text:"У вас не вказаний номер телефону. Щоб продовжити - перейдіть на сторінку налаштувань",
                 timer:3,
             })
+            return false
         }
 
-        const finalOrders = this.normalizeOrdersList(cartState)
+        const finalOrders = this.normalizeOrdersList(cartState, cell)
 
         axios.post(ORDERS_URL, {
             orders:finalOrders
@@ -205,11 +212,21 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
 
     }
 
+    changeCellPhone(event: any) {
+        const form = event.currentTarget
+        const { setUserFullData } = this.props
+        setUserFullData({
+            ...userInitState,
+            cell:form.value || ""
+        })
+    }
+
 
 
     render() {
-        const { mainMenuSimpleState, userState, cartState, infoLayerState, warehouses, settings } = this.props
+        const { mainMenuSimpleState, userState, cartState, infoLayerState, warehouses } = this.props
         const { products, totalCount, totalPriceDiscount, totalPrice } = cartState
+        const { cell } = userState
 
         return (
             <div className="Profile">
@@ -231,17 +248,33 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                 <div className="body standart-container row">
                     <div className="rightSidebar col-md-9 col-sm-12">
                         <div className="cartOrders">
+                        <div className="settings-body">
+                            <Form onSubmit={() => {}}>
+                                <Form.Group as={Row} controlId="formPlaintextCell">
+                                    <Form.Label column sm="4">
+                                    Контактиний номер
+                                    </Form.Label>
+                                    <Col sm="8">
+                                    <Form.Control plaintext={false} name="cell" onChange={this.changeCellPhone} readOnly={false} value={cell} />
+                                    </Col>
+                                </Form.Group>
+                            </Form>
+                        </div>
                             <Switch>
                                 <Route path="/profile/orders" exact component={() =>
                                     <ProfileComponents.OrdersList
                                         products={products}
                                         warehouses={warehouses}
                                         totalCount={totalCount}
+                                        userState={userState}
                                         price={totalPrice.toFixed(2)}
                                         removeItemFromCart={this.removeItemFromCart}
                                         createOrder={this.createOrder}
                                         totalPrice={totalPriceDiscount}
                                     />
+                                }/>
+                                <Route path="/profile/settings" exact component={() =>
+                                    <ProfileComponents.ProfileMenu currentPageName="settings"/>
                                 }/>
                             </Switch>
                         </div>

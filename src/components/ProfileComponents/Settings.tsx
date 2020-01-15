@@ -15,6 +15,7 @@ const Settings = (props:SettingsState) => {
         changeEditable
     } = props
     const { fname, lname, email, cell, password } = userForm
+    console.log("re render")
     return (
         <div className="Settings">
             <div className="general">
