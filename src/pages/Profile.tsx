@@ -135,7 +135,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                         id:productItem.id,
                         quantity:productItem.count
                     }],
-                    cell
+                    phonenumber:cell
                 }
             }
         }
