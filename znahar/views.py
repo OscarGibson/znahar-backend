@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework import permissions
+from django.core.mail import send_mail
 import requests
 import json
 from .models import Warehouse, SiteSettings, Jobs
@@ -93,6 +94,32 @@ class Products(APIView):
                 "message": "Request error",
                 "code": 400
             }, 400)
+
+
+class Feedback(APIView):
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        text = f"""
+        <div>
+         <h1>{request.data.get('name')}</h1>
+         <h3>{request.data.get('cell')}</h3>
+         <p>{request.data.get('message')}</p>
+        </div>
+        """
+
+        send_mail(
+            'Feedback from apteka-znahar.com.ua',
+            text,
+            'out@apteka-znahar.com.ua',
+            ['out@apteka-znahar.com.ua', 'oneostap@gmail.com'],
+            fail_silently=False,
+        )
+
+        return Response({
+            "message": "success",
+            "code": 201
+        }, 201)
 
 
 class CheckDiscount(APIView):

@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import Order, Products, WarehousesListAPI, Settings, WarehousesRetrieveAPI,\
-                    CheckDiscount, JobsAPI
+                    CheckDiscount, JobsAPI, Feedback
 
 urlpatterns = [
     path('orders/', Order.as_view()),
@@ -9,5 +9,6 @@ urlpatterns = [
     path('warehouses/', WarehousesListAPI.as_view()),
     path('warehouses/<str:uuid>', WarehousesRetrieveAPI.as_view()),
     path('check/', CheckDiscount.as_view()),
-    path('jobs/', JobsAPI.as_view())
+    path('jobs/', JobsAPI.as_view()),
+    path('feedback/', Feedback.as_view())
 ]

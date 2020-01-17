@@ -37,9 +37,9 @@ const FooterBlock = ({
                         {/* <div className="col-md-5  col-sm-12">
                             <FooterSocial {...socialList}/>
                         </div> */}
-                        {/* <div className="col-md-12  col-sm-12">
+                        <div className="col-md-12  col-sm-12">
                             <FooterBackForm {...backForm}/>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
 
