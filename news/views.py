@@ -17,6 +17,9 @@ class BaseAPIView:
 class ListNewsAPIView(BaseAPIView, ListAPIView):
     serializer_class = NewsListSerializer
 
+    def get_queryset(self):
+        return self.model.objects.order_by('-date')
+
 
 class RetrieveNewsAPIView(BaseAPIView, RetrieveAPIView):
     serializer_class = NewsPostSerializer
