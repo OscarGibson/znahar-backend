@@ -175,7 +175,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
         const { cell } = userState
         if (cell === "") {
             showInfoLayer({
-                text:"У вас не вказаний номер телефону. Щоб продовжити - перейдіть на сторінку налаштувань",
+                text:"У вас не вказаний номер телефону",
                 timer:3,
             })
             return false
@@ -189,7 +189,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
         .then((response) => {
             if (response.status === 201) {
                 showInfoLayer({
-                    text:"Вітаємо, ви успішно здійснили бронювання, найближчиим часом наш працівник зателефонує вам для уточнення деталей",
+                    text:"Вітаємо, ви успішно здійснили бронювання, очікуйте СМС",
                     timer:2,
                 })
             } else {
