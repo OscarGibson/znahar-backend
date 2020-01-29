@@ -99,20 +99,18 @@ class Products(APIView):
 class Feedback(APIView):
 
     def post(self, request, *args, **kwargs):
-        print(request.data)
         text = f"""
-        <div>
-         <h1>{request.data.get('name')}</h1>
-         <h3>{request.data.get('cell')}</h3>
-         <p>{request.data.get('message')}</p>
-        </div>
+        Ім'я: {request.data.get('name')}
+        Номер: {request.data.get('cell')}
+        Повідомлення: {request.data.get('message')}
         """
 
         send_mail(
             'Feedback from apteka-znahar.com.ua',
             text,
-            'out@apteka-znahar.com.ua',
+            'info@apteka-znahar.com.ua',
             ['out@apteka-znahar.com.ua', 'oneostap@gmail.com'],
+            # ['oneostap@gmail.com',],
             fail_silently=False,
         )
 

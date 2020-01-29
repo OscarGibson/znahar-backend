@@ -212,3 +212,10 @@ from google.oauth2 import service_account
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     os.path.join(BASE_DIR, 'backend', 'znahar-ed9e0d984345.json')
 )
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "timeproteam1@gmail.com"
+EMAIL_HOST_PASSWORD = "asas2121"
