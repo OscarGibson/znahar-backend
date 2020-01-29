@@ -375,33 +375,39 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
   if (action.type === CHANGE_PRODUCT_ITEM_QUANTITY) {
     const { productId, warehouseId, increment, currentQuantity } = action.payload
     const { cartState } = state
-    const newQuantity = currentQuantity + increment
+    let newQuantity = currentQuantity + increment
     let newProducts:IProductItem[] = []
     let newPrice:number = 0
-    if (newQuantity !== 0 && newQuantity !== 50) {
 
-      for (let product of cartState.products) {
-        if (product.id === productId && product.warehouse_id === warehouseId) {
-          newProducts.push({
-            ...product,
-            count:newQuantity
-          })
-          newPrice += product.price * newQuantity
-        } else {
-          newProducts.push(product)
-          newPrice += product.price * product.count
-        }
-      }
-
-      return {
-        ...state,
-        cartState: {
-          ...cartState,
-          products:newProducts,
-          totalPrice:newPrice
-        },
+    for (let product of cartState.products) {
+      if (product.id === productId && product.warehouse_id === warehouseId) {
+        if (newQuantity > product.remain || newQuantity <= 0)
+          newQuantity = currentQuantity
+        newProducts.push({
+          ...product,
+          count:newQuantity
+        })
+        newPrice += product.price * newQuantity
+      } else {
+        newProducts.push(product)
+        newPrice += product.price * product.count
       }
     }
+
+    const newCartState = {
+      ...cartState,
+      products:newProducts,
+      totalPrice:newPrice
+    }
+
+    const cartStateJsonStr:string = JSON.stringify(newCartState)
+    localStorage.setItem("cart", cartStateJsonStr)
+
+    return {
+      ...state,
+      cartState: newCartState,
+    }
+    
   }
 
   if (action.type === SHOW_INFO_BLOCK) {
