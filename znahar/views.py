@@ -2,7 +2,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveAPIView, ListAPIView
 from rest_framework import permissions
-from django.core.mail import send_mail
+from django.conf import settings
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 import requests
 import json
 from .models import Warehouse, SiteSettings, Jobs
@@ -100,19 +102,26 @@ class Feedback(APIView):
 
     def post(self, request, *args, **kwargs):
         text = f"""
-        Ім'я: {request.data.get('name')}
-        Номер: {request.data.get('cell')}
-        Повідомлення: {request.data.get('message')}
+        <div>
+         <h1>Ім'я: {request.data.get('name')}</h1>
+         <h3>Номер: {request.data.get('cell')}</h3>
+         <p>Текст: {request.data.get('message')}</p>
+        </div>
         """
 
-        send_mail(
-            'Feedback from apteka-znahar.com.ua',
-            text,
-            'info@apteka-znahar.com.ua',
-            ['out@apteka-znahar.com.ua', 'oneostap@gmail.com'],
-            # ['oneostap@gmail.com',],
-            fail_silently=False,
-        )
+        message = Mail(
+            from_email='info@apteka-znahar.com.ua',
+            to_emails=['out@apteka-znahar.com.ua', 'oneostap@gmail.com'],
+            subject='Feedback from apteka-znahar.com.ua',
+            html_content=text)
+        try:
+            sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+            sg.send(message)
+        except Exception as e:
+            return Response({
+                "message": str(e),
+                "code": 400
+            }, 400)
 
         return Response({
             "message": "success",
