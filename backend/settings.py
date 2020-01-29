@@ -213,4 +213,4 @@ GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     os.path.join(BASE_DIR, 'backend', 'znahar-ed9e0d984345.json')
 )
 
-SENDGRID_API_KEY='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'
+SENDGRID_API_KEY='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'
