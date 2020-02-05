@@ -27,6 +27,8 @@ import { HistoryItemState } from '../components/ProfileComponents/History'
 import { Form } from 'react-bootstrap'
 import { Row } from 'react-bootstrap'
 import { Col } from 'react-bootstrap'
+import PhoneInput from "react-phone-number-input"
+
 
 interface IProductData {
     id:string,
@@ -173,6 +175,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
     createOrder() {
         const { cartState, userState, showInfoLayer } = this.props
         const { cell } = userState
+
         if (cell === "") {
             showInfoLayer({
                 text:"У вас не вказаний номер телефону",
@@ -212,12 +215,11 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
 
     }
 
-    changeCellPhone(event: any) {
-        const form = event.currentTarget
+    changeCellPhone(cell: string) {
         const { setUserFullData } = this.props
         setUserFullData({
             ...userInitState,
-            cell:form.value || ""
+            cell
         })
     }
 
@@ -255,7 +257,12 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                                     Контактиний номер
                                     </Form.Label>
                                     <Col sm="8">
-                                    <Form.Control plaintext={false} name="cell" onChange={this.changeCellPhone} readOnly={false} value={cell} />
+                                    <PhoneInput
+                                        international={false}
+                                        placeholder="+380XX XXX XX XX"
+                                        value={cell}
+                                        onChange={this.changeCellPhone}
+                                    />
                                     </Col>
                                 </Form.Group>
                             </Form>

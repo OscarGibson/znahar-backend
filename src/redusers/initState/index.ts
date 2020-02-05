@@ -248,7 +248,7 @@ export const userInitState:IUser = {
     fname:"",
     lname:"",
     email:"",
-    cell:"",
+    cell:"+380",
     photo:""
 }
 
