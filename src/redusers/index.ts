@@ -87,10 +87,16 @@ export const DefaultReducer = (state = defaultState, action:any) => {
   }
 
   if (action.type === SET_SETTINGS) {
-    const { topNavBarState, footerBlockState } = state
+    const { topNavBarState, footerBlockState, settings } = state
     const { socialList } = footerBlockState
     const newState = {
       ...state,
+      settings: {
+        ...settings,
+        facebook_link:action.payload.facebook_link,
+        instagram_link:action.payload.instagram_link,
+        youtube_link:action.payload.youtube_link
+      },
       topNavBarState:{
         ...topNavBarState,
         phonesNumbers:extractCell(action.payload.contact_cell_top)

@@ -14,10 +14,12 @@ const mapStateToProps = (reducer:any):TopNavType => {
     const { TopNavReducer } = reducer
     const { totalCount } = reducer.SearchReducer.cartState
     const phonesNumbers = reducer.DefaultReducer.topNavBarState.phonesNumbers
+    const fb_link = reducer.DefaultReducer.settings.facebook_link
     return {
         ...TopNavReducer,
         itemCount:totalCount,
-        cellList:phonesNumbers
+        cellList:phonesNumbers,
+        fb_link
     }
 }
 

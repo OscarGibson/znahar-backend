@@ -272,6 +272,7 @@ export const cartState:ICart = {
 
 export const topNavBarState:ITopNavBarState = {
     phonesNumbers:[],
+    fb_link:"",
     isUserAuth:false,
     userName:"",
     cartOrdersCount:initCartState.totalCount,

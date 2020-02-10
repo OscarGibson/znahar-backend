@@ -50,6 +50,7 @@ export interface ISearchForm {
 
 export interface ITopNavBarState {
     phonesNumbers:string[],
+    fb_link:string,
     isUserAuth:boolean,
     userName:string,
     cartOrdersCount:number,

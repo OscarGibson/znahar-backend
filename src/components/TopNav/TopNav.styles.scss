@@ -3,6 +3,14 @@
     background-position-y: bottom;
 
     .nav-item {
+        &.dropdown {
+            a.nav-link {
+                display: contents;
+            }
+            a.facebook-link {
+                margin-left: 11px;
+            }
+        }
         &.cart {
             background-color: #daf58e;
             a, i {
