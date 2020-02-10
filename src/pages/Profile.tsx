@@ -176,7 +176,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
         const { cartState, userState, showInfoLayer } = this.props
         const { cell } = userState
 
-        if (cell === "" || cell === userInitState.cell) {
+        if (!cell || cell === userInitState.cell) {
             showInfoLayer({
                 text:"У вас не вказаний номер телефону",
                 timer:3,
@@ -185,7 +185,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
         } else if (cell.length < 10) {
             showInfoLayer({
                 text:"Вказано некоректний номер телефону",
-                timer:0,
+                timer:3,
             })
         }
 
@@ -267,6 +267,8 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                                         placeholder="+380XX XXX XX XX"
                                         value={cell}
                                         onChange={this.changeCellPhone}
+                                        limitMaxLength
+                                        maxLength={16}
                                     />
                                     </Col>
                                 </Form.Group>
