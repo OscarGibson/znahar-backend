@@ -403,6 +403,7 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
           ...product,
           count:newQuantity
         })
+        newPrice += product.price * newQuantity
         
       } else {
         newProducts.push(product)
