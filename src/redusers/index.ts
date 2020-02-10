@@ -380,20 +380,30 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
 
   if (action.type === CHANGE_PRODUCT_ITEM_QUANTITY) {
     const { productId, warehouseId, increment, currentQuantity } = action.payload
-    const { cartState } = state
+    const { cartState, infoLayerState } = state
     let newQuantity = currentQuantity + increment
     let newProducts:IProductItem[] = []
     let newPrice:number = 0
+    let newInfoLayer = {
+      ...infoLayerState
+    }
 
     for (let product of cartState.products) {
       if (product.id === productId && product.warehouse_id === warehouseId) {
-        if (newQuantity > product.remain || newQuantity <= 0)
+        if (newQuantity <= product.remain && newQuantity > 0) {
+        } else if (newQuantity > product.remain) {
+          newInfoLayer.text = "Вибрана максимальна кількість товару, яка є в залишку"
+          newInfoLayer.active = true
+          newInfoLayer.timer = 3
           newQuantity = currentQuantity
+        } else if (newQuantity <= 0) {
+          newQuantity = currentQuantity
+        }
         newProducts.push({
           ...product,
           count:newQuantity
         })
-        newPrice += product.price * newQuantity
+        
       } else {
         newProducts.push(product)
         newPrice += product.price * product.count
@@ -412,6 +422,7 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
     return {
       ...state,
       cartState: newCartState,
+      infoLayerState:newInfoLayer
     }
     
   }
