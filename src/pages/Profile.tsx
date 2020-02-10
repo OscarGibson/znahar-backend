@@ -240,13 +240,13 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                 <MainMenuSimple { ...mainMenuSimpleState }/>
                 <div className="header">
                     <div className="content standart-container">
-                        <h1 className="title">Мій кабінет</h1>
+                        <h1 className="title">Замовлення</h1>
                         <Breadcrumbp
                             pages={[{
                                 name:"Головна",
                                 url:"/"
                             },{
-                                name:"Мій кабінет",
+                                name:"Замовлення",
                                 url:null
                             }]}
                         />

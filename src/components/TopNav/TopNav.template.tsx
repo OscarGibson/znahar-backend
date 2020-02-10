@@ -49,7 +49,7 @@ const ButtonsList = (props:{itemCount:number, logged:boolean, userName:string}) 
 
 
 const TopNavTemplate = (props:TopNavProps) => {
-    const { logged, cellList, itemCount, userName } = props
+    const { logged, cellList, itemCount, userName, fb_link } = props
     return (
         <nav className="navbar navbar-expand-lg navbar-dark info-color TopNav">
             <ul style={{cursor:"pointer"}} className="navbar-nav">
@@ -76,6 +76,9 @@ const TopNavTemplate = (props:TopNavProps) => {
                             Неділя: вихідний<br/>
                         </div>
                     </div>
+                    <a className="facebook-link" href={fb_link} target="blank">
+                        <img src={"/static/svg/facebook.svg"} alt="Facebook Page"/>
+                    </a>
                 </li>
             </ul>
             <div className="navbar-toggler">

@@ -182,9 +182,6 @@ export const footerMenu:IMainMenuData = {
     },{
         name:"Вакансії",
         url:"/jobs"
-    },{
-        name:"Мій Кабінет",
-        url:"/profile"
     }],
 
 }
