@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { IBackForm } from '../types'
 import axios from 'axios'
 import { SEND_FEEDBACK } from '../constants'
+import PhoneInput from 'react-phone-number-input'
 
 
 class FooterBackForm extends React.Component<IBackForm, any> {
@@ -18,6 +19,7 @@ class FooterBackForm extends React.Component<IBackForm, any> {
 
         this.handleSearchFormSubmit = this.handleSearchFormSubmit.bind(this)
         this.handleFormChange = this.handleFormChange.bind(this)
+        this.cellHandler = this.cellHandler.bind(this)
     }
 
     handleSearchFormSubmit(e:any) {
@@ -37,6 +39,10 @@ class FooterBackForm extends React.Component<IBackForm, any> {
         .finally(() => {
     
         })
+    }
+
+    cellHandler(cell:string) {
+        this.setState({ cell })
     }
 
     handleFormChange(e:any) {
@@ -67,7 +73,7 @@ class FooterBackForm extends React.Component<IBackForm, any> {
                         onChange={this.handleFormChange}
                     />
 
-                    <input 
+                    {/* <input 
                         type="text"
                         className="searchFormField"
                         id="backFormCell"
@@ -75,6 +81,17 @@ class FooterBackForm extends React.Component<IBackForm, any> {
                         name="cell"
                         placeholder="Телефон"
                         onChange={this.handleFormChange}
+                    /> */}
+
+                    <PhoneInput
+                        country="UA"
+                        defaultCountry="UA"
+                        international={false}
+                        value={cell}
+                        onChange={this.cellHandler}
+                        placeholder="+380XX XXX XX XX"
+                        limitMaxLength
+                        maxLength={16}
                     />
 
                     <textarea

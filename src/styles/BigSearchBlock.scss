@@ -32,6 +32,17 @@
         line-height: normal;
     }
 
+    @media screen and (max-width: 200px) {
+        .standart-container {
+            h1 {
+                font-size: 20px;
+            }
+            h3 {
+                font-size: 13px;
+            }
+        }
+    }
+
     .SearchFormHome {
         .form-control {
             width: 250px;
@@ -45,6 +56,13 @@
         @media screen and (max-width: 285px) {
             .form-control {
                 width: 100%;
+            }
+        }
+        @media screen and (max-width: 200px) {
+            .form-control,
+            .custom-select {
+                height: 50%;
+                font-size: 13px;
             }
         }
         .custom-select {

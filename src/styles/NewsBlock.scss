@@ -11,6 +11,11 @@
             font-weight: bold;
             color: #353535;
         }
+        @media screen and (max-width: 200px) {
+            .title {
+                font-size: 16px;
+            }
+        }
         .divider {
             max-width: 240px;
             border: 1px solid #353535;
@@ -21,14 +26,15 @@
             display: flex;
             justify-content: space-between;
             .NewsItem {
-                width: 238px;
+                max-width: 238px;
                 font-family: Montserrat;
                 text-align: left;
                 color: #353535;
                 cursor: pointer;
                 .image {
-                    width: 238px;
-                    height: 238px;
+                    width: inherit;
+                    // max-width: 208px;
+                    // height: 238px;
                 }
                 .title {
                     margin-top: 16px;
