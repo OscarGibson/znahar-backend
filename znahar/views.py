@@ -1,3 +1,4 @@
+import os
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import RetrieveAPIView, ListAPIView
@@ -112,10 +113,12 @@ class Feedback(APIView):
         message = Mail(
             from_email='info@apteka-znahar.com.ua',
             to_emails=['out@apteka-znahar.com.ua', 'oneostap@gmail.com'],
+            # to_emails=['oneostap@gmail.com',],
             subject='Feedback from apteka-znahar.com.ua',
-            html_content=text)
+            html_content=text
+        )
         try:
-            sg = SendGridAPIClient(settings.SENDGRID_API_KEY)
+            sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
             sg.send(message)
         except Exception as e:
             return Response({

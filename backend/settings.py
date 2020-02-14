@@ -212,5 +212,3 @@ from google.oauth2 import service_account
 GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
     os.path.join(BASE_DIR, 'backend', 'znahar-ed9e0d984345.json')
 )
-
-SENDGRID_API_KEY='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'
