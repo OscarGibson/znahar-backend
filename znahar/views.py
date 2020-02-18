@@ -120,8 +120,9 @@ class Feedback(APIView):
             subject='Feedback from apteka-znahar.com.ua',
             html_content=text
         )
+
         try:
-            sg = SendGridAPIClient("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")
+            sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
             sg.send(message)
         except Exception as e:
             return Response({
