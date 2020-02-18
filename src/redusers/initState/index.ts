@@ -205,7 +205,8 @@ export const backForm:IBackFormAction = {
     name:"",
     cell:"",
     message:"",
-    action:() => {}
+    action:() => {},
+    showInfoLayer:() => {}
 }
 
 export const footerBlockState:IFooterBlock = {
@@ -350,6 +351,7 @@ export const homePageState:IHomePage = {
     bigSearchBlockState: bigSearchBlockState,
     mainMenuOriginState: mainMenuOriginState,
     promotionsSmallBoxState: promotionsSmallBoxState,
+    infoLayerState:infoLayerState,
     newBlockState: newBlockState,
     carouselState: carouselState,
     subscribeBlockState: subscribeBlockState,

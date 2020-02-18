@@ -9,6 +9,7 @@ import MainMenuBig from '../components/MainMenuBig'
 import { setPromotions, setNews } from '../actions'
 import axios from 'axios'
 import { GET_PROMOTIONS_URL, GET_NEWS_URL } from '../constants';
+import InfoLayer from '../components/InfoLayer'
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
@@ -18,9 +19,10 @@ const mapDispatchToProps = (dispatch:any) => {
 }
 
 const mapStateToProps = (reducer:any):IHomePage => {
-    const { HomeReducer } = reducer
+    const { HomeReducer, SearchReducer } = reducer
     return {
-        ...HomeReducer
+        ...HomeReducer,
+        infoLayerState:SearchReducer.infoLayerState,
     }
 }
 
@@ -76,6 +78,7 @@ class HomePage extends React.Component<IHomePage, IHomePage> {
             promotionsSmallBoxState,
             newBlockState,
             subscribeBlockState,
+            infoLayerState,
         } = this.props
         return (
             <div className="HomePage">
@@ -84,6 +87,7 @@ class HomePage extends React.Component<IHomePage, IHomePage> {
                 <PromotionsSmallBox {...promotionsSmallBoxState}/>
                 <NewsBlock {...newBlockState}/>
                 <SubscribeBlock {...subscribeBlockState}/>
+                <InfoLayer {...infoLayerState}/>
             </div>
         )
     }

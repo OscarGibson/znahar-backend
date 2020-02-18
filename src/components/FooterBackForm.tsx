@@ -1,10 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { IBackForm } from '../types'
+import { IBackForm, IInfoLayer } from '../types'
 import axios from 'axios'
 import { SEND_FEEDBACK } from '../constants'
 import PhoneInput from 'react-phone-number-input'
+import { showInfoLayer } from '../actions'
+import { userInitState } from '../redusers/initState'
 
+
+const mapDispatchToProps = (dispatch:any) => {
+    return {
+        showInfoLayer: (payload:IInfoLayer) => {dispatch(showInfoLayer(payload))}
+    }
+}
 
 class FooterBackForm extends React.Component<IBackForm, any> {
 
@@ -25,12 +33,45 @@ class FooterBackForm extends React.Component<IBackForm, any> {
     handleSearchFormSubmit(e:any) {
         e.preventDefault()
         const { name, cell, message } = this.state
+        const { showInfoLayer } = this.props
+
+        if (!cell || cell === userInitState.cell) {
+            showInfoLayer({
+                text:"У вас не вказаний номер телефону",
+                timer:3,
+            })
+            return false
+        } else if (cell.length < 10) {
+            showInfoLayer({
+                text:"Вказано некоректний номер телефону",
+                timer:3,
+            })
+            return false
+        }
+
+        if (name === "") {
+            showInfoLayer({
+                text:"Вкажіть своє ім'я",
+                timer:3,
+            })
+            return false
+        }
+        
         axios.post(SEND_FEEDBACK, {
             name, cell, message
         })
         .then((response) => {
             if (response.status === 201) {
                 console.log(response)
+                this.setState({
+                    name: "",
+                    cell: "",
+                    message: ""
+                })
+                showInfoLayer({
+                    text:"Дякуємо за ваш відгук",
+                    timer:3,
+                })
             }
         })
         .catch((error) => {
@@ -111,4 +152,4 @@ class FooterBackForm extends React.Component<IBackForm, any> {
     }
 }
 
-export default connect()(FooterBackForm)
+export default connect(null, mapDispatchToProps)(FooterBackForm)

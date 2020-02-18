@@ -173,6 +173,7 @@ export interface IBackForm {
     name:string,
     cell:string,
     message:string,
+    showInfoLayer: (payload:any) => void
 }
 
 export interface IBackFormAction extends IBackForm {
@@ -321,6 +322,7 @@ export interface IHomePage {
     mainMenuOriginState:IMainMenuData,
     bigSearchBlockState:IBigSearchBlock,
     promotionsSmallBoxState:IPromotionsSmallBox,
+    infoLayerState:IInfoLayer,
     newBlockState:INewsBlock,
     carouselState:ICarouselBlock,
     subscribeBlockState:ISubscribeBlock,

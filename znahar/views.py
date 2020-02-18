@@ -101,6 +101,10 @@ class Products(APIView):
 
 class Feedback(APIView):
 
+    permission_classes = [
+        permissions.AllowAny
+    ]
+
     def post(self, request, *args, **kwargs):
         text = f"""
         <div>
@@ -113,12 +117,11 @@ class Feedback(APIView):
         message = Mail(
             from_email='info@apteka-znahar.com.ua',
             to_emails=['out@apteka-znahar.com.ua', 'oneostap@gmail.com'],
-            # to_emails=['oneostap@gmail.com',],
             subject='Feedback from apteka-znahar.com.ua',
             html_content=text
         )
         try:
-            sg = SendGridAPIClient(os.getenv("SENDGRID_API_KEY"))
+            sg = SendGridAPIClient("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")
             sg.send(message)
         except Exception as e:
             return Response({
