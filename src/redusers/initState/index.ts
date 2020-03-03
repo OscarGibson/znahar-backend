@@ -233,7 +233,7 @@ export const getWarehouseById = (id:string, warehouses:IWarehouse[]):IWarehouse 
 }
 
 export const infoLayerState:IInfoLayer = {
-    text:"Стрепсілс з віт. С апельсин льодяники №24 успішно додано до списку бронювання",
+    text:"",
     active:false,
     timer:0,
     showInfoLayer: (payload:IInfoLayer) => {},

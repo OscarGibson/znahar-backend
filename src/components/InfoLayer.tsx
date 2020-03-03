@@ -27,17 +27,23 @@ const InfoLayer = ({text, timer, active, hideInfoLayer }:IInfoLayer) => {
         setTimeout( () => {
             hideInfoLayer()
         }, (timer * 1000) + 600)
+        console.log("1", active, timer)
         animationIDuration = 300
         animationOutDuration = 300
         animationInDelay = 0
     } else if (!active && timer !== 0) {
+        console.log("2", active, timer)
         animationIDuration = 300
         animationOutDuration = 300
         animationInDelay = 0
     } else {
+        console.log("3", active, timer)
         animationIDuration = 0
         animationOutDuration = 0
         animationInDelay = 300
+        setTimeout( () => {
+            hideInfoLayer()
+        }, 0)
     }
     
     return (
