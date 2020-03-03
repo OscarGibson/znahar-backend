@@ -32,6 +32,9 @@ const MainMenuBig = ({items, logoUrl}:IMainMenuData) => {
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
+                        <button className="navbar-toggler navbar-hiden-logo" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <img src={logoUrl} alt="Logo"/>
+                        </button>
                         <div className="navbarNav collapse navbar-collapse justify-content-center" id="navbarNav">
                             <ul className="navbar-nav nav">
                             {items.map( (item, index) => {
