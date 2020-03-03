@@ -237,7 +237,8 @@ export const infoLayerState:IInfoLayer = {
     active:false,
     timer:0,
     showInfoLayer: (payload:IInfoLayer) => {},
-    hideInfoLayer: () => {}
+    hideInfoLayer: () => {},
+    notShown:true
 }
 
 export const userInitState:IUser = {

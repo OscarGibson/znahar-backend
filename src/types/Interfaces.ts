@@ -215,7 +215,8 @@ export interface IInfoLayer {
     timer:number,
     active:boolean,
     showInfoLayer:(payload:any) => void,
-    hideInfoLayer:() => void
+    hideInfoLayer:() => void,
+    notShown:boolean
 }
 
 export interface IProductItem extends IProduct {

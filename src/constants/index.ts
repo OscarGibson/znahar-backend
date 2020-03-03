@@ -7,7 +7,7 @@ const envPath = (env:string):string => {
             return ""
 
         case "production":
-            return "http://www.apteka-znahar.com.ua"
+            return ""
     
         default:
             return ""

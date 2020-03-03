@@ -19,7 +19,11 @@ const mapDispathToProps = (dispatch:any) => {
     }
 }
 
-const InfoLayer = ({text, timer, active, hideInfoLayer }:IInfoLayer) => {
+const InfoLayer = ({text, timer, active, hideInfoLayer, notShown }:IInfoLayer) => {
+    if (notShown)
+        return (
+            <div/>
+        )
     let animationIDuration:number
     let animationInDelay:number
     let animationOutDuration:number
@@ -27,17 +31,14 @@ const InfoLayer = ({text, timer, active, hideInfoLayer }:IInfoLayer) => {
         setTimeout( () => {
             hideInfoLayer()
         }, (timer * 1000) + 600)
-        console.log("1", active, timer)
         animationIDuration = 300
         animationOutDuration = 300
         animationInDelay = 0
     } else if (!active && timer !== 0) {
-        console.log("2", active, timer)
         animationIDuration = 300
         animationOutDuration = 300
         animationInDelay = 0
     } else {
-        console.log("3", active, timer)
         animationIDuration = 0
         animationOutDuration = 0
         animationInDelay = 300

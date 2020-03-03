@@ -437,7 +437,8 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
         ...infoLayerState,
         text,
         timer,
-        active:true
+        active:true,
+        notShown:false
       }
     };
   }
@@ -448,7 +449,8 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
       ...state,
       infoLayerState: {
         ...infoLayerState,
-        active:false
+        active:false,
+        notShown:false
       }
     };
   }
