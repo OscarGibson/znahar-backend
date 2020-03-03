@@ -201,7 +201,7 @@ export const socialList:ISocialList = {
 }
 
 export const backForm:IBackFormAction = {
-    title:"Форма Зворотнього звязку",
+    title:"Форма Зворотнього зв'язку",
     name:"",
     cell:"",
     message:"",
