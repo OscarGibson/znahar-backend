@@ -34,13 +34,13 @@ const PaginatorTemplate = (props:PaginatorPropsExtend) => {
     const { currentPage, limit, totalPages, moveTo, changeLimit } = props
     return (
         <div className="PaginatorTemplate standart-container mt-5">
-            <div className="d-flex justify-content-between">
-                <div className="p-2 bd-highlight">Показувати
+            <div className="row">
+                <div className="col-md-6 col-sm-12 p-2">Показувати
                     <LimitOption option={PAGINATION_OPTIONS.P10_PER_PAGE} limit={limit} changeLimit={changeLimit}/>
                     <LimitOption option={PAGINATION_OPTIONS.P20_PER_PAGE} limit={limit} changeLimit={changeLimit}/>
                     <LimitOption option={PAGINATION_OPTIONS.P30_PER_PAGE} limit={limit} changeLimit={changeLimit}/>
                     товарів на сторінку</div>
-                <div className="p-2 bd-highlight">Сторінка
+                <div className="col-md-6 col-sm-12 p-2">Сторінка
                     <Arrow
                         delta={-1} limit={limit} currentPage={currentPage}
                         totalPages={totalPages} moveToAction={moveTo}/>

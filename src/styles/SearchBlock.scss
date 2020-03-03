@@ -28,6 +28,7 @@
             .form-control {
                 width: 250px;
                 border: 2px solid #f5a623;
+                border-radius: 0;
             }
             
             @media screen and (max-width: 767px) {
@@ -37,8 +38,10 @@
             }
 
             .custom-select {
+                max-width: 100%;
                 width: 350px;
                 border: 2px solid #f5a623;
+                margin-left: 0;
             }
             @media screen and (max-width: 350px) {
                 .custom-select {
@@ -87,6 +90,22 @@
         .new-price {
             color: #f33;
             font-size: .75rem;
+        }
+
+        @media screen and (max-width: 767px) {
+            font-size: .75rem;
+            .addToCart {
+                font-size: .75rem;
+            }
+        }
+        @media screen and (max-width: 425px) {
+            font-size: .5rem;
+            .addToCart {
+                font-size: .5rem;
+            }
+            td {
+                padding: .4rem;
+            }
         }
     }
 }

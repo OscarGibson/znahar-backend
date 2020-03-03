@@ -47,6 +47,7 @@
         .form-control {
             width: 250px;
             border: 2px solid #f5a623;
+            border-radius: 0;
         }
         @media screen and (max-width: 767px) {
             .form-control {
@@ -66,7 +67,9 @@
             }
         }
         .custom-select {
+            max-width: 100%;
             width: 350px;
+            margin-left: 0;
             border: 2px solid #f5a623;
         }
         @media screen and (max-width: 350px) {
