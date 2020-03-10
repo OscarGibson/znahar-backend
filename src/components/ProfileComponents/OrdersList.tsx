@@ -18,15 +18,23 @@ interface OrdersListState {
     plusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => void,
     minusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => void,
     setUserFullData:(userState:IUser) => void
+    checkDiscount:() => void
 }
 
-const discountBlock = (totalPrice:number) => {
-    if (totalPrice !== -1)
-        return (
-            <div className="info">
-                <span className="text">{`Зі знижкою ${totalPrice.toFixed(2)} грн`}</span>
-            </div>
-        )
+const discountBlock = (totalPrice:number, checkDiscount:() => void) => {
+    let price = totalPrice !== -1 ? `Зі знижкою ${totalPrice.toFixed(2)} грн` : ""
+    return (
+        <div className="info">
+            <span className="text">{price}</span>
+            <ActionButton
+                text={"Порахувати знижку"}
+                action={checkDiscount}
+                classList={["default-button", "button"]}
+                iconName=""
+                iconSvgSrc=""
+            />
+        </div>
+    )
 }
 
 const mapDispatchToProps = (dispatch:any) => {
@@ -45,9 +53,10 @@ const RenderInfoBlock = (
         props:{totalCount:number,
         createOrder:() => void,
         price:string,
-        totalPrice:number}
+        totalPrice:number,
+        checkDiscount:() => void}
     ) => {
-        const { totalCount, createOrder, price,  totalPrice} = props
+        const { totalCount, createOrder, price,  totalPrice, checkDiscount } = props
     if (totalCount === 0) {
         return (
             <div className="info">
@@ -74,7 +83,7 @@ const RenderInfoBlock = (
                         iconSvgSrc=""
                     />
                 </div>
-                {discountBlock(totalPrice)}
+                {discountBlock(totalPrice, checkDiscount)}
             </Fragment>
         )
     }
@@ -106,7 +115,7 @@ const getPrice = (price:number, discount:number, type:number) => {
 const OrdersList = (props:OrdersListState) => {
     const { products, warehouses, removeItemFromCart,
         totalCount, price, createOrder, totalPrice,
-        plusProductItem, minusProductItem, userState } = props
+        plusProductItem, minusProductItem, userState, checkDiscount } = props
         const { cell } = userState
 
     return (
@@ -116,6 +125,7 @@ const OrdersList = (props:OrdersListState) => {
                 createOrder={createOrder}
                 price={price}
                 totalPrice={totalPrice}
+                checkDiscount={checkDiscount}
             />
             <table className="table">
                 <thead className="thead-dark">

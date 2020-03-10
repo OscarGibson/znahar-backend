@@ -420,6 +420,7 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
       products:newProducts,
       totalPrice:newPrice,
       totalCount:totalQuantity,
+      totalPriceDiscount:-1,
     }
 
     const cartStateJsonStr:string = JSON.stringify(newCartState)

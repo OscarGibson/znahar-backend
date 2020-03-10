@@ -88,7 +88,6 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
 
     componentDidMount() {
         const { cartState, userState } = this.props
-        this.checkDiscount(this.normalizeOrdersList(cartState, userState.cell))
     }
     
 
@@ -158,8 +157,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
             if (response.status === 200) {
                 const { total_price, price } = response.data.data
                 const { applyDiscount } = this.props
-                if (price !== total_price)
-                    applyDiscount(total_price)
+                applyDiscount(total_price)
             } else {
                 //
             }
@@ -285,6 +283,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                                         removeItemFromCart={this.removeItemFromCart}
                                         createOrder={this.createOrder}
                                         totalPrice={totalPriceDiscount}
+                                        checkDiscount={() => {this.checkDiscount(this.normalizeOrdersList(cartState, userState.cell))}}
                                     />
                                 }/>
                                 <Route path="/profile/settings" exact component={() =>
