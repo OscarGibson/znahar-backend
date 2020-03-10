@@ -259,7 +259,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                             <Form onSubmit={() => {}}>
                                 <Form.Group as={Row} controlId="formPlaintextCell">
                                     <Form.Label column sm="4">
-                                    Контактиний номер
+                                    Контактний номер
                                     </Form.Label>
                                     <Col sm="8">
                                     <PhoneInput

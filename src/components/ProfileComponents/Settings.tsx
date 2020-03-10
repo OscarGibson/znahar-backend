@@ -55,7 +55,7 @@ const Settings = (props:SettingsState) => {
 
                         <Form.Group as={Row} controlId="formPlaintextCell">
                             <Form.Label column sm="4">
-                            Контактиний номер
+                            Контактний номер
                             </Form.Label>
                             <Col sm="8">
                             <Form.Control plaintext={!generalBlockEditable} name="cell" onChange={changeUserFormField} readOnly={!generalBlockEditable} value={cell} />
