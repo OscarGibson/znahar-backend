@@ -387,6 +387,7 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
     let newInfoLayer = {
       ...infoLayerState
     }
+    let totalQuantity = 0
 
     for (let product of cartState.products) {
       if (product.id === productId && product.warehouse_id === warehouseId) {
@@ -404,17 +405,20 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
           count:newQuantity
         })
         newPrice += product.price * newQuantity
+        totalQuantity += newQuantity
         
       } else {
         newProducts.push(product)
         newPrice += product.price * product.count
+        totalQuantity += product.count
       }
     }
 
     const newCartState = {
       ...cartState,
       products:newProducts,
-      totalPrice:newPrice
+      totalPrice:newPrice,
+      totalCount:totalQuantity,
     }
 
     const cartStateJsonStr:string = JSON.stringify(newCartState)

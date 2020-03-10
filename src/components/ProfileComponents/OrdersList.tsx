@@ -143,13 +143,9 @@ const OrdersList = (props:OrdersListState) => {
                                         <span className="button" onClick={() => {plusProductItem(id, warehouse_id, count)}}>+</span>
                                     </td>
                                     <td>
-                                        <ActionButton
-                                            text=""
-                                            iconName=""
-                                            iconSvgSrc="/static/svg/huge_bin.svg"
-                                            classList={["delete-icon"]}
-                                            action={() => {removeItemFromCart(id)}}
-                                        />
+                                        <div className="ActionButton delete-icon" onClick={() => {removeItemFromCart(id)}}>
+                                            <img key="delete-icon-img" src="/static/svg/huge_bin.svg" alt="" />
+                                        </div>
                                     </td>
                                 </tr>
                             )
