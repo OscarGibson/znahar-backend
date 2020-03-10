@@ -396,6 +396,7 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
           newInfoLayer.text = "Вибрана максимальна кількість товару, яка є в залишку"
           newInfoLayer.active = true
           newInfoLayer.timer = 3
+          newInfoLayer.notShown = false
           newQuantity = currentQuantity
         } else if (newQuantity <= 0) {
           newQuantity = currentQuantity
@@ -465,6 +466,7 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
     let newProducts:IProductItem[] = []
     let totalPrice:number = 0
     let found:boolean = false
+    let totalCount:number = 0
 
     for (let product of cartState.products) {
       if (product.id === action.payload.id &&
@@ -474,23 +476,26 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
           count: product.count + action.payload.count,
         })
         totalPrice += product.price + (action.payload.count * product.price)
+        totalCount += product.count + action.payload.count
         found = true
       } else {
         newProducts.push(product)
         totalPrice += product.price * product.count
+        totalCount += product.count
       }
     }
 
     if (!found) {
       newProducts = newProducts.concat(action.payload)
       totalPrice += action.payload.price * action.payload.count
+      totalCount += action.payload.count
     }
 
     const newCartState:ICart = {
       products:newProducts,
-      totalCount:newProducts.length,
       totalPrice:totalPrice,
-      totalPriceDiscount:-1
+      totalPriceDiscount:-1,
+      totalCount,
     }
 
     const cartStateJsonStr:string = JSON.stringify(newCartState)
@@ -591,19 +596,21 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
 
     let newProducts:IProductItem[] = []
     let totalPrice:number = 0
+    let totalCount:number = 0
 
     for (let product of cartState.products) {
       if (product.id !== action.payload) {
         newProducts.push(product)
         totalPrice += product.count * product.price
+        totalCount += product.count
       }
     }
 
     const newCartState:ICart = {
       products:newProducts,
-      totalCount:newProducts.length,
       totalPrice:totalPrice,
-      totalPriceDiscount:-1
+      totalPriceDiscount:-1,
+      totalCount,
     }
 
     const cartStateJsonStr:string = JSON.stringify(newCartState)
