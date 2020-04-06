@@ -75,15 +75,15 @@ export const clearCart = () => {
   return { type:CLEAR_CART, payload:{} }
 }
 
-export const removeProductFromCart = (payload:string) => {
+export const removeProductFromCart = (payload:IProductItem) => {
   return { type:REMOVE_PRODUCT_FROM_CART, payload }
 }
 
-export const plusProductToCart = (payload:number) => {
+export const plusProductToCart = (payload:IProductItem) => {
   return { type:PLUS_PRODUCT_TO_CART, payload }
 }
 
-export const minusProductFromCart = (payload:number) => {
+export const minusProductFromCart = (payload:IProductItem) => {
   return { type:MINUS_PRODUCT_TO_CART, payload }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import MainMenuSimple from '../components/MainMenuSimple'
-import { IProfilePage, IInfoLayer, IWarehouse, IUser, IUserForm, ICart } from '../types'
+import { IProfilePage, IInfoLayer, IWarehouse, IUser, IUserForm, ICart, IProductItem } from '../types'
 import { getWarehouseById, userInitState } from '../redusers/initState'
 import axios from 'axios'
 import {
@@ -47,9 +47,9 @@ interface IProfilePageExtend extends IProfilePage {
 
 const mapDispatchToProps = (dispatch:any) => {
     return {
-        removeProductFromCart: (payload:string) => {dispatch(removeProductFromCart(payload))},
-        plusProductToCart: (payload:number) => {dispatch(plusProductToCart(payload))},
-        minusProductFromCart: (payload:number) => {dispatch(minusProductFromCart(payload))},
+        removeProductFromCart: (payload:IProductItem) => {dispatch(removeProductFromCart(payload))},
+        plusProductToCart: (payload:IProductItem) => {dispatch(plusProductToCart(payload))},
+        minusProductFromCart: (payload:IProductItem) => {dispatch(minusProductFromCart(payload))},
         showInfoLayer: (payload:IInfoLayer) => {dispatch(showInfoLayer(payload))},
         clearCart: () => {dispatch(clearCart())},
         setUserFullData: (payload:IUser) => {dispatch(setUserFullData(payload))},
@@ -115,9 +115,9 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
         clearCart()   
     }
 
-    removeItemFromCart(itemId:string) {
+    removeItemFromCart(item:IProductItem) {
         const { removeProductFromCart } = this.props
-        removeProductFromCart(itemId)
+        removeProductFromCart(item)
     }
 
     normalizeOrdersList(cartState:ICart, cell:string) {

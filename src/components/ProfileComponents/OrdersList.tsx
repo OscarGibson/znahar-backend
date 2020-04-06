@@ -13,7 +13,7 @@ interface OrdersListState {
     price:string,
     totalPrice:number,
     userState:IUser,
-    removeItemFromCart:(id:string) => void,
+    removeItemFromCart:(product:IProductItem) => void,
     createOrder:() => void,
     plusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => void,
     minusProductItem:(productId:string, warehouseId:string, currentQuantity:number) => void,
@@ -153,7 +153,7 @@ const OrdersList = (props:OrdersListState) => {
                                         <span className="button" onClick={() => {plusProductItem(id, warehouse_id, count)}}>+</span>
                                     </td>
                                     <td>
-                                        <div className="ActionButton delete-icon" onClick={() => {removeItemFromCart(id)}}>
+                                        <div className="ActionButton delete-icon" onClick={() => {removeItemFromCart(product)}}>
                                             <img key="delete-icon-img" src="/static/svg/huge_bin.svg" alt="" />
                                         </div>
                                     </td>

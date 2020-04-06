@@ -34,7 +34,8 @@ import {
     INewsPost,
     IPromotionsPage,
     SettingsState,
-    IUserForm
+    IUserForm,
+    IProductItem
 } from '../../types'
 import { initState as paginatorInitState } from '../../components/Paginator/Paginator.state'
 import { IN_ALL_WAREHOUSES } from '../../constants';
@@ -383,9 +384,9 @@ export const profilePageState:IProfilePage = {
     userState:userInitState,
     cartState:cartState,
     infoLayerState:infoLayerState,
-    removeProductFromCart:(payload:string) => {},
-    plusProductToCart:(payload:number) => {},
-    minusProductFromCart:(payload:number) => {},
+    removeProductFromCart:(payload:IProductItem) => {},
+    plusProductToCart:(payload:IProductItem) => {},
+    minusProductFromCart:(payload:IProductItem) => {},
     showInfoLayer:(payload:any) => {},
     clearCart:() => {},
     setUserFullData:(payload:IUser) => {},

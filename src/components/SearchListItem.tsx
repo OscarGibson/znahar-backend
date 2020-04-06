@@ -54,6 +54,7 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
 
         this.addToCart = this.addToCart.bind(this)
         this.getPrice = this.getPrice.bind(this)
+        this.renderActionButton = this.renderActionButton.bind(this)
     }
 
     getPrice(price:number, discount:number, type:number) {
@@ -110,10 +111,31 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
         addItemTopCart(newProduct.count)
     }
 
+    renderActionButton(remain:number) {
+        if (remain < 1) {
+            return (
+                <div className="addToCart red">
+                    <span>Менше однієї упаковки, за довідкою зверніться в кол-центр</span>
+                </div>
+            )
+        } else {
+            return (
+                <ActionButton
+                    text={"Забронювати"}
+                    iconName=""
+                    iconSvgSrc=""
+                    classList={["addToCart"]}
+                    action={this.addToCart}
+                />
+            )
+        }
+    }
+
     render() {
         const {
             id, name, warehouse_id, price,
-            warehousesList, producer, discount, discount_type
+            warehousesList, producer, discount, discount_type,
+            remain
         } = this.props
         const warehouse = getWarehouseById(warehouse_id, warehousesList)
         return (
@@ -123,13 +145,7 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
                 <td>{`#${warehouse.uuid} ${warehouse.name}`}</td>
                 <td>{this.getPrice(price, discount, discount_type)}</td>
                 <td>
-                    <ActionButton
-                        text={"Забронювати"}
-                        iconName=""
-                        iconSvgSrc=""
-                        classList={["addToCart"]}
-                        action={this.addToCart}
-                    />
+                    {this.renderActionButton(remain)}
                 </td>
             </tr>
         )

@@ -473,11 +473,10 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
       if (product.id === action.payload.id &&
           product.warehouse_id === action.payload.warehouse_id) {
         newProducts.push({
-          ...product,
-          count: product.count + action.payload.count,
+          ...product
         })
-        totalPrice += product.price + (action.payload.count * product.price)
-        totalCount += product.count + action.payload.count
+        totalPrice += product.price
+        totalCount += product.count
         found = true
       } else {
         newProducts.push(product)
@@ -519,7 +518,8 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
     let totalPrice:number = 0
 
     for (let product of cartState.products) {
-      if (product.id === action.payload) {
+      if (product.id === action.payload.id  &&
+          product.warehouse_id === action.payload.warehouse_id) {
         newProducts.push({
           ...product,
           count:product.count + 1
@@ -558,7 +558,8 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
     let totalPrice:number = 0
 
     for (let product of cartState.products) {
-      if (product.id === action.payload) {
+      if (product.id === action.payload.id  &&
+          product.warehouse_id === action.payload.warehouse_id) {
         if (product.count >= 1) {
           newProducts.push({
             ...product,
@@ -600,7 +601,8 @@ export const SearchReducer = (state = searchInitState, action:any):ISearchState 
     let totalCount:number = 0
 
     for (let product of cartState.products) {
-      if (product.id !== action.payload) {
+      if (product.id !== action.payload.id  ||
+          product.warehouse_id !== action.payload.warehouse_id) {
         newProducts.push(product)
         totalPrice += product.count * product.price
         totalCount += product.count
