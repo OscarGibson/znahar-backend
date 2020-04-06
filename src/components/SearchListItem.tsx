@@ -115,7 +115,7 @@ class SearchListItemComponent extends React.Component<SearchListItemProps, Searc
         if (remain < 1) {
             return (
                 <div className="addToCart red">
-                    <span>Менше однієї упаковки, за довідкою зверніться в кол-центр</span>
+                    <span>Менше однієї упаковки на залишку, за довідкою зверніться в кол-центр</span>
                 </div>
             )
         } else {
