@@ -20,12 +20,12 @@ class BigSearchBlock extends React.Component<IBigSearchBlock, IBigSearchBlock> {
     render() {
         return (
             <Fragment>
-                {/* <div className="warning">
+                <div className="warning red">
                     <div className="standart-container">
                         <h1>!Увага!</h1>
-                        <h3>Резервація тимчасово не доступна, ведуться технічні роботи</h3>
+                        <h3>Згідно Постанови № 211 Кабінету Міністрів України в аптечні заклади мережі вхід без масок заборонений!</h3>
                     </div>
-                </div> */}
+                </div>
                 <div className="BigSearchBlock">
                     <div className="standart-container">
                         <h1>Знайдіть та забронюйте</h1>
