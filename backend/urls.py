@@ -32,6 +32,7 @@ urlpatterns = [
     path('search', include('base.urls'), name='index'),
     path('promotions', include('base.urls'), name='index'),
     path('news', include('base.urls'), name='index'),
+    path('news/<int:id>', include('base.urls'), name='index'),
     path('contacts', include('base.urls'), name='index'),
     path('for-clients', include('base.urls'), name='index'),
     path('profile', include('base.urls'), name='index'),

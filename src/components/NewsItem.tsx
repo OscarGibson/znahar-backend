@@ -7,7 +7,7 @@ const NewsItem = ({
     content_short, date,
 }:INewsItem) => {
     return (
-        <div className="NewsItem col-md-4 col-sm-6 col-xs-12" onClick={() => {window.location.href = `/news/${id}`}}>
+        <div className="NewsItem col-md-3 col-sm-6 col-xs-12" onClick={() => {window.location.href = `/news/${id}`}}>
             <img className="image" src={image} alt="photoUrl"/>
             <h6 className="title">{title}</h6>
             <p className="description">{content_short.slice(0, 75)}...</p>
