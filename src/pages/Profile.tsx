@@ -251,7 +251,7 @@ class Profile extends React.Component<IProfilePageExtend, IProfilePage> {
                     </div>
                 </div>
                 <div className="body standart-container row">
-                    <div className="rightSidebar col-md-9 col-sm-12">
+                    <div className="rightSidebar col-lg-9 col-md-12">
                         <div className="cartOrders">
                         <div className="settings-body">
                             <Form onSubmit={() => {}}>

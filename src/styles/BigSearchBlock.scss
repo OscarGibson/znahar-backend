@@ -1,11 +1,15 @@
 .warning {
-    height:220px;
+    // height:220px;
     padding-top: 117px;
     background-color: #f1f6f9;
+
+    h3 {
+        margin-bottom: 0;
+    }
 }
 .BigSearchBlock {
     min-height:420px;
-    padding-top: 117px;
+    padding-top: 86px;
     padding-bottom: 60px;
     background-color: #f1f6f9;
 
@@ -46,6 +50,7 @@
     .SearchFormHome {
         .form-control {
             width: 250px;
+            max-width: 100%;
             border: 2px solid #f5a623;
             border-radius: 0;
         }
