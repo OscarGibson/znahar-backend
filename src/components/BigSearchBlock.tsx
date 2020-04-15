@@ -45,7 +45,7 @@ class BigSearchBlock extends React.Component<IBigSearchBlock, IBigSearchBlock> {
                     </div>
                 </div>
                 <div className="BigSearchBlock">
-                    {renderSearch(false)}
+                    {renderSearch(true)}
                 </div>
             </Fragment>
         )
