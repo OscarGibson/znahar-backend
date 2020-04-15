@@ -36,6 +36,12 @@
         line-height: normal;
     }
 
+    .standart-container.info {
+        h1 {
+            text-align: center;
+        }
+    }
+
     @media screen and (max-width: 200px) {
         .standart-container {
             h1 {
