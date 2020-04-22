@@ -25,6 +25,32 @@ const mapDispatchToProps = (dispatch:any) => {
     }
 }
 
+const renderPromotionCircle = (discoun_type:string, value:number) => {
+    console.log(discoun_type, value)
+    switch (discoun_type) {
+        case '0':
+            break
+
+        case '1':
+            return (
+            <span className="promotion-circle">-{value} %</span>
+            )
+
+        case '2':
+            return (
+            <span className="promotion-circle">-{value}грн</span>
+            )
+        
+        case '3':
+            return (
+            <span className="promotion-circle">{value}грн</span>
+            )
+    
+        default:
+            break;
+    }
+}
+
 class News extends React.Component<INewsPage, INewsPage> {
 
     constructor(props:INewsPage, state:INewsPage) {
@@ -107,7 +133,17 @@ class News extends React.Component<INewsPage, INewsPage> {
                     <div className="rightBlock">
                     {promotions.map( (item, index) => {
                         return (
-                            <PromotionItem key={index} {...item}/>
+                        <div onClick={() => {window.location.href = `/search?searchKey=${item.title}`}} className="PromotionItem">
+                            <div className="imageBlock">
+                                <img src={`${item.photo}`} alt="photoUrl" className="image"/>
+                                {renderPromotionCircle(item.discount_type, item.value)}
+                                <img
+                                    src="/static/images/bottom-banner.png"
+                                    alt="самолікування може бути шкідливим для вашого здоров'я"
+                                    className="bottom-banner"
+                                />
+                            </div>
+                        </div>
                         )
                     })}
                     </div>

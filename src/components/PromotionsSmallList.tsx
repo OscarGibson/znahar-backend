@@ -28,7 +28,33 @@ const chunk = (array:IPromotionItem[], size:number):IPromotionItem[][] => {
       chunked_arr.push(copied.splice(0, size))
     }
     return chunked_arr
-  }
+}
+
+const renderPromotionCircle = (discoun_type:string, value:number) => {
+    console.log(discoun_type, value)
+    switch (discoun_type) {
+        case '0':
+            break
+
+        case '1':
+            return (
+            <span className="promotion-circle">-{value} %</span>
+            )
+
+        case '2':
+            return (
+            <span className="promotion-circle">-{value}грн</span>
+            )
+        
+        case '3':
+            return (
+            <span className="promotion-circle">{value}грн</span>
+            )
+    
+        default:
+            break;
+    }
+}
 
 class PromotionsSmallList extends React.Component<IPromotionsSmallList, IPromotionsSmallList> {
     render() {
@@ -47,6 +73,12 @@ class PromotionsSmallList extends React.Component<IPromotionsSmallList, IPromoti
                             <div key={`promotion-item-${index}`} onClick={() => {window.location.href = `/search?searchKey=${item.title}`}} className="item" style={{cursor:"pointer"}}>
                                 <div className="imageBlock">
                                     <img src={`${item.photo}`} alt="photoUrl" className="image"/>
+                                    {renderPromotionCircle(item.discount_type, item.value)}
+                                    <img
+                                        src="/static/images/bottom-banner.png"
+                                        alt="самолікування може бути шкідливим для вашого здоров'я"
+                                        className="bottom-banner"
+                                    />
                                 </div>
                             </div>
                         )

@@ -85,9 +85,8 @@ export interface IPromotionItem {
     photo:string,
     title:string,
     description:string,
-    price:number,
-    discount_price:number,
-    discount:number
+    discount_type:string,
+    value:number,
 }
 
 export interface IPromotionBigItem extends IPromotionItem {

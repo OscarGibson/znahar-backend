@@ -1,8 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { IPromotionItem } from '../types';
-// import { IMAGES_BACKEND } from '../constants';
 
+
+const renderPromotionCircle = (discoun_type:string, value:number) => {
+    console.log(discoun_type, value)
+    switch (discoun_type) {
+        case '0':
+            break
+
+        case '1':
+            return (
+            <span className="promotion-circle">-{value} %</span>
+            )
+
+        case '2':
+            return (
+            <span className="promotion-circle">-{value}грн</span>
+            )
+        
+        case '3':
+            return (
+            <span className="promotion-circle">{value}грн</span>
+            )
+    
+        default:
+            break;
+    }
+}
 
 class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
     constructor(props:IPromotionItem, state:IPromotionItem) {
@@ -18,21 +43,19 @@ class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
         const {
             photo,
             title,
-            description,
-            discount
+            discount_type,
+            value,
         } = this.props
-
         return (
             <div onClick={() => {this.redirectToSearch(title)}} className="PromotionItem col-md-3 col-sm-6 col-xs-12">
                 <div className="imageBlock">
                     <img src={`${photo}`} alt="photoUrl" className="image"/>
-                    {/* <p className="discount">-{discount}%</p> */}
-                </div>
-                {/* <h1 className="name">{title}</h1> */}
-                {/* <h3 className="description">{description}</h3> */}
-                <div className="priceBlock">
-                    {/* <p className="price">{discount_price.toFixed(2)}грн</p>
-                    <p className="discountPrice">{price.toFixed(2)}грн</p> */}
+                    {renderPromotionCircle(discount_type, value)}
+                    <img
+                        src="/static/images/bottom-banner.png"
+                        alt="самолікування може бути шкідливим для вашого здоров'я"
+                        className="bottom-banner"
+                    />
                 </div>
             </div>
         )
