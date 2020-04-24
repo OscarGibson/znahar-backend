@@ -35,7 +35,8 @@ import {
   CHANGE_SEARCH_KEY,
   CHANGE_FILTER,
   APPLY_DISCOUNT,
-  CHANGE_PRODUCT_ITEM_QUANTITY
+  CHANGE_PRODUCT_ITEM_QUANTITY,
+  SET_AUTOFILL
 } from "../actions/types";
 
 import {
@@ -51,7 +52,7 @@ import {
   profileSettingsState
 } from './initState';
 
-import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage, SettingsState, IWarehouse } from "../types";
+import { IHomePage, ISearchState, IProductItem, ICart, IProfilePage, SettingsState, IWarehouse, IRootApp } from "../types";
 import { HistoryState } from "../components/ProfileComponents/History";
 
 
@@ -61,7 +62,14 @@ const extractCell = (listOfCell:{phone:string}[]) => {
   })
 }
 
-export const DefaultReducer = (state = defaultState, action:any) => {
+export const DefaultReducer = (state:IRootApp = defaultState, action:any) => {
+
+  if (action.type === SET_AUTOFILL) {
+    return {
+      ...state,
+      autofillList:action.payload,
+    }
+  }
 
   if (action.type === ADD_ITEM_TOP_CART) {
     const { topNavBarState } = state

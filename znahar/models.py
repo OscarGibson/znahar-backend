@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 import cloudinary
 
@@ -18,6 +19,27 @@ class SingletonModel(models.Model):
     def load(cls):
         obj, _created = cls.objects.get_or_create(pk=1)
         return obj
+
+
+def upload_file(instance, filename):
+    ext = filename.split('.')[-1]
+    if instance.pk:
+        if instance.updated_at:
+            timestamp = instance.updated_at.timestamp()
+        else:
+            timestamp = datetime.utcnow().timestamp()
+        return 'upload/autosuggests/autofiled_names_{}.{}'.format(
+            timestamp,
+            ext,
+        )
+
+
+class Autosuggest(SingletonModel):
+    file = models.FileField(upload_to=upload_file)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.file.name
 
 
 class Warehouse(models.Model):

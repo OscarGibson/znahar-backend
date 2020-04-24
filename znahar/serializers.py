@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Warehouse, SiteSettings, CellNumber, Jobs
+from .models import Warehouse, SiteSettings, CellNumber, Jobs, Autosuggest
 
 
 class WarehouseSerializer(serializers.ModelSerializer):
@@ -31,3 +31,10 @@ class JobsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Jobs
         fields = "__all__"
+
+
+class AutosuggestSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Autosuggest
+        fields = ('file',)

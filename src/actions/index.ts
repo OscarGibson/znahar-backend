@@ -34,7 +34,8 @@ import {
   CHANGE_SEARCH_KEY,
   CHANGE_FILTER,
   APPLY_DISCOUNT,
-  CHANGE_PRODUCT_ITEM_QUANTITY
+  CHANGE_PRODUCT_ITEM_QUANTITY,
+  SET_AUTOFILL,
 } from "./types";
 import { IInfoLayer, IProductItem, IUser, IPromotionBigItem, IPromotionItem, INewsItem, INewsPost, IWarehouse, ISettings, IUserForm } from "../types";
 import { HistoryItemState } from "../components/ProfileComponents/History";
@@ -185,4 +186,8 @@ export const plusProductItem = (productId:string, warehouseId:string, currentQua
 
 export const minusProductItem = (productId:string, warehouseId:string, currentQuantity:number) => {
   return {type:CHANGE_PRODUCT_ITEM_QUANTITY, payload:{productId, warehouseId, currentQuantity, increment:-1}}
+}
+
+export const setAutofill = (payload:string[]) => {
+  return {type:SET_AUTOFILL, payload}
 }

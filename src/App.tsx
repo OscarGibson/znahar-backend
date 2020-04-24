@@ -6,25 +6,24 @@ import Home from './pages/Home'
 import Search from './pages/Search'
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 import { IRootApp, ISettings, IWarehouse } from './types'
-// import TopNavBar from './components/TopNavBar'
 import BottomFooterBlock from './components/BottomFooterBlock'
 import FooterBlock from './components/FooterBlock'
 import NotFoundPage from './pages/NotFoundPage'
 import Profile from './pages/Profile'
-import Register from './pages/Register'
 import Login from './pages/Login'
 import News from './pages/News'
 import NewsPost from './pages/NewsPost'
 import Promotions from './pages/Promotions'
 import { GET_SETTINGS_URL } from './constants'
-import { setSettings, setWarehouses } from './actions'
+import { setSettings, setWarehouses, setAutofill } from './actions'
 import Maps from './pages/Maps'
 import Jobs from './pages/Jobs'
 import TopNav from './components/TopNav'
 
 interface IRootAppAction {
   setSettings:(payload:ISettings) => void,
-  setWarehouses:(payload:IWarehouse[]) => void
+  setWarehouses:(payload:IWarehouse[]) => void,
+  setAutofill:(payload:string[]) => void,
 }
 
 
@@ -39,7 +38,8 @@ const mapStateToProps = (reducer:any):IRootApp => {
 const mapDispatchToProps = (dispatch:any) => {
   return {
     setSettings:(payload:ISettings) => {dispatch(setSettings(payload))},
-    setWarehouses:(payload:IWarehouse[]) => {dispatch(setWarehouses(payload))}
+    setWarehouses:(payload:IWarehouse[]) => {dispatch(setWarehouses(payload))},
+    setAutofill:(payload:string[]) => {dispatch(setAutofill(payload))},
   }
 }
 
@@ -48,8 +48,32 @@ class AppTemplate extends React.Component<IRootAppAction, IRootAppAction> {
   constructor(props:IRootAppAction, state:IRootAppAction) {
     super(props, state)
     this.getSettings = this.getSettings.bind(this)
+    this.getAutofill = this.getAutofill.bind(this)
 
     this.getSettings()
+  }
+
+  async getAutofill(url:string) {
+    const { setAutofill } = this.props
+    console.log({url})
+
+    await axios.get(url, {
+        headers: {
+          'Content-Type': 'text/csv',
+      }
+    })
+    .then( response => {
+      try {
+        const data:string = response.data
+        const list:string[] = data.split("\n")
+        setAutofill(list.slice(1))
+      } catch (error) {
+        console.log({error})
+      }
+    })
+    .catch( err => {
+      console.log({err})
+    })
   }
 
   getSettings() {
@@ -57,7 +81,12 @@ class AppTemplate extends React.Component<IRootAppAction, IRootAppAction> {
     axios.get(GET_SETTINGS_URL, {})
     .then((response) => {
         if (response.data.code === 200) {
-          const {settings, warehouses} = response.data.data
+          const {
+            settings,
+            warehouses,
+            autosuggests_file_name,
+          } = response.data.data
+          this.getAutofill(autosuggests_file_name.file)
           setSettings(settings)
           setWarehouses(warehouses)
         }

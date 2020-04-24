@@ -1,26 +1,49 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'
+import { connect } from 'react-redux'
 import { ISearchForm, IWarehouse, IHandleSearch } from '../types'
-import ActionButton from './ActionButton';
+import ActionButton from './ActionButton'
 import { IN_ALL_WAREHOUSES } from '../constants'
+import Autosuggest from 'react-autosuggest'
 
 interface ISearchFormFilter extends ISearchForm {
-    // selectedFilter:string|undefined
+    suggestions:string[],
 }
 
 interface ISearchFormCustom extends ISearchForm {
     action:IHandleSearch
 }
 
+const getSuggestions = (value:string, listOfNames:string[]) => {
+    const inputValue = value.trim().toLowerCase()
+    const inputLength = inputValue.length;
+   
+    const result = inputLength === 0 ? [] : listOfNames.filter(name =>
+      name.toLowerCase().slice(0, inputLength) === inputValue
+    )
+    return result
+}
+
+const getSuggestionValue = (suggestion:string) => {
+    return suggestion
+}
+
 const mapStateToProps = (reducer:any):ISearchForm => {
     const warehouses:IWarehouse[] = reducer.DefaultReducer.warehouses
+    const { autofillList } = reducer.DefaultReducer
     const { searchFormState } = reducer.HomeReducer.bigSearchBlockState
     const newState = {
         ...searchFormState,
-        warehouses
+        warehouses,
+        autofillList
     }
     return newState
 }
+
+const renderSuggestion = (suggestion:string) => (
+    <div>
+      {suggestion}
+    </div>
+)
 
 class SearchFormHome extends React.Component<ISearchFormCustom, ISearchFormFilter> {
 
@@ -29,12 +52,33 @@ class SearchFormHome extends React.Component<ISearchFormCustom, ISearchFormFilte
 
         this.state = {
             ...props,
-            selectedFilter:IN_ALL_WAREHOUSES
+            selectedFilter:IN_ALL_WAREHOUSES,
+            suggestions: [],
         }
 
         this.handleSearchSubmit = this.handleSearchSubmit.bind(this)
         this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this)
         this.handleFilterChange = this.handleFilterChange.bind(this)
+
+        this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this)
+        this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
+    }
+
+    // Autosuggest will call this function every time you need to update suggestions.
+    // You already implemented this logic above, so just use it.
+    onSuggestionsFetchRequested = (props:{ value:string }) => {
+        const { value } = props
+        const { autofillList } = this.props
+        this.setState({
+            suggestions: getSuggestions(value, autofillList)
+        })
+    }
+
+    // Autosuggest will call this function every time you need to clear suggestions.
+    onSuggestionsClearRequested = () => {
+        this.setState({
+            suggestions: []
+        })
     }
 
 
@@ -48,10 +92,10 @@ class SearchFormHome extends React.Component<ISearchFormCustom, ISearchFormFilte
         })
     }
 
-    handleSearchFieldChange(event:React.ChangeEvent<HTMLInputElement>):void {
+    handleSearchFieldChange(event:React.ChangeEvent<HTMLInputElement>, lprops:{newValue:string}):void {
         event.preventDefault()
         this.setState({
-            searchInput: event.target.value
+            searchInput: lprops.newValue
         })
     }
 
@@ -62,20 +106,23 @@ class SearchFormHome extends React.Component<ISearchFormCustom, ISearchFormFilte
     }
 
     render() {
-        const { searchInput } = this.state
+        const { searchInput,suggestions } = this.state
         const { warehouses } = this.props
         return (
             <div className="SearchFormHome">
                 <div className="input-group standart-container">
-                    <input
-                        type="text"
-                        id="searchInput"
-                        value={searchInput}
-                        className="form-control"
-                        aria-label="Sarch in warehouses"
-                        onChange={this.handleSearchFieldChange}
-                        placeholder="Введіть назву товару"
-                    />
+                    <Autosuggest
+                            suggestions={suggestions}
+                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                            getSuggestionValue={getSuggestionValue}
+                            renderSuggestion={renderSuggestion}
+                            inputProps={{
+                                onChange:this.handleSearchFieldChange,
+                                value:searchInput,
+                                placeholder:"Введіть назву товару",
+                            }}
+                        />
                     <select className="custom-select" id="inputGroupSelect04"
                         aria-label="Example select with button addon"
                         onChange={this.handleFilterChange}>

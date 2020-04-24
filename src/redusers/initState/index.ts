@@ -63,11 +63,9 @@ export const mainWarehouse:IWarehouse = {
 export const searchFormState:ISearchForm = {
     searchInput: "",
     searchFormSubmitted:false,
-    // action:(searchKey:string, selectedFiler:string|undefined) => {
-    //     window.location.href = `/search?searchKey=${searchKey}&selectedFilter=${selectedFiler}`
-    // },
     warehouses:[],
-    selectedFilter:IN_ALL_WAREHOUSES
+    selectedFilter:IN_ALL_WAREHOUSES,
+    autofillList:[],
 }
 
 export const mainMenuSimpleState:IMainMenuData = {
@@ -411,6 +409,7 @@ export const defaultState:IRootApp = {
     },
     warehouses:[],
     footerBlockState:footerBlockState,
+    autofillList:[],
 }
 
 export const initialState = {

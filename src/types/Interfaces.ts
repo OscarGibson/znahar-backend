@@ -45,7 +45,8 @@ export interface ISearchForm {
     searchInput:string,
     searchFormSubmitted:boolean,
     warehouses:IWarehouse[],
-    selectedFilter:string
+    selectedFilter:string,
+    autofillList:string[],
 }
 
 export interface ITopNavBarState {
@@ -376,4 +377,5 @@ export interface IRootApp {
     settings:ISettings,
     warehouses:IWarehouse[],
     footerBlockState:IFooterBlock,
+    autofillList:string[],
 }

@@ -3,15 +3,31 @@ import { connect } from 'react-redux'
 import { ISearchForm, IHandleSearch, IWarehouse } from '../types'
 import ActionButton from './ActionButton'
 import { changeSearchKey, changeFilter } from '../actions'
-import { IN_ALL_WAREHOUSES } from '../constants'
-import { mainWarehouse } from '../redusers/initState';
+import Autosuggest from 'react-autosuggest'
+import { mainWarehouse } from '../redusers/initState'
+
+
+const getSuggestions = (value:string, listOfNames:string[]) => {
+    const inputValue = value.trim().toLowerCase()
+    const inputLength = inputValue.length;
+   
+    const result = inputLength === 0 ? [] : listOfNames.filter(name =>
+      name.toLowerCase().slice(0, inputLength) === inputValue
+    )
+    return result
+}
+
+const getSuggestionValue = (suggestion:string) => {
+    return suggestion
+}
 
 const mapStateToProps = (reducer:any):ISearchForm => {
     const { searchFormState } = reducer.SearchReducer
-    const { warehouses } = reducer.DefaultReducer
+    const { warehouses, autofillList } = reducer.DefaultReducer
     return {
         ...searchFormState,
         warehouses,
+        autofillList,
     }
 }
 
@@ -32,15 +48,27 @@ const mapDispatchToProps = (dispatch:any) => {
     }
 }
 
-class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchFormFilter> {
+const renderSuggestion = (suggestion:string) => (
+    <div>
+      {suggestion}
+    </div>
+)
 
-    constructor(props:ISearchFormCustom, state:ISearchFormFilter) {
+class SearchFormComponent extends React.Component<ISearchFormCustom, any> {
+
+    constructor(props:ISearchFormCustom, state:any) {
         super(props, state)
 
         this.handleSearchFormSubmit = this.handleSearchFormSubmit.bind(this)
         this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this)
         this.handleFilterChange = this.handleFilterChange.bind(this)
         this.handleSearch = this.handleSearch.bind(this)
+        this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this)
+        this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
+
+        this.state = {
+            suggestions: [],
+        }
 
     }
 
@@ -55,10 +83,11 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchForm
         this.handleSearch(searchInput, selectedFilter, action)
     }
 
-    handleSearchFieldChange(event:React.ChangeEvent<HTMLInputElement>):void {
+    handleSearchFieldChange(event:React.ChangeEvent<HTMLInputElement>, lprops:{newValue:string}):void {
+        const { newValue } = lprops
         event.preventDefault()
         const { changeSearchKey } = this.props
-        changeSearchKey(event.target.value)
+        changeSearchKey(newValue)
     }
 
     handleFilterChange(event:React.ChangeEvent<HTMLSelectElement>):void {
@@ -67,7 +96,7 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchForm
     }
 
     renderWarehouseOption(warehouse:IWarehouse, selectedFilter:string, index:number) {
-        let selected = warehouse.uuid == selectedFilter ? true : false
+        let selected = warehouse.uuid === selectedFilter ? true : false
         let name = warehouse.name === warehouse.uuid ? `${warehouse.name}` : `№${warehouse.uuid} ${warehouse.name}`
         return (
             <option selected={selected} key={`warehouse-${index}`} value={warehouse.uuid}>
@@ -76,22 +105,43 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, ISearchForm
         )
     }
 
+    // Autosuggest will call this function every time you need to update suggestions.
+    // You already implemented this logic above, so just use it.
+    onSuggestionsFetchRequested = (props:{ value:string }) => {
+        const { value } = props
+        const { autofillList } = this.props
+        this.setState({
+            suggestions: getSuggestions(value, autofillList)
+        })
+    }
+
+    // Autosuggest will call this function every time you need to clear suggestions.
+    onSuggestionsClearRequested = () => {
+        this.setState({
+            suggestions: []
+        })
+    }
+
     render() {
         const { searchInput, warehouses, selectedFilter } = this.props
+        const { suggestions } = this.state
         return (
             <div className="SearchForm">
                 <div className="content standart-container">
                     <h1 className="title">Пошук</h1>
 
                     <div className="input-group standart-container">
-                        <input
-                            type="text"
-                            id="searchInput"
-                            value={searchInput}
-                            className="form-control"
-                            aria-label="Sarch in warehouses"
-                            onChange={this.handleSearchFieldChange}
-                            placeholder="Введіть назву товару"
+                        <Autosuggest
+                            suggestions={suggestions}
+                            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                            getSuggestionValue={getSuggestionValue}
+                            renderSuggestion={renderSuggestion}
+                            inputProps={{
+                                onChange:this.handleSearchFieldChange,
+                                value:searchInput,
+                                placeholder:"Введіть назву товару",
+                            }}
                         />
                         <select className="custom-select" id="inputGroupSelect04"
                             aria-label="Example select with button addon"

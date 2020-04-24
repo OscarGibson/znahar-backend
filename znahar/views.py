@@ -8,8 +8,8 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 import requests
 import json
-from .models import Warehouse, SiteSettings, Jobs
-from .serializers import WarehouseSerializer, SiteSettingsSerializer, JobsSerializer
+from .models import Warehouse, SiteSettings, Jobs, Autosuggest
+from .serializers import WarehouseSerializer, SiteSettingsSerializer, JobsSerializer, AutosuggestSerializer
 
 
 URL = 'http://a3.apteka-znahar.com.ua:15890/RT/hs/WebStore'
@@ -186,12 +186,14 @@ class Settings(APIView):
 
         settings = SiteSettings.load()
         warehouses = Warehouse.objects.all().order_by('ordering')
+        autosuggests_file_name = Autosuggest.objects.all().first()
 
         return Response({
             "message": "Site settings",
             "code": 200,
             "data": {
                 "settings": SiteSettingsSerializer(settings).data,
-                "warehouses": WarehouseSerializer(warehouses, many=True).data
+                "warehouses": WarehouseSerializer(warehouses, many=True).data,
+                "autosuggests_file_name": AutosuggestSerializer(autosuggests_file_name).data,
             }
         }, 200)
