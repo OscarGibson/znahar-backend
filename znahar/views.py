@@ -79,11 +79,10 @@ class Order(APIView):
                 "code": 500,
                 "error": str(e)
             }, 500)
-        
 
 
 class Products(APIView):
-    
+
     def get(self, request, *args, **kwargs):
         params = get_params(request.query_params)
 
