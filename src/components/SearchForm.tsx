@@ -65,6 +65,7 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, any> {
         this.handleSearch = this.handleSearch.bind(this)
         this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this)
         this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
+        this.handlePressEnter = this.handlePressEnter.bind(this)
 
         this.state = {
             suggestions: [],
@@ -122,6 +123,12 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, any> {
         })
     }
 
+    handlePressEnter(event:any) {
+        if (event.key === 'Enter') {
+            this.handleSearchFormSubmit(event)
+        }
+    }
+
     render() {
         const { searchInput, warehouses, selectedFilter } = this.props
         const { suggestions } = this.state
@@ -141,6 +148,7 @@ class SearchFormComponent extends React.Component<ISearchFormCustom, any> {
                                 onChange:this.handleSearchFieldChange,
                                 value:searchInput,
                                 placeholder:"Введіть назву товару",
+                                onKeyDown:this.handlePressEnter,
                             }}
                         />
                         <select className="custom-select" id="inputGroupSelect04"

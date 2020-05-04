@@ -62,6 +62,8 @@ class SearchFormHome extends React.Component<ISearchFormCustom, ISearchFormFilte
 
         this.onSuggestionsFetchRequested = this.onSuggestionsFetchRequested.bind(this)
         this.onSuggestionsClearRequested = this.onSuggestionsClearRequested.bind(this)
+
+        this.handlePressEnter = this.handlePressEnter.bind(this)
     }
 
     // Autosuggest will call this function every time you need to update suggestions.
@@ -105,6 +107,12 @@ class SearchFormHome extends React.Component<ISearchFormCustom, ISearchFormFilte
         })
     }
 
+    handlePressEnter(event:any) {
+        if (event.key === 'Enter') {
+            this.handleSearchSubmit(event)
+        }
+    }
+
     render() {
         const { searchInput,suggestions } = this.state
         const { warehouses } = this.props
@@ -121,6 +129,7 @@ class SearchFormHome extends React.Component<ISearchFormCustom, ISearchFormFilte
                                 onChange:this.handleSearchFieldChange,
                                 value:searchInput,
                                 placeholder:"Введіть назву товару",
+                                onKeyDown:this.handlePressEnter,
                             }}
                         />
                     <select className="custom-select" id="inputGroupSelect04"
