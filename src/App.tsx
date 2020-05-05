@@ -59,7 +59,7 @@ class AppTemplate extends React.Component<IRootAppAction, IRootAppAction> {
 
     await axios.get(url, {
         headers: {
-          'Content-Type': 'text/csv',
+          'Content-Type': 'text/plain',
       }
     })
     .then( response => {
