@@ -70,10 +70,12 @@ class SearchFormHome extends React.Component<ISearchFormCustom, ISearchFormFilte
     // You already implemented this logic above, so just use it.
     onSuggestionsFetchRequested = (props:{ value:string }) => {
         const { value } = props
-        const { autofillList } = this.props
-        this.setState({
-            suggestions: getSuggestions(value, autofillList)
-        })
+        if (value.length > 2) {
+            const { autofillList } = this.props
+            this.setState({
+                suggestions: getSuggestions(value, autofillList)
+            })    
+        }
     }
 
     // Autosuggest will call this function every time you need to clear suggestions.
