@@ -85,6 +85,7 @@ export interface IPromotionItem {
     id:number,
     photo:string,
     title:string,
+    visible_name:string,
     description:string,
     discount_type:string,
     value:number,

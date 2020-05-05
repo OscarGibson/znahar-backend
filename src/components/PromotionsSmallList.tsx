@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { IPromotionItem } from '../types'
-import PromotionItem from './PromotionItem'
 import ActionButton from './ActionButton'
 
 import OwlCarousel from 'react-owl-carousel'
@@ -72,13 +71,9 @@ class PromotionsSmallList extends React.Component<IPromotionsSmallList, IPromoti
                         return (
                             <div key={`promotion-item-${index}`} onClick={() => {window.location.href = `/search?searchKey=${item.title}`}} className="item" style={{cursor:"pointer"}}>
                                 <div className="imageBlock">
+                                    <h1 className="name">{item.visible_name}</h1>
                                     <img src={`${item.photo}`} alt="photoUrl" className="image"/>
                                     {renderPromotionCircle(item.discount_type, item.value)}
-                                    <img
-                                        src="/static/images/bottom-banner.png"
-                                        alt="самолікування може бути шкідливим для вашого здоров'я"
-                                        className="bottom-banner"
-                                    />
                                 </div>
                             </div>
                         )

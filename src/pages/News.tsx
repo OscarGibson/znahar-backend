@@ -135,6 +135,7 @@ class News extends React.Component<INewsPage, INewsPage> {
                         return (
                         <div onClick={() => {window.location.href = `/search?searchKey=${item.title}`}} className="PromotionItem">
                             <div className="imageBlock">
+                                <h1 className="name">{item.visible_name}</h1>
                                 <img src={`${item.photo}`} alt="photoUrl" className="image"/>
                                 {renderPromotionCircle(item.discount_type, item.value)}
                                 <img

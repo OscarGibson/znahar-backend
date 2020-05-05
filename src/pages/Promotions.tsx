@@ -83,6 +83,11 @@ class PromotionsPage extends React.Component<IPromotionsPage, IPromotionsPage> {
                                 <PromotionItem key={index} {...item}/>
                             )
                         })}
+                        <img
+                            src="/static/images/bottom-banner.png"
+                            alt="самолікування може бути шкідливим для вашого здоров'я"
+                            className="bottom-banner"
+                        />
                     </div>
                     <div className="PromotionBigItem">
                         {promotions_big.map( (item, index) => {

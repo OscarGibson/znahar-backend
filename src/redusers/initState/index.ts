@@ -110,6 +110,7 @@ export const promotionBigItem:IPromotionBigItem = {
     id:-1,
     photo:"",
     title:"",
+    visible_name: "",
     description:"",
     discount_type: "0",
     value: 0,

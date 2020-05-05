@@ -83,3 +83,13 @@ code {
 .react-autosuggest__suggestion--highlighted {
   background-color: #ddd;
 }
+
+@font-face {
+  font-family: 'Myriad Pro Condensed';
+  src: local('Myriad Pro Condensed Semibold'), local('Myriad-Pro-Condensed-Semibold'),
+      url('/static/fonts/MyriadPro-SemiboldCond.woff2') format('woff2'),
+      url('/static/fonts/MyriadPro-SemiboldCond.woff') format('woff'),
+      url('/static/fonts/MyriadPro-SemiboldCond.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}

@@ -11,7 +11,8 @@ DISCOUNT_TYPES = (
 
 
 class Promotion(models.Model):
-    title = models.CharField(max_length=64)
+    title = models.CharField(max_length=128)
+    visible_name = models.CharField(max_length=64)
     photo = models.ImageField(upload_to='upload/promotions')
     discount_type = models.CharField(
         choices=DISCOUNT_TYPES,

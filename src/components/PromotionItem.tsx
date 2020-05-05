@@ -44,18 +44,15 @@ class PromotionItem extends React.Component<IPromotionItem, IPromotionItem> {
             photo,
             title,
             discount_type,
+            visible_name,
             value,
         } = this.props
         return (
             <div onClick={() => {this.redirectToSearch(title)}} className="PromotionItem col-md-3 col-sm-6 col-xs-12">
                 <div className="imageBlock">
+                    <h1 className="name">{visible_name}</h1>
                     <img src={`${photo}`} alt="photoUrl" className="image"/>
                     {renderPromotionCircle(discount_type, value)}
-                    <img
-                        src="/static/images/bottom-banner.png"
-                        alt="самолікування може бути шкідливим для вашого здоров'я"
-                        className="bottom-banner"
-                    />
                 </div>
             </div>
         )

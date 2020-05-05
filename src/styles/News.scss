@@ -140,6 +140,12 @@
                     text-align: left;
                 }
                 .imageBlock {
+                    h1.name {
+                        text-align: center;
+                        font-family: "Myriad Pro Condensed";
+                        font-size: 2rem;
+                        color: #46c215;
+                    }
                     position: relative;
                     .image {
                         height: 200px;
