@@ -37,17 +37,9 @@ const renderSearch = (available:boolean) => {
 class BigSearchBlock extends React.Component<IBigSearchBlock, IBigSearchBlock> {
     render() {
         return (
-            <Fragment>
-                <div className="warning red">
-                    <div className="standart-container">
-                        <h1>!Увага!</h1>
-                        <h3>Згідно Постанови № 211 Кабінету Міністрів України в аптечні заклади мережі вхід без масок заборонений!</h3>
-                    </div>
-                </div>
-                <div className="BigSearchBlock">
-                    {renderSearch(true)}
-                </div>
-            </Fragment>
+            <div className="BigSearchBlock">
+                {renderSearch(true)}
+            </div>
         )
     }
 }
